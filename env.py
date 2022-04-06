@@ -844,7 +844,11 @@ class TrafficState:
 
     def accel(self, veh, acc, n_acc_steps=1):
         """
-        Let the initial speed be v0, the sim_step be dt, and the acceleration be a. This function increases v0 over n=n_acc_steps steps by a*dt/n per step. At each of the sim steps, the speed increases by a*dt/n at the BEGINNING of the step. After one step, the vehicle's speed is v1=v0+a*dt/n and the distance traveled is v1*dt. If n>1, then after two steps, the vehicle's speed is v2=v1+a*dt/n and the distance traveled is v2*dt. Etc etc. If accel is called again before n steps has elapsed, the new acceleration action overrides the continuation of any previous acceleration. The per step acceleration a/n is clipped by SUMO's IDM behavior to be in the range of -max_decel <= a/n <= max_accel, where max_accel and max_decel are the IDM parameters given to SUMO.
+        Let the initial speed be v0, the sim_step be dt, and the acceleration be a. This function increases v0 over n=n_acc_steps steps by a*dt/n per step.
+        At each of the sim steps, the speed increases by a*dt/n at the BEGINNING of the step. After one step, the vehicle's speed is v1=v0+a*dt/n and the distance traveled is v1*dt.
+        If n>1, then after two steps, the vehicle's speed is v2=v1+a*dt/n and the distance traveled is v2*dt. Etc etc.
+        If accel is called again before n steps has elapsed, the new acceleration action overrides the continuation of any previous acceleration.
+        The per step acceleration a/n is clipped by SUMO's IDM behavior to be in the range of -max_decel <= a/n <= max_accel, where max_accel and max_decel are the IDM parameters given to SUMO.
         """
         self.tc.vehicle.slowDown(veh.id, max(0, veh.speed + acc * self.c.sim_step), (n_acc_steps - 1) * self.c.sim_step)
 

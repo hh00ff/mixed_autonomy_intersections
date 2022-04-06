@@ -176,7 +176,10 @@ class Dist:
 class CatDist(Dist):
     def __init__(self, inputs):
         super().__init__(inputs)
-        self.dist = torch.distributions.categorical.Categorical(logits=inputs)
+        if len(inputs) > 0:
+            self.dist = torch.distributions.categorical.Categorical(logits=inputs)
+        else:
+            self.dist = torch.distributions.categorical.Categorical(probs=inputs)
 
     def argmax(self):
         return self.dist.probs.argmax(dim=-1)
@@ -374,7 +377,7 @@ class ValueFitting(Algorithm):
         buffer = c._buffer[:c._buffer_size]
         for i_gd in range(c.n_gds):
             batch_stats = []
-            for idxs, mb in buffer.iter_minibatch(max(1, c._buffer_size // c.size_mb), concat=c.batch_concat, device=c.device):
+            for idxs, mb in buffer.iter_minibatch(max(1, c._buffer_size // c.size_mb), concat=c.batch_concat, device=c.device):  # mb: mini batch
                 pred = c._model(mb.obs, value=True)
                 value_mask = mb.obs.get('value_mask') if isinstance(mb.obs, dict) else None
                 loss = self.value_loss(pred.value, mb.ret, v_start=mb.value, mask=value_mask)

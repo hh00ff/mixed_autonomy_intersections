@@ -109,8 +109,8 @@ class Main(Config):
             if c.tb:
                 for k, v in stats.items():
                     c._writer.add_scalar(k, v, global_step=c._i, walltime=total_time)
-            if c.wb:
-                c._writer.log(stats, step=c._i)
+            # if c.wb:  # hfq: TODO, key bug
+            #     c._writer.log(stats, step=c._i)
 
     def get_log_ii(c, ii, n_ii, print_time=False):
         return lambda **kwargs: c.log_stats(kwargs, ii, n_ii, print_time=print_time)
@@ -171,7 +171,8 @@ class Main(Config):
         """ Collect a list of rollouts for the training step """
         if c.use_ray:
             import ray
-            weights_id = ray.put({k: v.cpu() for k, v in c._model.state_dict().items()})
+            # weights_id = ray.put({k: v.cpu() for k, v in c._model.state_dict().items()})  # CPU bug
+            weights_id = ray.put({k: v for k, v in c._model.state_dict().items()})
             [w.set_weights.remote(weights_id) for w in c._rollout_workers]
             rollout_stats = flatten(ray.get([w.rollouts_single_process.remote() for w in c._rollout_workers]))
         else:
@@ -286,6 +287,7 @@ class Main(Config):
     def train(c):
         c.on_train_start()
         while c._i < c.n_steps:
+            print(c._i, '/', c.n_steps)
             c.on_step_start()
             with torch.no_grad():
                 rollouts = c.rollouts()
@@ -308,6 +310,7 @@ class Main(Config):
 
         c._alg = (eval(c.alg) if isinstance(c.alg, str) else c.alg)(c)
         c.set_model()
+        c._model.to(c.device)  # hfq: solve GPU bug
         c._model.eval()
         c._results = pd.DataFrame(index=pd.Series(name='step'))
         c._writer_buffer = NamedArrays()
@@ -336,6 +339,7 @@ class Main(Config):
         if c.e is not False:
             c.n_workers = 1
             c.setdefaults(use_ray=False, n_rollouts_per_worker=c.n_rollouts_per_step // c.n_workers)
+            # c.setdefaults(device='cuda' if torch.cuda.is_available() else 'cpu') # hfq GPU
             c.eval()
         else:
             c.setdefaults(device='cuda' if torch.cuda.is_available() else 'cpu')

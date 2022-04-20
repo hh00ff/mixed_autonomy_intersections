@@ -770,7 +770,12 @@ class TrafficState:
                 color_fn = c.get('color_fn', lambda veh: RED if 'rl' in type_.id else WHITE)
                 self.set_color(veh, color_fn(veh))
 
-            tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
+            # tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
+            if 'rl' in type_.id:
+                tc.vehicle.setSpeedMode(veh_id, 0)
+            else:
+                tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
+
             tc.vehicle.setLaneChangeMode(veh_id, c.get('lc_mode', LC_MODE.no_lat_collide))
             self.new_departed.add(veh)
             if '.' in veh_id:
@@ -781,6 +786,9 @@ class TrafficState:
 
         self.new_arrived = {self.vehicles[veh_id] for veh_id in sim_res.arrived_vehicles_ids}
         self.new_collided = {self.vehicles[veh_id] for veh_id in sim_res.colliding_vehicles_ids}
+        # for col_v in self.new_collided:
+        #     if col_v.type == "human":
+        #         self.new_collided.pop(col_v)
         for veh in self.new_arrived:
             veh.type.vehicles.remove(self.vehicles.pop(veh.id))
         self.new_arrived -= self.new_collided # Don't count collided vehicles as "arrived"

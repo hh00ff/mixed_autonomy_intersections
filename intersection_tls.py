@@ -16,12 +16,14 @@ class GridEnv(Env):
 
         builder = NetBuilder()
         xys = np.array(np.ones((c.n_rows + 2, c.n_cols + 2)).nonzero()).T * c.length
-        nodes = builder.add_nodes([Namespace(x=x, y=y, type='priority') for y, x in xys]).reshape(c.n_rows + 2, c.n_cols + 2)
-        tl = c.setdefault('tl', False)
-        if tl:
-            c.av_frac = 0
-            c.pop('av_range', None)
-            c.speed_mode = SPEED_MODE.all_checks
+        min = np.min(xys,0)
+        max = np.max(xys,0)
+        nodes = builder.add_nodes([Namespace(x=x, y=y, type='traffic_light') if (y!= min[0] and y!= max[0] and x!= min[1] and x!= max[1]) else Namespace(x=x, y=y, type='priority') for y, x in xys]).reshape(c.n_rows + 2, c.n_cols + 2)
+        tl = c.setdefault('tl', True)
+        # if tl:
+        #     c.av_frac = 0
+        #     c.pop('av_range', None)
+        #     c.speed_mode = SPEED_MODE.all_checks
 
         flows = []
         c.setdefaults(flow_rate_h=c.flow_rate, flow_rate_v=c.flow_rate)

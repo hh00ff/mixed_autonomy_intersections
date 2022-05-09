@@ -1,0 +1,1879 @@
+act_type: accel_discrete
+adv_norm: false
+alg: !!python/name:ut.PG ''
+av_frac: 0.15
+batch_concat: true
+center_reward: true
+collision_coef: 5
+debug: false
+depart_speed: 0
+device: cpu
+directions:
+- up
+- right
+disable_amp: true
+e: false
+flow_rate: 700
+gamma: 0.99
+generic_type: true
+horizon: 2000
+length: 100
+logger: true
+low: -1
+lr: 0.001
+main: true
+max_accel: 1.5
+max_decel: 3.5
+max_dist: 100
+max_speed: 13
+n_actions: 3
+n_cols: 1
+n_gds: 1
+n_rows: 2
+n_steps: 200
+name: fourway_1x1_penetration0.5_server_no_TLS
+norm_reward: true
+obs_next_cross_platoons: 1
+obs_tail: true
+opt: RMSprop
+opt_level: O0
+render: false
+res: /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS
+sim_step: 0.5
+speed_mode: 1
+step_save: 10
+tb: true
+tmp: false
+warmup_steps: 100
+
+i 0 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-0.pth at step 0
+netconvert -o results/fourway_1x1_penetration0.5_server_no_TLS/sumo/net.xml -n results/fourway_1x1_penetration0.5_server_no_TLS/sumo/nod.xml -e results/fourway_1x1_penetration0.5_server_no_TLS/sumo/edg.xml -x results/fourway_1x1_penetration0.5_server_no_TLS/sumo/con.xml --no-turnarounds true
+sumo --net-file results/fourway_1x1_penetration0.5_server_no_TLS/sumo/net.xml --additional-files results/fourway_1x1_penetration0.5_server_no_TLS/sumo/add.xml --gui-settings-file results/fourway_1x1_penetration0.5_server_no_TLS/sumo/gui.xml --begin 0 --step-length 0.5 --no-step-log true --time-to-teleport -1 --no-warnings true --collision.action remove --collision.check-junctions true --max-depart-delay 0.5 --random true --start true
+i 0 | ii  0 | rollout_time 11.7 | horizon 2e+03 | speed 0.896 | speed_rl 0.73 | speed_rl_std 1.01 | speed_human 0.933 | inflow 213 | outflow 164 | inflow_hourly 767 | outflow_hourly 590
+    | collisions 12 | collisions_human 10 | fuel 1.23e+03 | backlog_step 180 | n_total_veh_step 227 | flow_horizontal 700 | flow_vertical 700
+i 0 | ii  0 | raw_reward_mean 0.052 | raw_reward_sum 104
+i 0 | ii  0 | reward_mean -0.00902 | reward_sum -18
+i 0 | ii  0 | n_veh_step_mean 8.48 | n_veh_step_sum 1.7e+04 | n_veh_unique 35
+i 0 | ii  0 | policy_loss 0.186 | kl -1.17e-11 | entropy 1.1
+i 0 | gd_time 0.0607 | total_time 17.7
+
+i 1 | klcoef 0 | lr 0.001
+i 1 | ii  0 | rollout_time 10.2 | horizon 2e+03 | speed 1.06 | speed_rl 0.864 | speed_rl_std 1.17 | speed_human 1.1 | inflow 232 | outflow 181 | inflow_hourly 835 | outflow_hourly 652
+    | collisions 10 | collisions_human 9 | fuel 1.12e+03 | backlog_step 173 | n_total_veh_step 219 | flow_horizontal 700 | flow_vertical 700
+i 1 | ii  0 | raw_reward_mean 0.0655 | raw_reward_sum 131
+i 1 | ii  0 | reward_mean 0.00268 | reward_sum 5.36
+i 1 | ii  0 | n_veh_step_mean 7.91 | n_veh_step_sum 1.58e+04 | n_veh_unique 36
+i 1 | ii  0 | policy_loss -0.314 | kl 8.02e-10 | entropy 1.09
+i 1 | gd_time 0.0527 | total_time 28.2
+
+i 2 | klcoef 0 | lr 0.001
+i 2 | ii  0 | rollout_time 10.6 | horizon 2e+03 | speed 1.02 | speed_rl 0.849 | speed_rl_std 1.12 | speed_human 1.05 | inflow 243 | outflow 190 | inflow_hourly 875 | outflow_hourly 684
+    | collisions 12 | collisions_human 12 | fuel 1.22e+03 | backlog_step 164 | n_total_veh_step 212 | flow_horizontal 700 | flow_vertical 700
+i 2 | ii  0 | raw_reward_mean 0.065 | raw_reward_sum 130
+i 2 | ii  0 | reward_mean 0.00167 | reward_sum 3.33
+i 2 | ii  0 | n_veh_step_mean 8.5 | n_veh_step_sum 1.7e+04 | n_veh_unique 37
+i 2 | ii  0 | policy_loss -0.265 | kl 3.34e-10 | entropy 1.09
+i 2 | gd_time 0.0558 | total_time 39
+
+i 3 | klcoef 0 | lr 0.001
+i 3 | ii  0 | rollout_time 9.47 | horizon 2e+03 | speed 1.42 | speed_rl 1.19 | speed_rl_std 1.56 | speed_human 1.47 | inflow 285 | outflow 240 | inflow_hourly 1.03e+03 | outflow_hourly 864
+    | collisions 10 | collisions_human 10 | fuel 1.2e+03 | backlog_step 141 | n_total_veh_step 183 | flow_horizontal 700 | flow_vertical 700
+i 3 | ii  0 | raw_reward_mean 0.095 | raw_reward_sum 190
+i 3 | ii  0 | reward_mean 0.00599 | reward_sum 12
+i 3 | ii  0 | n_veh_step_mean 7.49 | n_veh_step_sum 1.5e+04 | n_veh_unique 46
+i 3 | ii  0 | policy_loss -0.544 | kl -6.34e-10 | entropy 1.08
+i 3 | gd_time 0.0518 | total_time 48.7
+
+i 4 | klcoef 0 | lr 0.001
+i 4 | ii  0 | rollout_time 7.96 | horizon 2e+03 | speed 2.98 | speed_rl 2.53 | speed_rl_std 2.6 | speed_human 3.08 | inflow 453 | outflow 425 | inflow_hourly 1.63e+03 | outflow_hourly 1.53e+03
+    | collisions 4 | collisions_human 3 | fuel 1.55e+03 | backlog_step 57.7 | n_total_veh_step 92.1 | flow_horizontal 700 | flow_vertical 700
+i 4 | ii  0 | raw_reward_mean 0.203 | raw_reward_sum 405
+i 4 | ii  0 | reward_mean 0.0211 | reward_sum 42.3
+i 4 | ii  0 | n_veh_step_mean 5.98 | n_veh_step_sum 1.2e+04 | n_veh_unique 69
+i 4 | ii  0 | policy_loss -2.11 | kl -6.59e-11 | entropy 0.993
+i 4 | gd_time 0.049 | total_time 56.9
+
+i 5 | klcoef 0 | lr 0.001
+i 5 | ii  0 | rollout_time 9.7 | horizon 2e+03 | speed 1.62 | speed_rl 1.37 | speed_rl_std 1.68 | speed_human 1.67 | inflow 319 | outflow 280 | inflow_hourly 1.15e+03 | outflow_hourly 1.01e+03
+    | collisions 4 | collisions_human 4 | fuel 1.42e+03 | backlog_step 125 | n_total_veh_step 167 | flow_horizontal 700 | flow_vertical 700
+i 5 | ii  0 | raw_reward_mean 0.13 | raw_reward_sum 260
+i 5 | ii  0 | reward_mean 0.00493 | reward_sum 9.86
+i 5 | ii  0 | n_veh_step_mean 7.55 | n_veh_step_sum 1.51e+04 | n_veh_unique 49
+i 5 | ii  0 | policy_loss -0.516 | kl 5.18e-10 | entropy 1.07
+i 5 | gd_time 0.0525 | total_time 66.9
+
+i 6 | klcoef 0 | lr 0.001
+i 6 | ii  0 | rollout_time 9.5 | horizon 2e+03 | speed 1.74 | speed_rl 1.48 | speed_rl_std 1.78 | speed_human 1.8 | inflow 331 | outflow 294 | inflow_hourly 1.19e+03 | outflow_hourly 1.06e+03
+    | collisions 8 | collisions_human 8 | fuel 1.55e+03 | backlog_step 121 | n_total_veh_step 164 | flow_horizontal 700 | flow_vertical 700
+i 6 | ii  0 | raw_reward_mean 0.127 | raw_reward_sum 254
+i 6 | ii  0 | reward_mean 0.004 | reward_sum 8.01
+i 6 | ii  0 | n_veh_step_mean 7.46 | n_veh_step_sum 1.49e+04 | n_veh_unique 52
+i 6 | ii  0 | policy_loss -0.654 | kl 5.77e-10 | entropy 1.07
+i 6 | gd_time 0.0538 | total_time 76.6
+
+i 7 | klcoef 0 | lr 0.001
+i 7 | ii  0 | rollout_time 8.61 | horizon 2e+03 | speed 2.45 | speed_rl 2.09 | speed_rl_std 2.31 | speed_human 2.52 | inflow 419 | outflow 385 | inflow_hourly 1.51e+03 | outflow_hourly 1.39e+03
+    | collisions 2 | collisions_human 2 | fuel 1.39e+03 | backlog_step 76.6 | n_total_veh_step 115 | flow_horizontal 700 | flow_vertical 700
+i 7 | ii  0 | raw_reward_mean 0.188 | raw_reward_sum 375
+i 7 | ii  0 | reward_mean 0.0126 | reward_sum 25.2
+i 7 | ii  0 | n_veh_step_mean 6.55 | n_veh_step_sum 1.31e+04 | n_veh_unique 63
+i 7 | ii  0 | policy_loss -1.32 | kl -4.95e-10 | entropy 1.03
+i 7 | gd_time 0.0499 | total_time 85.5
+
+i 8 | klcoef 0 | lr 0.001
+i 8 | ii  0 | rollout_time 8.54 | horizon 2e+03 | speed 2.68 | speed_rl 2.32 | speed_rl_std 2.43 | speed_human 2.76 | inflow 435 | outflow 400 | inflow_hourly 1.57e+03 | outflow_hourly 1.44e+03
+    | collisions 4 | collisions_human 4 | fuel 1.37e+03 | backlog_step 64.6 | n_total_veh_step 102 | flow_horizontal 700 | flow_vertical 700
+i 8 | ii  0 | raw_reward_mean 0.19 | raw_reward_sum 380
+i 8 | ii  0 | reward_mean 0.0116 | reward_sum 23.3
+i 8 | ii  0 | n_veh_step_mean 6.36 | n_veh_step_sum 1.27e+04 | n_veh_unique 69
+i 8 | ii  0 | policy_loss -1.18 | kl -5.73e-10 | entropy 1.02
+i 8 | gd_time 0.0497 | total_time 94.3
+
+i 9 | klcoef 0 | lr 0.001
+i 9 | ii  0 | rollout_time 7.83 | horizon 2e+03 | speed 3.26 | speed_rl 2.81 | speed_rl_std 2.77 | speed_human 3.36 | inflow 483 | outflow 455 | inflow_hourly 1.74e+03 | outflow_hourly 1.64e+03
+    | collisions 4 | collisions_human 3 | fuel 1.65e+03 | backlog_step 47.7 | n_total_veh_step 81.2 | flow_horizontal 700 | flow_vertical 700
+i 9 | ii  0 | raw_reward_mean 0.217 | raw_reward_sum 435
+i 9 | ii  0 | reward_mean 0.0149 | reward_sum 29.8
+i 9 | ii  0 | n_veh_step_mean 5.75 | n_veh_step_sum 1.15e+04 | n_veh_unique 73
+i 9 | ii  0 | policy_loss -1.64 | kl -1.22e-09 | entropy 0.999
+i 9 | gd_time 0.0471 | total_time 102
+
+i 10 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-10.pth at step 10
+i 10 | ii  0 | rollout_time 7.79 | horizon 2e+03 | speed 3.34 | speed_rl 2.94 | speed_rl_std 3 | speed_human 3.42 | inflow 484 | outflow 461 | inflow_hourly 1.74e+03 | outflow_hourly 1.66e+03
+     | collisions 2 | collisions_human 2 | fuel 1.67e+03 | backlog_step 45.7 | n_total_veh_step 78.9 | flow_horizontal 700 | flow_vertical 700
+i 10 | ii  0 | raw_reward_mean 0.226 | raw_reward_sum 451
+i 10 | ii  0 | reward_mean 0.0148 | reward_sum 29.5
+i 10 | ii  0 | n_veh_step_mean 5.6 | n_veh_step_sum 1.12e+04 | n_veh_unique 75
+i 10 | ii  0 | policy_loss -1.5 | kl 1.83e-10 | entropy 0.963
+i 10 | gd_time 0.0455 | total_time 110
+
+i 11 | klcoef 0 | lr 0.001
+i 11 | ii  0 | rollout_time 7.68 | horizon 2e+03 | speed 3.47 | speed_rl 2.95 | speed_rl_std 2.89 | speed_human 3.58 | inflow 484 | outflow 453 | inflow_hourly 1.74e+03
+     | outflow_hourly 1.63e+03 | collisions 4 | collisions_human 4 | fuel 1.39e+03 | backlog_step 45.2 | n_total_veh_step 76.9 | flow_horizontal 700 | flow_vertical 700
+i 11 | ii  0 | raw_reward_mean 0.216 | raw_reward_sum 433
+i 11 | ii  0 | reward_mean 0.0122 | reward_sum 24.4
+i 11 | ii  0 | n_veh_step_mean 5.54 | n_veh_step_sum 1.11e+04 | n_veh_unique 75
+i 11 | ii  0 | policy_loss -1.26 | kl -5.88e-10 | entropy 1
+i 11 | gd_time 0.045 | total_time 118
+
+i 12 | klcoef 0 | lr 0.001
+i 12 | ii  0 | rollout_time 8.74 | horizon 2e+03 | speed 2.51 | speed_rl 2.13 | speed_rl_std 2.32 | speed_human 2.59 | inflow 423 | outflow 390 | inflow_hourly 1.52e+03 | outflow_hourly 1.4e+03
+     | collisions 6 | collisions_human 5 | fuel 1.57e+03 | backlog_step 69.8 | n_total_veh_step 108 | flow_horizontal 700 | flow_vertical 700
+i 12 | ii  0 | raw_reward_mean 0.18 | raw_reward_sum 360
+i 12 | ii  0 | reward_mean 0.00531 | reward_sum 10.6
+i 12 | ii  0 | n_veh_step_mean 6.58 | n_veh_step_sum 1.32e+04 | n_veh_unique 65
+i 12 | ii  0 | policy_loss -0.6 | kl 4.31e-11 | entropy 1.03
+i 12 | gd_time 0.0509 | total_time 127
+
+i 13 | klcoef 0 | lr 0.001
+i 13 | ii  0 | rollout_time 8.81 | horizon 2e+03 | speed 2.75 | speed_rl 2.41 | speed_rl_std 2.49 | speed_human 2.82 | inflow 470 | outflow 430 | inflow_hourly 1.69e+03
+     | outflow_hourly 1.55e+03 | collisions 2 | collisions_human 2 | fuel 1.28e+03 | backlog_step 49.2 | n_total_veh_step 87.4 | flow_horizontal 700 | flow_vertical 700
+i 13 | ii  0 | raw_reward_mean 0.21 | raw_reward_sum 420
+i 13 | ii  0 | reward_mean 0.0101 | reward_sum 20.2
+i 13 | ii  0 | n_veh_step_mean 6.48 | n_veh_step_sum 1.3e+04 | n_veh_unique 71
+i 13 | ii  0 | policy_loss -1.1 | kl 1.42e-10 | entropy 0.989
+i 13 | gd_time 0.05 | total_time 136
+
+i 14 | klcoef 0 | lr 0.001
+i 14 | ii  0 | rollout_time 8.15 | horizon 2e+03 | speed 3.22 | speed_rl 2.85 | speed_rl_std 2.89 | speed_human 3.29 | inflow 495 | outflow 466 | inflow_hourly 1.78e+03
+     | outflow_hourly 1.68e+03 | collisions 2 | collisions_human 1 | fuel 1.49e+03 | backlog_step 35.8 | n_total_veh_step 70.8 | flow_horizontal 700 | flow_vertical 700
+i 14 | ii  0 | raw_reward_mean 0.228 | raw_reward_sum 456
+i 14 | ii  0 | reward_mean 0.0127 | reward_sum 25.4
+i 14 | ii  0 | n_veh_step_mean 5.83 | n_veh_step_sum 1.17e+04 | n_veh_unique 76
+i 14 | ii  0 | policy_loss -1.3 | kl 1.09e-10 | entropy 0.907
+i 14 | gd_time 0.0501 | total_time 145
+
+i 15 | klcoef 0 | lr 0.001
+i 15 | ii  0 | rollout_time 7.74 | horizon 2e+03 | speed 3.65 | speed_rl 3.2 | speed_rl_std 3.09 | speed_human 3.74 | inflow 514 | outflow 484 | inflow_hourly 1.85e+03 | outflow_hourly 1.74e+03
+     | collisions 10 | collisions_human 5 | fuel 1.8e+03 | backlog_step 29.3 | n_total_veh_step 61.4 | flow_horizontal 700 | flow_vertical 700
+i 15 | ii  0 | raw_reward_mean 0.217 | raw_reward_sum 434
+i 15 | ii  0 | reward_mean 0.0102 | reward_sum 20.5
+i 15 | ii  0 | n_veh_step_mean 5.34 | n_veh_step_sum 1.07e+04 | n_veh_unique 80
+i 15 | ii  0 | policy_loss -1.07 | kl -1.47e-09 | entropy 0.862
+i 15 | gd_time 0.0483 | total_time 153
+
+i 16 | klcoef 0 | lr 0.001
+i 16 | ii  0 | rollout_time 8.65 | horizon 2e+03 | speed 2.73 | speed_rl 2.35 | speed_rl_std 2.4 | speed_human 2.81 | inflow 455 | outflow 421 | inflow_hourly 1.64e+03 | outflow_hourly 1.52e+03
+     | collisions 4 | collisions_human 3 | fuel 1.41e+03 | backlog_step 57.7 | n_total_veh_step 95.5 | flow_horizontal 700 | flow_vertical 700
+i 16 | ii  0 | raw_reward_mean 0.201 | raw_reward_sum 401
+i 16 | ii  0 | reward_mean 0.00676 | reward_sum 13.5
+i 16 | ii  0 | n_veh_step_mean 6.51 | n_veh_step_sum 1.3e+04 | n_veh_unique 71
+i 16 | ii  0 | policy_loss -0.846 | kl 1.18e-09 | entropy 0.963
+i 16 | gd_time 0.0489 | total_time 162
+
+i 17 | klcoef 0 | lr 0.001
+i 17 | ii  0 | rollout_time 8.67 | horizon 2e+03 | speed 2.83 | speed_rl 2.46 | speed_rl_std 2.38 | speed_human 2.91 | inflow 468 | outflow 438 | inflow_hourly 1.68e+03
+     | outflow_hourly 1.58e+03 | collisions 4 | collisions_human 4 | fuel 1.55e+03 | backlog_step 53.4 | n_total_veh_step 90.6 | flow_horizontal 700 | flow_vertical 700
+i 17 | ii  0 | raw_reward_mean 0.209 | raw_reward_sum 418
+i 17 | ii  0 | reward_mean 0.00798 | reward_sum 16
+i 17 | ii  0 | n_veh_step_mean 6.38 | n_veh_step_sum 1.28e+04 | n_veh_unique 72
+i 17 | ii  0 | policy_loss -1 | kl -7.17e-11 | entropy 0.952
+i 17 | gd_time 0.0531 | total_time 171
+
+i 18 | klcoef 0 | lr 0.001
+i 18 | ii  0 | rollout_time 8.38 | horizon 2e+03 | speed 3.05 | speed_rl 2.67 | speed_rl_std 2.63 | speed_human 3.13 | inflow 483 | outflow 448 | inflow_hourly 1.74e+03
+     | outflow_hourly 1.61e+03 | collisions 2 | collisions_human 2 | fuel 1.3e+03 | backlog_step 39.9 | n_total_veh_step 75.5 | flow_horizontal 700 | flow_vertical 700
+i 18 | ii  0 | raw_reward_mean 0.219 | raw_reward_sum 438
+i 18 | ii  0 | reward_mean 0.00944 | reward_sum 18.9
+i 18 | ii  0 | n_veh_step_mean 6.08 | n_veh_step_sum 1.22e+04 | n_veh_unique 75
+i 18 | ii  0 | policy_loss -0.967 | kl 5.13e-10 | entropy 0.924
+i 18 | gd_time 0.0501 | total_time 179
+
+i 19 | klcoef 0 | lr 0.001
+i 19 | ii  0 | rollout_time 9.65 | horizon 2e+03 | speed 2.34 | speed_rl 2.05 | speed_rl_std 2.21 | speed_human 2.4 | inflow 440 | outflow 404 | inflow_hourly 1.58e+03 | outflow_hourly 1.45e+03
+     | collisions 2 | collisions_human 2 | fuel 1.47e+03 | backlog_step 64.3 | n_total_veh_step 107 | flow_horizontal 700 | flow_vertical 700
+i 19 | ii  0 | raw_reward_mean 0.197 | raw_reward_sum 394
+i 19 | ii  0 | reward_mean 0.00501 | reward_sum 10
+i 19 | ii  0 | n_veh_step_mean 7.18 | n_veh_step_sum 1.44e+04 | n_veh_unique 66
+i 19 | ii  0 | policy_loss -0.66 | kl 7.48e-10 | entropy 0.979
+i 19 | gd_time 0.0535 | total_time 189
+
+i 20 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-20.pth at step 20
+i 20 | ii  0 | rollout_time 8.06 | horizon 2e+03 | speed 3.06 | speed_rl 2.59 | speed_rl_std 2.58 | speed_human 3.16 | inflow 471 | outflow 435 | inflow_hourly 1.7e+03 | outflow_hourly 1.57e+03
+     | collisions 10 | collisions_human 6 | fuel 1.51e+03 | backlog_step 50.5 | n_total_veh_step 84.8 | flow_horizontal 700 | flow_vertical 700
+i 20 | ii  0 | raw_reward_mean 0.193 | raw_reward_sum 385
+i 20 | ii  0 | reward_mean 0.00389 | reward_sum 7.78
+i 20 | ii  0 | n_veh_step_mean 5.92 | n_veh_step_sum 1.18e+04 | n_veh_unique 72
+i 20 | ii  0 | policy_loss -0.631 | kl 1.59e-09 | entropy 0.95
+i 20 | gd_time 0.0497 | total_time 197
+
+i 21 | klcoef 0 | lr 0.001
+i 21 | ii  0 | rollout_time 8.02 | horizon 2e+03 | speed 3.11 | speed_rl 2.67 | speed_rl_std 2.67 | speed_human 3.21 | inflow 469 | outflow 441 | inflow_hourly 1.69e+03
+     | outflow_hourly 1.59e+03 | collisions 8 | collisions_human 7 | fuel 1.69e+03 | backlog_step 49.6 | n_total_veh_step 83.5 | flow_horizontal 700 | flow_vertical 700
+i 21 | ii  0 | raw_reward_mean 0.201 | raw_reward_sum 401
+i 21 | ii  0 | reward_mean 0.00521 | reward_sum 10.4
+i 21 | ii  0 | n_veh_step_mean 5.86 | n_veh_step_sum 1.17e+04 | n_veh_unique 72
+i 21 | ii  0 | policy_loss -0.782 | kl -1.05e-10 | entropy 0.967
+i 21 | gd_time 0.0471 | total_time 206
+
+i 22 | klcoef 0 | lr 0.001
+i 22 | ii  0 | rollout_time 9.34 | horizon 2e+03 | speed 2.51 | speed_rl 2.15 | speed_rl_std 2.38 | speed_human 2.59 | inflow 417 | outflow 386 | inflow_hourly 1.5e+03 | outflow_hourly 1.39e+03
+     | collisions 2 | collisions_human 2 | fuel 1.41e+03 | backlog_step 78.5 | n_total_veh_step 116 | flow_horizontal 700 | flow_vertical 700
+i 22 | ii  0 | raw_reward_mean 0.188 | raw_reward_sum 376
+i 22 | ii  0 | reward_mean 0.00262 | reward_sum 5.23
+i 22 | ii  0 | n_veh_step_mean 6.52 | n_veh_step_sum 1.3e+04 | n_veh_unique 65
+i 22 | ii  0 | policy_loss -0.314 | kl -7.05e-10 | entropy 0.997
+i 22 | gd_time 0.0511 | total_time 215
+
+i 23 | klcoef 0 | lr 0.001
+i 23 | ii  0 | rollout_time 8.91 | horizon 2e+03 | speed 2.85 | speed_rl 2.5 | speed_rl_std 2.55 | speed_human 2.92 | inflow 474 | outflow 441 | inflow_hourly 1.71e+03 | outflow_hourly 1.59e+03
+     | collisions 2 | collisions_human 2 | fuel 1.44e+03 | backlog_step 50.2 | n_total_veh_step 87.6 | flow_horizontal 700 | flow_vertical 700
+i 23 | ii  0 | raw_reward_mean 0.215 | raw_reward_sum 431
+i 23 | ii  0 | reward_mean 0.00767 | reward_sum 15.3
+i 23 | ii  0 | n_veh_step_mean 6.35 | n_veh_step_sum 1.27e+04 | n_veh_unique 72
+i 23 | ii  0 | policy_loss -0.903 | kl 5.05e-10 | entropy 0.977
+i 23 | gd_time 0.0495 | total_time 224
+
+i 24 | klcoef 0 | lr 0.001
+i 24 | ii  0 | rollout_time 8.74 | horizon 2e+03 | speed 2.87 | speed_rl 2.53 | speed_rl_std 2.61 | speed_human 2.94 | inflow 471 | outflow 436 | inflow_hourly 1.7e+03 | outflow_hourly 1.57e+03
+     | collisions 0 | collisions_human 0 | fuel 1.45e+03 | backlog_step 49.4 | n_total_veh_step 86.7 | flow_horizontal 700 | flow_vertical 700
+i 24 | ii  0 | raw_reward_mean 0.218 | raw_reward_sum 436
+i 24 | ii  0 | reward_mean 0.00792 | reward_sum 15.8
+i 24 | ii  0 | n_veh_step_mean 6.25 | n_veh_step_sum 1.25e+04 | n_veh_unique 70
+i 24 | ii  0 | policy_loss -0.827 | kl 5.71e-11 | entropy 0.969
+i 24 | gd_time 0.0503 | total_time 233
+
+i 25 | klcoef 0 | lr 0.001
+i 25 | ii  0 | rollout_time 8.26 | horizon 2e+03 | speed 3.32 | speed_rl 3 | speed_rl_std 3.04 | speed_human 3.38 | inflow 504 | outflow 474 | inflow_hourly 1.81e+03 | outflow_hourly 1.71e+03
+     | collisions 0 | collisions_human 0 | fuel 1.46e+03 | backlog_step 31.7 | n_total_veh_step 66.3 | flow_horizontal 700 | flow_vertical 700
+i 25 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 474
+i 25 | ii  0 | reward_mean 0.0114 | reward_sum 22.7
+i 25 | ii  0 | n_veh_step_mean 5.7 | n_veh_step_sum 1.14e+04 | n_veh_unique 77
+i 25 | ii  0 | policy_loss -1.08 | kl 2e-10 | entropy 0.913
+i 25 | gd_time 0.0494 | total_time 242
+
+i 26 | klcoef 0 | lr 0.001
+i 26 | ii  0 | rollout_time 7.79 | horizon 2e+03 | speed 3.5 | speed_rl 3.05 | speed_rl_std 2.93 | speed_human 3.59 | inflow 499 | outflow 469 | inflow_hourly 1.8e+03 | outflow_hourly 1.69e+03
+     | collisions 2 | collisions_human 2 | fuel 1.47e+03 | backlog_step 34.3 | n_total_veh_step 67 | flow_horizontal 700 | flow_vertical 700
+i 26 | ii  0 | raw_reward_mean 0.23 | raw_reward_sum 459
+i 26 | ii  0 | reward_mean 0.00961 | reward_sum 19.2
+i 26 | ii  0 | n_veh_step_mean 5.57 | n_veh_step_sum 1.11e+04 | n_veh_unique 76
+i 26 | ii  0 | policy_loss -0.918 | kl 1.47e-09 | entropy 0.956
+i 26 | gd_time 0.0491 | total_time 250
+
+i 27 | klcoef 0 | lr 0.001
+i 27 | ii  0 | rollout_time 7.75 | horizon 2e+03 | speed 3.54 | speed_rl 3.17 | speed_rl_std 3.16 | speed_human 3.62 | inflow 513 | outflow 473 | inflow_hourly 1.85e+03 | outflow_hourly 1.7e+03
+     | collisions 10 | collisions_human 7 | fuel 1.45e+03 | backlog_step 31.2 | n_total_veh_step 64 | flow_horizontal 700 | flow_vertical 700
+i 27 | ii  0 | raw_reward_mean 0.211 | raw_reward_sum 423
+i 27 | ii  0 | reward_mean 0.00577 | reward_sum 11.5
+i 27 | ii  0 | n_veh_step_mean 5.4 | n_veh_step_sum 1.08e+04 | n_veh_unique 78
+i 27 | ii  0 | policy_loss -0.954 | kl 1.28e-09 | entropy 0.905
+i 27 | gd_time 0.0477 | total_time 258
+
+i 28 | klcoef 0 | lr 0.001
+i 28 | ii  0 | rollout_time 7.82 | horizon 2e+03 | speed 3.64 | speed_rl 3.35 | speed_rl_std 3.26 | speed_human 3.7 | inflow 530 | outflow 488 | inflow_hourly 1.91e+03 | outflow_hourly 1.76e+03
+     | collisions 10 | collisions_human 8 | fuel 1.34e+03 | backlog_step 17.2 | n_total_veh_step 50.2 | flow_horizontal 700 | flow_vertical 700
+i 28 | ii  0 | raw_reward_mean 0.219 | raw_reward_sum 438
+i 28 | ii  0 | reward_mean 0.00705 | reward_sum 14.1
+i 28 | ii  0 | n_veh_step_mean 5.3 | n_veh_step_sum 1.06e+04 | n_veh_unique 80
+i 28 | ii  0 | policy_loss -0.964 | kl 9.75e-10 | entropy 0.875
+i 28 | gd_time 0.0449 | total_time 266
+
+i 29 | klcoef 0 | lr 0.001
+i 29 | ii  0 | rollout_time 7.27 | horizon 2e+03 | speed 4.1 | speed_rl 3.68 | speed_rl_std 3.45 | speed_human 4.18 | inflow 527 | outflow 502 | inflow_hourly 1.9e+03 | outflow_hourly 1.81e+03
+     | collisions 8 | collisions_human 6 | fuel 1.85e+03 | backlog_step 22.6 | n_total_veh_step 52 | flow_horizontal 700 | flow_vertical 700
+i 29 | ii  0 | raw_reward_mean 0.231 | raw_reward_sum 462
+i 29 | ii  0 | reward_mean 0.00918 | reward_sum 18.4
+i 29 | ii  0 | n_veh_step_mean 4.85 | n_veh_step_sum 9.69e+03 | n_veh_unique 81
+i 29 | ii  0 | policy_loss -1.15 | kl -2.65e-10 | entropy 0.917
+i 29 | gd_time 0.0458 | total_time 274
+
+i 30 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-30.pth at step 30
+i 30 | ii  0 | rollout_time 6.73 | horizon 2e+03 | speed 4.47 | speed_rl 4.04 | speed_rl_std 3.83 | speed_human 4.56 | inflow 541 | outflow 489 | inflow_hourly 1.95e+03
+     | outflow_hourly 1.76e+03 | collisions 26 | collisions_human 20 | fuel 1.45e+03 | backlog_step 16.4 | n_total_veh_step 43.6 | flow_horizontal 700 | flow_vertical 700
+i 30 | ii  0 | raw_reward_mean 0.179 | raw_reward_sum 359
+i 30 | ii  0 | reward_mean -0.00124 | reward_sum -2.49
+i 30 | ii  0 | n_veh_step_mean 4.43 | n_veh_step_sum 8.87e+03 | n_veh_unique 81
+i 30 | ii  0 | policy_loss -0.0123 | kl -1.02e-10 | entropy 0.834
+i 30 | gd_time 0.0437 | total_time 281
+
+i 31 | klcoef 0 | lr 0.001
+i 31 | ii  0 | rollout_time 6.79 | horizon 2e+03 | speed 4.35 | speed_rl 3.91 | speed_rl_std 3.7 | speed_human 4.44 | inflow 533 | outflow 494 | inflow_hourly 1.92e+03 | outflow_hourly 1.78e+03
+     | collisions 22 | collisions_human 20 | fuel 1.71e+03 | backlog_step 19.3 | n_total_veh_step 47 | flow_horizontal 700 | flow_vertical 700
+i 31 | ii  0 | raw_reward_mean 0.192 | raw_reward_sum 384
+i 31 | ii  0 | reward_mean 0.0011 | reward_sum 2.19
+i 31 | ii  0 | n_veh_step_mean 4.61 | n_veh_step_sum 9.22e+03 | n_veh_unique 82
+i 31 | ii  0 | policy_loss -0.576 | kl 7.18e-10 | entropy 0.847
+i 31 | gd_time 0.0436 | total_time 288
+
+i 32 | klcoef 0 | lr 0.001
+i 32 | ii  0 | rollout_time 8.13 | horizon 2e+03 | speed 3.29 | speed_rl 2.96 | speed_rl_std 2.97 | speed_human 3.35 | inflow 499 | outflow 464 | inflow_hourly 1.8e+03 | outflow_hourly 1.67e+03
+     | collisions 6 | collisions_human 5 | fuel 1.51e+03 | backlog_step 33.3 | n_total_veh_step 67.7 | flow_horizontal 700 | flow_vertical 700
+i 32 | ii  0 | raw_reward_mean 0.217 | raw_reward_sum 434
+i 32 | ii  0 | reward_mean 0.00586 | reward_sum 11.7
+i 32 | ii  0 | n_veh_step_mean 5.64 | n_veh_step_sum 1.13e+04 | n_veh_unique 76
+i 32 | ii  0 | policy_loss -0.754 | kl -1.08e-10 | entropy 0.936
+i 32 | gd_time 0.0493 | total_time 296
+
+i 33 | klcoef 0 | lr 0.001
+i 33 | ii  0 | rollout_time 8.47 | horizon 2e+03 | speed 3.2 | speed_rl 2.93 | speed_rl_std 2.97 | speed_human 3.25 | inflow 509 | outflow 478 | inflow_hourly 1.83e+03 | outflow_hourly 1.72e+03
+     | collisions 0 | collisions_human 0 | fuel 1.46e+03 | backlog_step 28.8 | n_total_veh_step 65.2 | flow_horizontal 700 | flow_vertical 700
+i 33 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 478
+i 33 | ii  0 | reward_mean 0.0099 | reward_sum 19.8
+i 33 | ii  0 | n_veh_step_mean 5.9 | n_veh_step_sum 1.18e+04 | n_veh_unique 77
+i 33 | ii  0 | policy_loss -0.927 | kl 9.34e-10 | entropy 0.938
+i 33 | gd_time 0.0501 | total_time 305
+
+i 34 | klcoef 0 | lr 0.001
+i 34 | ii  0 | rollout_time 7.49 | horizon 2e+03 | speed 3.94 | speed_rl 3.54 | speed_rl_std 3.34 | speed_human 4.02 | inflow 525 | outflow 491 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.77e+03 | collisions 10 | collisions_human 8 | fuel 1.55e+03 | backlog_step 25.1 | n_total_veh_step 55.4 | flow_horizontal 700 | flow_vertical 700
+i 34 | ii  0 | raw_reward_mean 0.221 | raw_reward_sum 441
+i 34 | ii  0 | reward_mean 0.00618 | reward_sum 12.4
+i 34 | ii  0 | n_veh_step_mean 4.99 | n_veh_step_sum 9.98e+03 | n_veh_unique 81
+i 34 | ii  0 | policy_loss -0.8 | kl 5.36e-10 | entropy 0.89
+i 34 | gd_time 0.0436 | total_time 312
+
+i 35 | klcoef 0 | lr 0.001
+i 35 | ii  0 | rollout_time 6.49 | horizon 2e+03 | speed 4.6 | speed_rl 4.03 | speed_rl_std 3.69 | speed_human 4.71 | inflow 535 | outflow 484 | inflow_hourly 1.93e+03 | outflow_hourly 1.74e+03
+     | collisions 32 | collisions_human 25 | fuel 1.65e+03 | backlog_step 16.6 | n_total_veh_step 42.8 | flow_horizontal 700 | flow_vertical 700
+i 35 | ii  0 | raw_reward_mean 0.162 | raw_reward_sum 324
+i 35 | ii  0 | reward_mean -0.00522 | reward_sum -10.4
+i 35 | ii  0 | n_veh_step_mean 4.34 | n_veh_step_sum 8.69e+03 | n_veh_unique 82
+i 35 | ii  0 | policy_loss -0.203 | kl 1.63e-10 | entropy 0.875
+i 35 | gd_time 0.044 | total_time 319
+
+i 36 | klcoef 0 | lr 0.001
+i 36 | ii  0 | rollout_time 6.46 | horizon 2e+03 | speed 4.83 | speed_rl 4.32 | speed_rl_std 3.8 | speed_human 4.93 | inflow 550 | outflow 503 | inflow_hourly 1.98e+03 | outflow_hourly 1.81e+03
+     | collisions 28 | collisions_human 23 | fuel 1.66e+03 | backlog_step 9.46 | n_total_veh_step 35.1 | flow_horizontal 700 | flow_vertical 700
+i 36 | ii  0 | raw_reward_mean 0.181 | raw_reward_sum 363
+i 36 | ii  0 | reward_mean -0.00125 | reward_sum -2.5
+i 36 | ii  0 | n_veh_step_mean 4.2 | n_veh_step_sum 8.39e+03 | n_veh_unique 84
+i 36 | ii  0 | policy_loss -0.128 | kl -1.4e-10 | entropy 0.849
+i 36 | gd_time 0.046 | total_time 326
+
+i 37 | klcoef 0 | lr 0.001
+i 37 | ii  0 | rollout_time 6.71 | horizon 2e+03 | speed 4.49 | speed_rl 4.01 | speed_rl_std 3.65 | speed_human 4.58 | inflow 538 | outflow 503 | inflow_hourly 1.94e+03
+     | outflow_hourly 1.81e+03 | collisions 14 | collisions_human 9 | fuel 1.54e+03 | backlog_step 14.8 | n_total_veh_step 42 | flow_horizontal 700 | flow_vertical 700
+i 37 | ii  0 | raw_reward_mean 0.216 | raw_reward_sum 433
+i 37 | ii  0 | reward_mean 0.00492 | reward_sum 9.84
+i 37 | ii  0 | n_veh_step_mean 4.45 | n_veh_step_sum 8.9e+03 | n_veh_unique 83
+i 37 | ii  0 | policy_loss -0.594 | kl -2.66e-10 | entropy 0.834
+i 37 | gd_time 0.0448 | total_time 333
+
+i 38 | klcoef 0 | lr 0.001
+i 38 | ii  0 | rollout_time 7.89 | horizon 2e+03 | speed 3.59 | speed_rl 3.25 | speed_rl_std 3.23 | speed_human 3.65 | inflow 517 | outflow 481 | inflow_hourly 1.86e+03
+     | outflow_hourly 1.73e+03 | collisions 8 | collisions_human 7 | fuel 1.52e+03 | backlog_step 26.6 | n_total_veh_step 59.6 | flow_horizontal 700 | flow_vertical 700
+i 38 | ii  0 | raw_reward_mean 0.221 | raw_reward_sum 441
+i 38 | ii  0 | reward_mean 0.00554 | reward_sum 11.1
+i 38 | ii  0 | n_veh_step_mean 5.4 | n_veh_step_sum 1.08e+04 | n_veh_unique 79
+i 38 | ii  0 | policy_loss -0.714 | kl -6.28e-10 | entropy 0.89
+i 38 | gd_time 0.0462 | total_time 341
+
+i 39 | klcoef 0 | lr 0.001
+i 39 | ii  0 | rollout_time 7.91 | horizon 2e+03 | speed 3.57 | speed_rl 3.3 | speed_rl_std 3.22 | speed_human 3.62 | inflow 519 | outflow 485 | inflow_hourly 1.87e+03 | outflow_hourly 1.75e+03
+     | collisions 6 | collisions_human 6 | fuel 1.5e+03 | backlog_step 27.3 | n_total_veh_step 60.4 | flow_horizontal 700 | flow_vertical 700
+i 39 | ii  0 | raw_reward_mean 0.228 | raw_reward_sum 455
+i 39 | ii  0 | reward_mean 0.00663 | reward_sum 13.3
+i 39 | ii  0 | n_veh_step_mean 5.36 | n_veh_step_sum 1.07e+04 | n_veh_unique 80
+i 39 | ii  0 | policy_loss -0.931 | kl -8.62e-10 | entropy 0.872
+i 39 | gd_time 0.0442 | total_time 349
+
+i 40 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-40.pth at step 40
+i 40 | ii  0 | rollout_time 7.43 | horizon 2e+03 | speed 3.95 | speed_rl 3.62 | speed_rl_std 3.42 | speed_human 4.01 | inflow 538 | outflow 504 | inflow_hourly 1.94e+03
+     | outflow_hourly 1.81e+03 | collisions 6 | collisions_human 5 | fuel 1.39e+03 | backlog_step 17.6 | n_total_veh_step 48.6 | flow_horizontal 700 | flow_vertical 700
+i 40 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 474
+i 40 | ii  0 | reward_mean 0.00818 | reward_sum 16.4
+i 40 | ii  0 | n_veh_step_mean 5.05 | n_veh_step_sum 1.01e+04 | n_veh_unique 83
+i 40 | ii  0 | policy_loss -0.961 | kl -1.33e-09 | entropy 0.85
+i 40 | gd_time 0.0485 | total_time 357
+
+i 41 | klcoef 0 | lr 0.001
+i 41 | ii  0 | rollout_time 7.36 | horizon 2e+03 | speed 3.8 | speed_rl 3.36 | speed_rl_std 3.22 | speed_human 3.89 | inflow 521 | outflow 478 | inflow_hourly 1.88e+03 | outflow_hourly 1.72e+03
+     | collisions 14 | collisions_human 10 | fuel 1.4e+03 | backlog_step 25 | n_total_veh_step 55.8 | flow_horizontal 700 | flow_vertical 700
+i 41 | ii  0 | raw_reward_mean 0.204 | raw_reward_sum 408
+i 41 | ii  0 | reward_mean 0.00212 | reward_sum 4.24
+i 41 | ii  0 | n_veh_step_mean 5.14 | n_veh_step_sum 1.03e+04 | n_veh_unique 80
+i 41 | ii  0 | policy_loss -0.234 | kl 1.45e-09 | entropy 0.894
+i 41 | gd_time 0.0452 | total_time 364
+
+i 42 | klcoef 0 | lr 0.001
+i 42 | ii  0 | rollout_time 8.04 | horizon 2e+03 | speed 3.63 | speed_rl 3.3 | speed_rl_std 3.23 | speed_human 3.69 | inflow 530 | outflow 498 | inflow_hourly 1.91e+03 | outflow_hourly 1.79e+03
+     | collisions 2 | collisions_human 2 | fuel 1.41e+03 | backlog_step 25.9 | n_total_veh_step 59.1 | flow_horizontal 700 | flow_vertical 700
+i 42 | ii  0 | raw_reward_mean 0.244 | raw_reward_sum 488
+i 42 | ii  0 | reward_mean 0.00922 | reward_sum 18.4
+i 42 | ii  0 | n_veh_step_mean 5.37 | n_veh_step_sum 1.07e+04 | n_veh_unique 80
+i 42 | ii  0 | policy_loss -1.02 | kl -1.31e-11 | entropy 0.886
+i 42 | gd_time 0.0449 | total_time 373
+
+i 43 | klcoef 0 | lr 0.001
+i 43 | ii  0 | rollout_time 7.51 | horizon 2e+03 | speed 3.9 | speed_rl 3.55 | speed_rl_std 3.39 | speed_human 3.97 | inflow 529 | outflow 507 | inflow_hourly 1.9e+03 | outflow_hourly 1.83e+03
+     | collisions 2 | collisions_human 1 | fuel 1.68e+03 | backlog_step 23.5 | n_total_veh_step 54.7 | flow_horizontal 700 | flow_vertical 700
+i 43 | ii  0 | raw_reward_mean 0.248 | raw_reward_sum 497
+i 43 | ii  0 | reward_mean 0.00988 | reward_sum 19.8
+i 43 | ii  0 | n_veh_step_mean 5.07 | n_veh_step_sum 1.01e+04 | n_veh_unique 82
+i 43 | ii  0 | policy_loss -1.01 | kl -3.24e-11 | entropy 0.871
+i 43 | gd_time 0.0471 | total_time 381
+
+i 44 | klcoef 0 | lr 0.001
+i 44 | ii  0 | rollout_time 7.79 | horizon 2e+03 | speed 3.62 | speed_rl 3.37 | speed_rl_std 3.31 | speed_human 3.66 | inflow 524 | outflow 489 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.76e+03 | collisions 8 | collisions_human 7 | fuel 1.43e+03 | backlog_step 21.8 | n_total_veh_step 54.7 | flow_horizontal 700 | flow_vertical 700
+i 44 | ii  0 | raw_reward_mean 0.225 | raw_reward_sum 449
+i 44 | ii  0 | reward_mean 0.0054 | reward_sum 10.8
+i 44 | ii  0 | n_veh_step_mean 5.29 | n_veh_step_sum 1.06e+04 | n_veh_unique 81
+i 44 | ii  0 | policy_loss -0.645 | kl 5.02e-10 | entropy 0.855
+i 44 | gd_time 0.0448 | total_time 389
+
+i 45 | klcoef 0 | lr 0.001
+i 45 | ii  0 | rollout_time 8.15 | horizon 2e+03 | speed 3.53 | speed_rl 3.31 | speed_rl_std 3.29 | speed_human 3.57 | inflow 533 | outflow 503 | inflow_hourly 1.92e+03
+     | outflow_hourly 1.81e+03 | collisions 4 | collisions_human 4 | fuel 1.53e+03 | backlog_step 16.3 | n_total_veh_step 50.9 | flow_horizontal 700 | flow_vertical 700
+i 45 | ii  0 | raw_reward_mean 0.241 | raw_reward_sum 483
+i 45 | ii  0 | reward_mean 0.00839 | reward_sum 16.8
+i 45 | ii  0 | n_veh_step_mean 5.5 | n_veh_step_sum 1.1e+04 | n_veh_unique 83
+i 45 | ii  0 | policy_loss -0.969 | kl 2.24e-10 | entropy 0.826
+i 45 | gd_time 0.0481 | total_time 397
+
+i 46 | klcoef 0 | lr 0.001
+i 46 | ii  0 | rollout_time 7.47 | horizon 2e+03 | speed 3.89 | speed_rl 3.56 | speed_rl_std 3.37 | speed_human 3.96 | inflow 537 | outflow 500 | inflow_hourly 1.93e+03 | outflow_hourly 1.8e+03
+     | collisions 10 | collisions_human 8 | fuel 1.46e+03 | backlog_step 17.3 | n_total_veh_step 48.6 | flow_horizontal 700 | flow_vertical 700
+i 46 | ii  0 | raw_reward_mean 0.225 | raw_reward_sum 450
+i 46 | ii  0 | reward_mean 0.00523 | reward_sum 10.5
+i 46 | ii  0 | n_veh_step_mean 5.07 | n_veh_step_sum 1.01e+04 | n_veh_unique 83
+i 46 | ii  0 | policy_loss -0.595 | kl -3.18e-10 | entropy 0.855
+i 46 | gd_time 0.0469 | total_time 405
+
+i 47 | klcoef 0 | lr 0.001
+i 47 | ii  0 | rollout_time 8.78 | horizon 2e+03 | speed 3.21 | speed_rl 2.98 | speed_rl_std 3.03 | speed_human 3.25 | inflow 522 | outflow 485 | inflow_hourly 1.88e+03
+     | outflow_hourly 1.75e+03 | collisions 4 | collisions_human 3 | fuel 1.42e+03 | backlog_step 20.5 | n_total_veh_step 57.5 | flow_horizontal 700 | flow_vertical 700
+i 47 | ii  0 | raw_reward_mean 0.233 | raw_reward_sum 465
+i 47 | ii  0 | reward_mean 0.00651 | reward_sum 13
+i 47 | ii  0 | n_veh_step_mean 5.91 | n_veh_step_sum 1.18e+04 | n_veh_unique 79
+i 47 | ii  0 | policy_loss -0.818 | kl 3.99e-10 | entropy 0.883
+i 47 | gd_time 0.0487 | total_time 414
+
+i 48 | klcoef 0 | lr 0.001
+i 48 | ii  0 | rollout_time 8.19 | horizon 2e+03 | speed 3.42 | speed_rl 3.14 | speed_rl_std 3.14 | speed_human 3.47 | inflow 525 | outflow 480 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.73e+03 | collisions 12 | collisions_human 9 | fuel 1.39e+03 | backlog_step 20.3 | n_total_veh_step 54.8 | flow_horizontal 700 | flow_vertical 700
+i 48 | ii  0 | raw_reward_mean 0.21 | raw_reward_sum 420
+i 48 | ii  0 | reward_mean 0.00222 | reward_sum 4.44
+i 48 | ii  0 | n_veh_step_mean 5.54 | n_veh_step_sum 1.11e+04 | n_veh_unique 82
+i 48 | ii  0 | policy_loss -0.671 | kl 3.29e-10 | entropy 0.874
+i 48 | gd_time 0.0492 | total_time 422
+
+i 49 | klcoef 0 | lr 0.001
+i 49 | ii  0 | rollout_time 7.74 | horizon 2e+03 | speed 3.71 | speed_rl 3.39 | speed_rl_std 3.33 | speed_human 3.77 | inflow 528 | outflow 495 | inflow_hourly 1.9e+03 | outflow_hourly 1.78e+03
+     | collisions 4 | collisions_human 3 | fuel 1.42e+03 | backlog_step 20.8 | n_total_veh_step 53.2 | flow_horizontal 700 | flow_vertical 700
+i 49 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 475
+i 49 | ii  0 | reward_mean 0.00721 | reward_sum 14.4
+i 49 | ii  0 | n_veh_step_mean 5.28 | n_veh_step_sum 1.06e+04 | n_veh_unique 80
+i 49 | ii  0 | policy_loss -0.869 | kl -1.62e-09 | entropy 0.884
+i 49 | gd_time 0.0491 | total_time 430
+
+i 50 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-50.pth at step 50
+i 50 | ii  0 | rollout_time 7.71 | horizon 2e+03 | speed 3.62 | speed_rl 3.27 | speed_rl_std 3.19 | speed_human 3.69 | inflow 516 | outflow 486 | inflow_hourly 1.86e+03
+     | outflow_hourly 1.75e+03 | collisions 2 | collisions_human 2 | fuel 1.48e+03 | backlog_step 28 | n_total_veh_step 60.4 | flow_horizontal 700 | flow_vertical 700
+i 50 | ii  0 | raw_reward_mean 0.238 | raw_reward_sum 476
+i 50 | ii  0 | reward_mean 0.0072 | reward_sum 14.4
+i 50 | ii  0 | n_veh_step_mean 5.36 | n_veh_step_sum 1.07e+04 | n_veh_unique 78
+i 50 | ii  0 | policy_loss -0.803 | kl 2.64e-10 | entropy 0.929
+i 50 | gd_time 0.0472 | total_time 438
+
+i 51 | klcoef 0 | lr 0.001
+i 51 | ii  0 | rollout_time 7.65 | horizon 2e+03 | speed 3.82 | speed_rl 3.44 | speed_rl_std 3.24 | speed_human 3.89 | inflow 528 | outflow 493 | inflow_hourly 1.9e+03 | outflow_hourly 1.77e+03
+     | collisions 4 | collisions_human 3 | fuel 1.32e+03 | backlog_step 19.7 | n_total_veh_step 51.1 | flow_horizontal 700 | flow_vertical 700
+i 51 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 473
+i 51 | ii  0 | reward_mean 0.00681 | reward_sum 13.6
+i 51 | ii  0 | n_veh_step_mean 5.18 | n_veh_step_sum 1.04e+04 | n_veh_unique 79
+i 51 | ii  0 | policy_loss -0.833 | kl 1.76e-10 | entropy 0.922
+i 51 | gd_time 0.0467 | total_time 446
+
+i 52 | klcoef 0 | lr 0.001
+i 52 | ii  0 | rollout_time 8.65 | horizon 2e+03 | speed 3.26 | speed_rl 2.98 | speed_rl_std 2.98 | speed_human 3.32 | inflow 519 | outflow 488 | inflow_hourly 1.87e+03
+     | outflow_hourly 1.76e+03 | collisions 0 | collisions_human 0 | fuel 1.51e+03 | backlog_step 25.4 | n_total_veh_step 61.7 | flow_horizontal 700 | flow_vertical 700
+i 52 | ii  0 | raw_reward_mean 0.244 | raw_reward_sum 488
+i 52 | ii  0 | reward_mean 0.00813 | reward_sum 16.3
+i 52 | ii  0 | n_veh_step_mean 5.86 | n_veh_step_sum 1.17e+04 | n_veh_unique 78
+i 52 | ii  0 | policy_loss -0.823 | kl -5.75e-10 | entropy 0.895
+i 52 | gd_time 0.0481 | total_time 455
+
+i 53 | klcoef 0 | lr 0.001
+i 53 | ii  0 | rollout_time 7.89 | horizon 2e+03 | speed 3.55 | speed_rl 3.2 | speed_rl_std 3.17 | speed_human 3.62 | inflow 520 | outflow 493 | inflow_hourly 1.87e+03 | outflow_hourly 1.77e+03
+     | collisions 2 | collisions_human 2 | fuel 1.62e+03 | backlog_step 26.9 | n_total_veh_step 60.7 | flow_horizontal 700 | flow_vertical 700
+i 53 | ii  0 | raw_reward_mean 0.241 | raw_reward_sum 483
+i 53 | ii  0 | reward_mean 0.00758 | reward_sum 15.2
+i 53 | ii  0 | n_veh_step_mean 5.54 | n_veh_step_sum 1.11e+04 | n_veh_unique 79
+i 53 | ii  0 | policy_loss -0.864 | kl -8.89e-10 | entropy 0.923
+i 53 | gd_time 0.0514 | total_time 463
+
+i 54 | klcoef 0 | lr 0.001
+i 54 | ii  0 | rollout_time 8.28 | horizon 2e+03 | speed 3.35 | speed_rl 3.08 | speed_rl_std 3.03 | speed_human 3.4 | inflow 524 | outflow 487 | inflow_hourly 1.89e+03 | outflow_hourly 1.75e+03
+     | collisions 4 | collisions_human 3 | fuel 1.36e+03 | backlog_step 20.9 | n_total_veh_step 56.5 | flow_horizontal 700 | flow_vertical 700
+i 54 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 54 | ii  0 | reward_mean 0.00598 | reward_sum 12
+i 54 | ii  0 | n_veh_step_mean 5.73 | n_veh_step_sum 1.15e+04 | n_veh_unique 81
+i 54 | ii  0 | policy_loss -0.708 | kl -3.23e-10 | entropy 0.916
+i 54 | gd_time 0.0519 | total_time 472
+
+i 55 | klcoef 0 | lr 0.001
+i 55 | ii  0 | rollout_time 7.91 | horizon 2e+03 | speed 3.63 | speed_rl 3.36 | speed_rl_std 3.25 | speed_human 3.68 | inflow 535 | outflow 500 | inflow_hourly 1.93e+03 | outflow_hourly 1.8e+03
+     | collisions 4 | collisions_human 4 | fuel 1.32e+03 | backlog_step 17.2 | n_total_veh_step 50.7 | flow_horizontal 700 | flow_vertical 700
+i 55 | ii  0 | raw_reward_mean 0.24 | raw_reward_sum 480
+i 55 | ii  0 | reward_mean 0.00713 | reward_sum 14.3
+i 55 | ii  0 | n_veh_step_mean 5.38 | n_veh_step_sum 1.08e+04 | n_veh_unique 83
+i 55 | ii  0 | policy_loss -0.771 | kl 9.35e-10 | entropy 0.887
+i 55 | gd_time 0.0487 | total_time 480
+
+i 56 | klcoef 0 | lr 0.001
+i 56 | ii  0 | rollout_time 7.55 | horizon 2e+03 | speed 3.89 | speed_rl 3.56 | speed_rl_std 3.33 | speed_human 3.95 | inflow 542 | outflow 502 | inflow_hourly 1.95e+03
+     | outflow_hourly 1.81e+03 | collisions 10 | collisions_human 8 | fuel 1.41e+03 | backlog_step 15.5 | n_total_veh_step 47 | flow_horizontal 700 | flow_vertical 700
+i 56 | ii  0 | raw_reward_mean 0.226 | raw_reward_sum 452
+i 56 | ii  0 | reward_mean 0.00438 | reward_sum 8.76
+i 56 | ii  0 | n_veh_step_mean 5.08 | n_veh_step_sum 1.02e+04 | n_veh_unique 83
+i 56 | ii  0 | policy_loss -0.739 | kl 5.07e-10 | entropy 0.893
+i 56 | gd_time 0.0458 | total_time 488
+
+i 57 | klcoef 0 | lr 0.001
+i 57 | ii  0 | rollout_time 8.51 | horizon 2e+03 | speed 3.4 | speed_rl 3.14 | speed_rl_std 3.12 | speed_human 3.45 | inflow 526 | outflow 495 | inflow_hourly 1.89e+03 | outflow_hourly 1.78e+03
+     | collisions 2 | collisions_human 2 | fuel 1.42e+03 | backlog_step 19.8 | n_total_veh_step 55.1 | flow_horizontal 700 | flow_vertical 700
+i 57 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 485
+i 57 | ii  0 | reward_mean 0.00745 | reward_sum 14.9
+i 57 | ii  0 | n_veh_step_mean 5.7 | n_veh_step_sum 1.14e+04 | n_veh_unique 82
+i 57 | ii  0 | policy_loss -0.788 | kl 9.43e-11 | entropy 0.91
+i 57 | gd_time 0.0518 | total_time 496
+
+i 58 | klcoef 0 | lr 0.001
+i 58 | ii  0 | rollout_time 8.24 | horizon 2e+03 | speed 3.41 | speed_rl 3.14 | speed_rl_std 3.08 | speed_human 3.47 | inflow 524 | outflow 494 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.78e+03 | collisions 0 | collisions_human 0 | fuel 1.49e+03 | backlog_step 22.5 | n_total_veh_step 57.6 | flow_horizontal 700 | flow_vertical 700
+i 58 | ii  0 | raw_reward_mean 0.247 | raw_reward_sum 494
+i 58 | ii  0 | reward_mean 0.00824 | reward_sum 16.5
+i 58 | ii  0 | n_veh_step_mean 5.67 | n_veh_step_sum 1.13e+04 | n_veh_unique 81
+i 58 | ii  0 | policy_loss -0.802 | kl 5.06e-10 | entropy 0.911
+i 58 | gd_time 0.0508 | total_time 505
+
+i 59 | klcoef 0 | lr 0.001
+i 59 | ii  0 | rollout_time 7.79 | horizon 2e+03 | speed 3.61 | speed_rl 3.29 | speed_rl_std 3.19 | speed_human 3.67 | inflow 520 | outflow 495 | inflow_hourly 1.87e+03
+     | outflow_hourly 1.78e+03 | collisions 0 | collisions_human 0 | fuel 1.53e+03 | backlog_step 24.8 | n_total_veh_step 57.6 | flow_horizontal 700 | flow_vertical 700
+i 59 | ii  0 | raw_reward_mean 0.247 | raw_reward_sum 495
+i 59 | ii  0 | reward_mean 0.00826 | reward_sum 16.5
+i 59 | ii  0 | n_veh_step_mean 5.34 | n_veh_step_sum 1.07e+04 | n_veh_unique 80
+i 59 | ii  0 | policy_loss -0.789 | kl 2.14e-10 | entropy 0.911
+i 59 | gd_time 0.0468 | total_time 513
+
+i 60 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-60.pth at step 60
+i 60 | ii  0 | rollout_time 8.41 | horizon 2e+03 | speed 3.27 | speed_rl 2.99 | speed_rl_std 3.02 | speed_human 3.32 | inflow 518 | outflow 481 | inflow_hourly 1.86e+03
+     | outflow_hourly 1.73e+03 | collisions 2 | collisions_human 2 | fuel 1.34e+03 | backlog_step 25.7 | n_total_veh_step 61.5 | flow_horizontal 700 | flow_vertical 700
+i 60 | ii  0 | raw_reward_mean 0.235 | raw_reward_sum 471
+i 60 | ii  0 | reward_mean 0.00585 | reward_sum 11.7
+i 60 | ii  0 | n_veh_step_mean 5.79 | n_veh_step_sum 1.16e+04 | n_veh_unique 77
+i 60 | ii  0 | policy_loss -0.662 | kl -1.21e-09 | entropy 0.942
+i 60 | gd_time 0.052 | total_time 522
+
+i 61 | klcoef 0 | lr 0.001
+i 61 | ii  0 | rollout_time 8.5 | horizon 2e+03 | speed 3.24 | speed_rl 2.99 | speed_rl_std 2.99 | speed_human 3.29 | inflow 514 | outflow 484 | inflow_hourly 1.85e+03 | outflow_hourly 1.74e+03
+     | collisions 2 | collisions_human 2 | fuel 1.51e+03 | backlog_step 28.9 | n_total_veh_step 65.2 | flow_horizontal 700 | flow_vertical 700
+i 61 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 474
+i 61 | ii  0 | reward_mean 0.00609 | reward_sum 12.2
+i 61 | ii  0 | n_veh_step_mean 5.87 | n_veh_step_sum 1.17e+04 | n_veh_unique 80
+i 61 | ii  0 | policy_loss -0.695 | kl -8.88e-10 | entropy 0.936
+i 61 | gd_time 0.0529 | total_time 530
+
+i 62 | klcoef 0 | lr 0.001
+i 62 | ii  0 | rollout_time 8.74 | horizon 2e+03 | speed 3.21 | speed_rl 2.91 | speed_rl_std 2.94 | speed_human 3.26 | inflow 515 | outflow 478 | inflow_hourly 1.85e+03
+     | outflow_hourly 1.72e+03 | collisions 2 | collisions_human 2 | fuel 1.37e+03 | backlog_step 26.9 | n_total_veh_step 63.2 | flow_horizontal 700 | flow_vertical 700
+i 62 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 468
+i 62 | ii  0 | reward_mean 0.00543 | reward_sum 10.9
+i 62 | ii  0 | n_veh_step_mean 5.91 | n_veh_step_sum 1.18e+04 | n_veh_unique 76
+i 62 | ii  0 | policy_loss -0.649 | kl -6.53e-10 | entropy 0.938
+i 62 | gd_time 0.052 | total_time 539
+
+i 63 | klcoef 0 | lr 0.001
+i 63 | ii  0 | rollout_time 7.59 | horizon 2e+03 | speed 3.83 | speed_rl 3.43 | speed_rl_std 3.27 | speed_human 3.9 | inflow 526 | outflow 495 | inflow_hourly 1.89e+03 | outflow_hourly 1.78e+03
+     | collisions 10 | collisions_human 8 | fuel 1.79e+03 | backlog_step 22.2 | n_total_veh_step 53.7 | flow_horizontal 700 | flow_vertical 700
+i 63 | ii  0 | raw_reward_mean 0.223 | raw_reward_sum 445
+i 63 | ii  0 | reward_mean 0.00305 | reward_sum 6.1
+i 63 | ii  0 | n_veh_step_mean 5.19 | n_veh_step_sum 1.04e+04 | n_veh_unique 80
+i 63 | ii  0 | policy_loss -0.356 | kl -7.37e-10 | entropy 0.929
+i 63 | gd_time 0.0467 | total_time 547
+
+i 64 | klcoef 0 | lr 0.001
+i 64 | ii  0 | rollout_time 8.77 | horizon 2e+03 | speed 2.97 | speed_rl 2.69 | speed_rl_std 2.78 | speed_human 3.03 | inflow 492 | outflow 459 | inflow_hourly 1.77e+03
+     | outflow_hourly 1.65e+03 | collisions 2 | collisions_human 2 | fuel 1.41e+03 | backlog_step 35.3 | n_total_veh_step 73.1 | flow_horizontal 700 | flow_vertical 700
+i 64 | ii  0 | raw_reward_mean 0.225 | raw_reward_sum 449
+i 64 | ii  0 | reward_mean 0.00342 | reward_sum 6.83
+i 64 | ii  0 | n_veh_step_mean 6.24 | n_veh_step_sum 1.25e+04 | n_veh_unique 77
+i 64 | ii  0 | policy_loss -0.421 | kl -2.12e-10 | entropy 0.983
+i 64 | gd_time 0.0535 | total_time 556
+
+i 65 | klcoef 0 | lr 0.001
+i 65 | ii  0 | rollout_time 8.5 | horizon 2e+03 | speed 3.1 | speed_rl 2.8 | speed_rl_std 2.86 | speed_human 3.16 | inflow 497 | outflow 467 | inflow_hourly 1.79e+03 | outflow_hourly 1.68e+03
+     | collisions 0 | collisions_human 0 | fuel 1.49e+03 | backlog_step 35.5 | n_total_veh_step 72.2 | flow_horizontal 700 | flow_vertical 700
+i 65 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 65 | ii  0 | reward_mean 0.00517 | reward_sum 10.3
+i 65 | ii  0 | n_veh_step_mean 5.97 | n_veh_step_sum 1.19e+04 | n_veh_unique 75
+i 65 | ii  0 | policy_loss -0.498 | kl 1.31e-09 | entropy 0.975
+i 65 | gd_time 0.0501 | total_time 565
+
+i 66 | klcoef 0 | lr 0.001
+i 66 | ii  0 | rollout_time 7.63 | horizon 2e+03 | speed 3.76 | speed_rl 3.38 | speed_rl_std 3.16 | speed_human 3.84 | inflow 521 | outflow 498 | inflow_hourly 1.88e+03
+     | outflow_hourly 1.79e+03 | collisions 2 | collisions_human 2 | fuel 1.68e+03 | backlog_step 25.8 | n_total_veh_step 57.6 | flow_horizontal 700 | flow_vertical 700
+i 66 | ii  0 | raw_reward_mean 0.244 | raw_reward_sum 488
+i 66 | ii  0 | reward_mean 0.00723 | reward_sum 14.5
+i 66 | ii  0 | n_veh_step_mean 5.28 | n_veh_step_sum 1.06e+04 | n_veh_unique 81
+i 66 | ii  0 | policy_loss -0.82 | kl -3.3e-10 | entropy 0.955
+i 66 | gd_time 0.0485 | total_time 573
+
+i 67 | klcoef 0 | lr 0.001
+i 67 | ii  0 | rollout_time 7.97 | horizon 2e+03 | speed 3.6 | speed_rl 3.25 | speed_rl_std 3.14 | speed_human 3.67 | inflow 510 | outflow 481 | inflow_hourly 1.84e+03 | outflow_hourly 1.73e+03
+     | collisions 4 | collisions_human 4 | fuel 1.63e+03 | backlog_step 31 | n_total_veh_step 63.3 | flow_horizontal 700 | flow_vertical 700
+i 67 | ii  0 | raw_reward_mean 0.231 | raw_reward_sum 461
+i 67 | ii  0 | reward_mean 0.00444 | reward_sum 8.88
+i 67 | ii  0 | n_veh_step_mean 5.28 | n_veh_step_sum 1.06e+04 | n_veh_unique 76
+i 67 | ii  0 | policy_loss -0.704 | kl -4.25e-10 | entropy 0.945
+i 67 | gd_time 0.0463 | total_time 581
+
+i 68 | klcoef 0 | lr 0.001
+i 68 | ii  0 | rollout_time 8.13 | horizon 2e+03 | speed 3.32 | speed_rl 3.01 | speed_rl_std 3.08 | speed_human 3.38 | inflow 504 | outflow 467 | inflow_hourly 1.81e+03
+     | outflow_hourly 1.68e+03 | collisions 4 | collisions_human 4 | fuel 1.35e+03 | backlog_step 32.9 | n_total_veh_step 67.2 | flow_horizontal 700 | flow_vertical 700
+i 68 | ii  0 | raw_reward_mean 0.224 | raw_reward_sum 447
+i 68 | ii  0 | reward_mean 0.00297 | reward_sum 5.94
+i 68 | ii  0 | n_veh_step_mean 5.64 | n_veh_step_sum 1.13e+04 | n_veh_unique 76
+i 68 | ii  0 | policy_loss -0.511 | kl 3.78e-11 | entropy 0.969
+i 68 | gd_time 0.0515 | total_time 590
+
+i 69 | klcoef 0 | lr 0.001
+i 69 | ii  0 | rollout_time 8.55 | horizon 2e+03 | speed 3.15 | speed_rl 2.87 | speed_rl_std 2.87 | speed_human 3.21 | inflow 501 | outflow 469 | inflow_hourly 1.8e+03 | outflow_hourly 1.69e+03
+     | collisions 4 | collisions_human 2 | fuel 1.57e+03 | backlog_step 35 | n_total_veh_step 71.3 | flow_horizontal 700 | flow_vertical 700
+i 69 | ii  0 | raw_reward_mean 0.225 | raw_reward_sum 449
+i 69 | ii  0 | reward_mean 0.00315 | reward_sum 6.31
+i 69 | ii  0 | n_veh_step_mean 5.9 | n_veh_step_sum 1.18e+04 | n_veh_unique 78
+i 69 | ii  0 | policy_loss -0.488 | kl -5.77e-10 | entropy 0.962
+i 69 | gd_time 0.0527 | total_time 598
+
+i 70 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-70.pth at step 70
+i 70 | ii  0 | rollout_time 7.22 | horizon 2e+03 | speed 3.9 | speed_rl 3.4 | speed_rl_std 3.28 | speed_human 4 | inflow 512 | outflow 476 | inflow_hourly 1.84e+03 | outflow_hourly 1.71e+03
+     | collisions 12 | collisions_human 9 | fuel 1.51e+03 | backlog_step 28.4 | n_total_veh_step 58.2 | flow_horizontal 700 | flow_vertical 700
+i 70 | ii  0 | raw_reward_mean 0.208 | raw_reward_sum 416
+i 70 | ii  0 | reward_mean -0.000224 | reward_sum -0.448
+i 70 | ii  0 | n_veh_step_mean 5.04 | n_veh_step_sum 1.01e+04 | n_veh_unique 79
+i 70 | ii  0 | policy_loss -0.131 | kl 3.42e-10 | entropy 0.971
+i 70 | gd_time 0.0471 | total_time 606
+
+i 71 | klcoef 0 | lr 0.001
+i 71 | ii  0 | rollout_time 7.98 | horizon 2e+03 | speed 3.49 | speed_rl 3.16 | speed_rl_std 3.12 | speed_human 3.55 | inflow 514 | outflow 484 | inflow_hourly 1.85e+03
+     | outflow_hourly 1.74e+03 | collisions 0 | collisions_human 0 | fuel 1.38e+03 | backlog_step 27.7 | n_total_veh_step 61.4 | flow_horizontal 700 | flow_vertical 700
+i 71 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 484
+i 71 | ii  0 | reward_mean 0.00664 | reward_sum 13.3
+i 71 | ii  0 | n_veh_step_mean 5.56 | n_veh_step_sum 1.11e+04 | n_veh_unique 79
+i 71 | ii  0 | policy_loss -0.62 | kl 5.74e-10 | entropy 0.979
+i 71 | gd_time 0.0478 | total_time 614
+
+i 72 | klcoef 0 | lr 0.001
+i 72 | ii  0 | rollout_time 8.08 | horizon 2e+03 | speed 3.46 | speed_rl 3.13 | speed_rl_std 3.07 | speed_human 3.52 | inflow 520 | outflow 490 | inflow_hourly 1.87e+03
+     | outflow_hourly 1.76e+03 | collisions 4 | collisions_human 2 | fuel 1.58e+03 | backlog_step 23.9 | n_total_veh_step 58.3 | flow_horizontal 700 | flow_vertical 700
+i 72 | ii  0 | raw_reward_mean 0.235 | raw_reward_sum 470
+i 72 | ii  0 | reward_mean 0.00517 | reward_sum 10.3
+i 72 | ii  0 | n_veh_step_mean 5.58 | n_veh_step_sum 1.12e+04 | n_veh_unique 79
+i 72 | ii  0 | policy_loss -0.644 | kl -2.83e-10 | entropy 0.948
+i 72 | gd_time 0.051 | total_time 623
+
+i 73 | klcoef 0 | lr 0.001
+i 73 | ii  0 | rollout_time 8.88 | horizon 2e+03 | speed 3.21 | speed_rl 2.95 | speed_rl_std 2.97 | speed_human 3.26 | inflow 517 | outflow 489 | inflow_hourly 1.86e+03
+     | outflow_hourly 1.76e+03 | collisions 2 | collisions_human 1 | fuel 1.57e+03 | backlog_step 25 | n_total_veh_step 62.1 | flow_horizontal 700 | flow_vertical 700
+i 73 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 479
+i 73 | ii  0 | reward_mean 0.00603 | reward_sum 12.1
+i 73 | ii  0 | n_veh_step_mean 5.95 | n_veh_step_sum 1.19e+04 | n_veh_unique 80
+i 73 | ii  0 | policy_loss -0.554 | kl -1.12e-09 | entropy 0.947
+i 73 | gd_time 0.0514 | total_time 632
+
+i 74 | klcoef 0 | lr 0.001
+i 74 | ii  0 | rollout_time 7.83 | horizon 2e+03 | speed 3.68 | speed_rl 3.37 | speed_rl_std 3.29 | speed_human 3.75 | inflow 524 | outflow 492 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.77e+03 | collisions 6 | collisions_human 5 | fuel 1.56e+03 | backlog_step 27 | n_total_veh_step 59.4 | flow_horizontal 700 | flow_vertical 700
+i 74 | ii  0 | raw_reward_mean 0.231 | raw_reward_sum 462
+i 74 | ii  0 | reward_mean 0.00425 | reward_sum 8.5
+i 74 | ii  0 | n_veh_step_mean 5.31 | n_veh_step_sum 1.06e+04 | n_veh_unique 82
+i 74 | ii  0 | policy_loss -0.582 | kl -6.48e-10 | entropy 0.915
+i 74 | gd_time 0.0477 | total_time 640
+
+i 75 | klcoef 0 | lr 0.001
+i 75 | ii  0 | rollout_time 7.08 | horizon 2e+03 | speed 4.13 | speed_rl 3.69 | speed_rl_std 3.42 | speed_human 4.22 | inflow 526 | outflow 497 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.79e+03 | collisions 6 | collisions_human 5 | fuel 1.66e+03 | backlog_step 20.9 | n_total_veh_step 50.1 | flow_horizontal 700 | flow_vertical 700
+i 75 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 75 | ii  0 | reward_mean 0.0047 | reward_sum 9.4
+i 75 | ii  0 | n_veh_step_mean 4.89 | n_veh_step_sum 9.77e+03 | n_veh_unique 80
+i 75 | ii  0 | policy_loss -0.695 | kl 5.31e-11 | entropy 0.948
+i 75 | gd_time 0.0463 | total_time 647
+
+i 76 | klcoef 0 | lr 0.001
+i 76 | ii  0 | rollout_time 7.52 | horizon 2e+03 | speed 4.03 | speed_rl 3.56 | speed_rl_std 3.34 | speed_human 4.12 | inflow 525 | outflow 498 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.79e+03 | collisions 8 | collisions_human 5 | fuel 1.72e+03 | backlog_step 25.2 | n_total_veh_step 54.8 | flow_horizontal 700 | flow_vertical 700
+i 76 | ii  0 | raw_reward_mean 0.229 | raw_reward_sum 458
+i 76 | ii  0 | reward_mean 0.00371 | reward_sum 7.43
+i 76 | ii  0 | n_veh_step_mean 4.92 | n_veh_step_sum 9.84e+03 | n_veh_unique 82
+i 76 | ii  0 | policy_loss -0.449 | kl -1.02e-09 | entropy 0.944
+i 76 | gd_time 0.0484 | total_time 655
+
+i 77 | klcoef 0 | lr 0.001
+i 77 | ii  0 | rollout_time 7.7 | horizon 2e+03 | speed 3.6 | speed_rl 3.2 | speed_rl_std 3.21 | speed_human 3.69 | inflow 502 | outflow 466 | inflow_hourly 1.81e+03 | outflow_hourly 1.68e+03
+     | collisions 10 | collisions_human 9 | fuel 1.43e+03 | backlog_step 32.4 | n_total_veh_step 63.9 | flow_horizontal 700 | flow_vertical 700
+i 77 | ii  0 | raw_reward_mean 0.208 | raw_reward_sum 416
+i 77 | ii  0 | reward_mean -0.000657 | reward_sum -1.31
+i 77 | ii  0 | n_veh_step_mean 5.3 | n_veh_step_sum 1.06e+04 | n_veh_unique 78
+i 77 | ii  0 | policy_loss -0.344 | kl 1.6e-10 | entropy 0.963
+i 77 | gd_time 0.0473 | total_time 663
+
+i 78 | klcoef 0 | lr 0.001
+i 78 | ii  0 | rollout_time 8.33 | horizon 2e+03 | speed 3.36 | speed_rl 2.96 | speed_rl_std 2.97 | speed_human 3.44 | inflow 505 | outflow 476 | inflow_hourly 1.82e+03
+     | outflow_hourly 1.71e+03 | collisions 4 | collisions_human 2 | fuel 1.62e+03 | backlog_step 30 | n_total_veh_step 64.4 | flow_horizontal 700 | flow_vertical 700
+i 78 | ii  0 | raw_reward_mean 0.228 | raw_reward_sum 456
+i 78 | ii  0 | reward_mean 0.00346 | reward_sum 6.93
+i 78 | ii  0 | n_veh_step_mean 5.7 | n_veh_step_sum 1.14e+04 | n_veh_unique 77
+i 78 | ii  0 | policy_loss -0.398 | kl 8.69e-11 | entropy 0.979
+i 78 | gd_time 0.0486 | total_time 671
+
+i 79 | klcoef 0 | lr 0.001
+i 79 | ii  0 | rollout_time 7.55 | horizon 2e+03 | speed 3.73 | speed_rl 3.26 | speed_rl_std 3.12 | speed_human 3.82 | inflow 509 | outflow 482 | inflow_hourly 1.83e+03
+     | outflow_hourly 1.74e+03 | collisions 6 | collisions_human 4 | fuel 1.71e+03 | backlog_step 30.3 | n_total_veh_step 61.6 | flow_horizontal 700 | flow_vertical 700
+i 79 | ii  0 | raw_reward_mean 0.226 | raw_reward_sum 452
+i 79 | ii  0 | reward_mean 0.00302 | reward_sum 6.04
+i 79 | ii  0 | n_veh_step_mean 5.28 | n_veh_step_sum 1.06e+04 | n_veh_unique 78
+i 79 | ii  0 | policy_loss -0.418 | kl -6.16e-10 | entropy 0.97
+i 79 | gd_time 0.0497 | total_time 679
+
+i 80 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-80.pth at step 80
+i 80 | ii  0 | rollout_time 7.06 | horizon 2e+03 | speed 4.09 | speed_rl 3.58 | speed_rl_std 3.3 | speed_human 4.19 | inflow 528 | outflow 486 | inflow_hourly 1.9e+03 | outflow_hourly 1.75e+03
+     | collisions 16 | collisions_human 14 | fuel 1.48e+03 | backlog_step 22.1 | n_total_veh_step 51 | flow_horizontal 700 | flow_vertical 700
+i 80 | ii  0 | raw_reward_mean 0.203 | raw_reward_sum 406
+i 80 | ii  0 | reward_mean -0.00176 | reward_sum -3.52
+i 80 | ii  0 | n_veh_step_mean 4.86 | n_veh_step_sum 9.72e+03 | n_veh_unique 80
+i 80 | ii  0 | policy_loss -0.0607 | kl 4.05e-10 | entropy 0.966
+i 80 | gd_time 0.049 | total_time 687
+
+i 81 | klcoef 0 | lr 0.001
+i 81 | ii  0 | rollout_time 7.64 | horizon 2e+03 | speed 3.66 | speed_rl 3.3 | speed_rl_std 3.12 | speed_human 3.73 | inflow 515 | outflow 485 | inflow_hourly 1.85e+03 | outflow_hourly 1.75e+03
+     | collisions 4 | collisions_human 4 | fuel 1.55e+03 | backlog_step 29.8 | n_total_veh_step 61.7 | flow_horizontal 700 | flow_vertical 700
+i 81 | ii  0 | raw_reward_mean 0.233 | raw_reward_sum 465
+i 81 | ii  0 | reward_mean 0.00431 | reward_sum 8.62
+i 81 | ii  0 | n_veh_step_mean 5.33 | n_veh_step_sum 1.06e+04 | n_veh_unique 80
+i 81 | ii  0 | policy_loss -0.657 | kl 2.18e-10 | entropy 0.974
+i 81 | gd_time 0.0457 | total_time 695
+
+i 82 | klcoef 0 | lr 0.001
+i 82 | ii  0 | rollout_time 8.45 | horizon 2e+03 | speed 3.22 | speed_rl 2.91 | speed_rl_std 2.89 | speed_human 3.28 | inflow 505 | outflow 473 | inflow_hourly 1.82e+03 | outflow_hourly 1.7e+03
+     | collisions 2 | collisions_human 2 | fuel 1.48e+03 | backlog_step 32 | n_total_veh_step 67.8 | flow_horizontal 700 | flow_vertical 700
+i 82 | ii  0 | raw_reward_mean 0.232 | raw_reward_sum 463
+i 82 | ii  0 | reward_mean 0.00407 | reward_sum 8.13
+i 82 | ii  0 | n_veh_step_mean 5.89 | n_veh_step_sum 1.18e+04 | n_veh_unique 77
+i 82 | ii  0 | policy_loss -0.53 | kl 8.48e-11 | entropy 0.971
+i 82 | gd_time 0.0519 | total_time 703
+
+i 83 | klcoef 0 | lr 0.001
+i 83 | ii  0 | rollout_time 8.47 | horizon 2e+03 | speed 3.23 | speed_rl 2.93 | speed_rl_std 2.89 | speed_human 3.29 | inflow 510 | outflow 479 | inflow_hourly 1.84e+03
+     | outflow_hourly 1.72e+03 | collisions 0 | collisions_human 0 | fuel 1.42e+03 | backlog_step 30.8 | n_total_veh_step 66.7 | flow_horizontal 700 | flow_vertical 700
+i 83 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 479
+i 83 | ii  0 | reward_mean 0.00568 | reward_sum 11.4
+i 83 | ii  0 | n_veh_step_mean 5.91 | n_veh_step_sum 1.18e+04 | n_veh_unique 78
+i 83 | ii  0 | policy_loss -0.55 | kl -2e-10 | entropy 0.975
+i 83 | gd_time 0.051 | total_time 712
+
+i 84 | klcoef 0 | lr 0.001
+i 84 | ii  0 | rollout_time 8.52 | horizon 2e+03 | speed 3.31 | speed_rl 2.97 | speed_rl_std 2.85 | speed_human 3.38 | inflow 508 | outflow 479 | inflow_hourly 1.83e+03
+     | outflow_hourly 1.72e+03 | collisions 0 | collisions_human 0 | fuel 1.44e+03 | backlog_step 30.8 | n_total_veh_step 66 | flow_horizontal 700 | flow_vertical 700
+i 84 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 479
+i 84 | ii  0 | reward_mean 0.00563 | reward_sum 11.3
+i 84 | ii  0 | n_veh_step_mean 5.84 | n_veh_step_sum 1.17e+04 | n_veh_unique 77
+i 84 | ii  0 | policy_loss -0.542 | kl -1.11e-09 | entropy 0.979
+i 84 | gd_time 0.0513 | total_time 721
+
+i 85 | klcoef 0 | lr 0.001
+i 85 | ii  0 | rollout_time 8.5 | horizon 2e+03 | speed 3.11 | speed_rl 2.84 | speed_rl_std 2.91 | speed_human 3.16 | inflow 505 | outflow 466 | inflow_hourly 1.82e+03 | outflow_hourly 1.68e+03
+     | collisions 6 | collisions_human 4 | fuel 1.37e+03 | backlog_step 32.1 | n_total_veh_step 69 | flow_horizontal 700 | flow_vertical 700
+i 85 | ii  0 | raw_reward_mean 0.218 | raw_reward_sum 436
+i 85 | ii  0 | reward_mean 0.00113 | reward_sum 2.27
+i 85 | ii  0 | n_veh_step_mean 5.98 | n_veh_step_sum 1.2e+04 | n_veh_unique 78
+i 85 | ii  0 | policy_loss -0.336 | kl 2.48e-10 | entropy 0.957
+i 85 | gd_time 0.0514 | total_time 730
+
+i 86 | klcoef 0 | lr 0.001
+i 86 | ii  0 | rollout_time 7.01 | horizon 2e+03 | speed 4.18 | speed_rl 3.65 | speed_rl_std 3.32 | speed_human 4.29 | inflow 526 | outflow 497 | inflow_hourly 1.89e+03
+     | outflow_hourly 1.79e+03 | collisions 8 | collisions_human 7 | fuel 1.64e+03 | backlog_step 25.2 | n_total_veh_step 53.8 | flow_horizontal 700 | flow_vertical 700
+i 86 | ii  0 | raw_reward_mean 0.229 | raw_reward_sum 457
+i 86 | ii  0 | reward_mean 0.00329 | reward_sum 6.59
+i 86 | ii  0 | n_veh_step_mean 4.85 | n_veh_step_sum 9.7e+03 | n_veh_unique 79
+i 86 | ii  0 | policy_loss -0.44 | kl -3.41e-10 | entropy 0.949
+i 86 | gd_time 0.047 | total_time 737
+
+i 87 | klcoef 0 | lr 0.001
+i 87 | ii  0 | rollout_time 8.33 | horizon 2e+03 | speed 3.32 | speed_rl 3.04 | speed_rl_std 2.95 | speed_human 3.37 | inflow 521 | outflow 491 | inflow_hourly 1.88e+03
+     | outflow_hourly 1.77e+03 | collisions 0 | collisions_human 0 | fuel 1.4e+03 | backlog_step 28 | n_total_veh_step 63.9 | flow_horizontal 700 | flow_vertical 700
+i 87 | ii  0 | raw_reward_mean 0.245 | raw_reward_sum 491
+i 87 | ii  0 | reward_mean 0.0068 | reward_sum 13.6
+i 87 | ii  0 | n_veh_step_mean 5.82 | n_veh_step_sum 1.16e+04 | n_veh_unique 81
+i 87 | ii  0 | policy_loss -0.669 | kl 8.06e-10 | entropy 0.958
+i 87 | gd_time 0.0502 | total_time 745
+
+i 88 | klcoef 0 | lr 0.001
+i 88 | ii  0 | rollout_time 7.99 | horizon 2e+03 | speed 3.45 | speed_rl 3.16 | speed_rl_std 3.1 | speed_human 3.51 | inflow 520 | outflow 479 | inflow_hourly 1.87e+03 | outflow_hourly 1.72e+03
+     | collisions 12 | collisions_human 9 | fuel 1.45e+03 | backlog_step 22 | n_total_veh_step 56.2 | flow_horizontal 700 | flow_vertical 700
+i 88 | ii  0 | raw_reward_mean 0.209 | raw_reward_sum 419
+i 88 | ii  0 | reward_mean -0.000756 | reward_sum -1.51
+i 88 | ii  0 | n_veh_step_mean 5.54 | n_veh_step_sum 1.11e+04 | n_veh_unique 81
+i 88 | ii  0 | policy_loss -0.268 | kl -1.29e-10 | entropy 0.943
+i 88 | gd_time 0.0523 | total_time 754
+
+i 89 | klcoef 0 | lr 0.001
+i 89 | ii  0 | rollout_time 8.08 | horizon 2e+03 | speed 3.43 | speed_rl 3.06 | speed_rl_std 3.04 | speed_human 3.51 | inflow 510 | outflow 483 | inflow_hourly 1.84e+03
+     | outflow_hourly 1.74e+03 | collisions 0 | collisions_human 0 | fuel 1.48e+03 | backlog_step 32.7 | n_total_veh_step 66.8 | flow_horizontal 700 | flow_vertical 700
+i 89 | ii  0 | raw_reward_mean 0.241 | raw_reward_sum 483
+i 89 | ii  0 | reward_mean 0.00591 | reward_sum 11.8
+i 89 | ii  0 | n_veh_step_mean 5.67 | n_veh_step_sum 1.13e+04 | n_veh_unique 78
+i 89 | ii  0 | policy_loss -0.57 | kl -7.72e-10 | entropy 0.973
+i 89 | gd_time 0.0496 | total_time 762
+
+i 90 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-90.pth at step 90
+i 90 | ii  0 | rollout_time 8.14 | horizon 2e+03 | speed 3.32 | speed_rl 3.01 | speed_rl_std 3.05 | speed_human 3.39 | inflow 500 | outflow 472 | inflow_hourly 1.8e+03 | outflow_hourly 1.7e+03
+     | collisions 10 | collisions_human 9 | fuel 1.97e+03 | backlog_step 36.4 | n_total_veh_step 70.7 | flow_horizontal 700 | flow_vertical 700
+i 90 | ii  0 | raw_reward_mean 0.211 | raw_reward_sum 422
+i 90 | ii  0 | reward_mean -0.000518 | reward_sum -1.04
+i 90 | ii  0 | n_veh_step_mean 5.66 | n_veh_step_sum 1.13e+04 | n_veh_unique 77
+i 90 | ii  0 | policy_loss -0.177 | kl -3.57e-10 | entropy 0.97
+i 90 | gd_time 0.0509 | total_time 770
+
+i 91 | klcoef 0 | lr 0.001
+i 91 | ii  0 | rollout_time 8.58 | horizon 2e+03 | speed 3.23 | speed_rl 2.91 | speed_rl_std 2.93 | speed_human 3.3 | inflow 503 | outflow 471 | inflow_hourly 1.81e+03 | outflow_hourly 1.7e+03
+     | collisions 4 | collisions_human 4 | fuel 1.44e+03 | backlog_step 29.4 | n_total_veh_step 65 | flow_horizontal 700 | flow_vertical 700
+i 91 | ii  0 | raw_reward_mean 0.226 | raw_reward_sum 451
+i 91 | ii  0 | reward_mean 0.00251 | reward_sum 5.03
+i 91 | ii  0 | n_veh_step_mean 5.87 | n_veh_step_sum 1.17e+04 | n_veh_unique 78
+i 91 | ii  0 | policy_loss -0.444 | kl 7.92e-10 | entropy 0.983
+i 91 | gd_time 0.0497 | total_time 779
+
+i 92 | klcoef 0 | lr 0.001
+i 92 | ii  0 | rollout_time 8.26 | horizon 2e+03 | speed 3.39 | speed_rl 3.07 | speed_rl_std 3.04 | speed_human 3.45 | inflow 518 | outflow 488 | inflow_hourly 1.86e+03
+     | outflow_hourly 1.76e+03 | collisions 2 | collisions_human 2 | fuel 1.48e+03 | backlog_step 24.5 | n_total_veh_step 59.5 | flow_horizontal 700 | flow_vertical 700
+i 92 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 478
+i 92 | ii  0 | reward_mean 0.00531 | reward_sum 10.6
+i 92 | ii  0 | n_veh_step_mean 5.74 | n_veh_step_sum 1.15e+04 | n_veh_unique 81
+i 92 | ii  0 | policy_loss -0.622 | kl -2.44e-10 | entropy 0.965
+i 92 | gd_time 0.0511 | total_time 788
+
+i 93 | klcoef 0 | lr 0.001
+i 93 | ii  0 | rollout_time 7.39 | horizon 2e+03 | speed 3.89 | speed_rl 3.48 | speed_rl_std 3.2 | speed_human 3.97 | inflow 525 | outflow 495 | inflow_hourly 1.89e+03 | outflow_hourly 1.78e+03
+     | collisions 6 | collisions_human 6 | fuel 1.61e+03 | backlog_step 25.5 | n_total_veh_step 56.3 | flow_horizontal 700 | flow_vertical 700
+i 93 | ii  0 | raw_reward_mean 0.233 | raw_reward_sum 465
+i 93 | ii  0 | reward_mean 0.00391 | reward_sum 7.82
+i 93 | ii  0 | n_veh_step_mean 5.1 | n_veh_step_sum 1.02e+04 | n_veh_unique 79
+i 93 | ii  0 | policy_loss -0.661 | kl 2.98e-10 | entropy 0.958
+i 93 | gd_time 0.0462 | total_time 795
+
+i 94 | klcoef 0 | lr 0.001
+i 94 | ii  0 | rollout_time 8.17 | horizon 2e+03 | speed 3.39 | speed_rl 3.07 | speed_rl_std 2.97 | speed_human 3.45 | inflow 515 | outflow 481 | inflow_hourly 1.85e+03
+     | outflow_hourly 1.73e+03 | collisions 6 | collisions_human 6 | fuel 1.5e+03 | backlog_step 30.1 | n_total_veh_step 64.5 | flow_horizontal 700 | flow_vertical 700
+i 94 | ii  0 | raw_reward_mean 0.226 | raw_reward_sum 451
+i 94 | ii  0 | reward_mean 0.0024 | reward_sum 4.79
+i 94 | ii  0 | n_veh_step_mean 5.69 | n_veh_step_sum 1.14e+04 | n_veh_unique 80
+i 94 | ii  0 | policy_loss -0.608 | kl -2.61e-10 | entropy 0.965
+i 94 | gd_time 0.0517 | total_time 804
+
+i 95 | klcoef 0 | lr 0.001
+i 95 | ii  0 | rollout_time 7.36 | horizon 2e+03 | speed 4.02 | speed_rl 3.53 | speed_rl_std 3.36 | speed_human 4.13 | inflow 513 | outflow 484 | inflow_hourly 1.85e+03
+     | outflow_hourly 1.74e+03 | collisions 8 | collisions_human 8 | fuel 1.72e+03 | backlog_step 29.1 | n_total_veh_step 57.9 | flow_horizontal 700 | flow_vertical 700
+i 95 | ii  0 | raw_reward_mean 0.222 | raw_reward_sum 444
+i 95 | ii  0 | reward_mean 0.00164 | reward_sum 3.28
+i 95 | ii  0 | n_veh_step_mean 4.92 | n_veh_step_sum 9.83e+03 | n_veh_unique 80
+i 95 | ii  0 | policy_loss -0.283 | kl 5.32e-10 | entropy 0.981
+i 95 | gd_time 0.0455 | total_time 812
+
+i 96 | klcoef 0 | lr 0.001
+i 96 | ii  0 | rollout_time 9.23 | horizon 2e+03 | speed 3.07 | speed_rl 2.81 | speed_rl_std 2.84 | speed_human 3.12 | inflow 511 | outflow 477 | inflow_hourly 1.84e+03
+     | outflow_hourly 1.72e+03 | collisions 6 | collisions_human 5 | fuel 1.51e+03 | backlog_step 27.8 | n_total_veh_step 65.7 | flow_horizontal 700 | flow_vertical 700
+i 96 | ii  0 | raw_reward_mean 0.224 | raw_reward_sum 447
+i 96 | ii  0 | reward_mean 0.00194 | reward_sum 3.87
+i 96 | ii  0 | n_veh_step_mean 6.16 | n_veh_step_sum 1.23e+04 | n_veh_unique 79
+i 96 | ii  0 | policy_loss -0.55 | kl 3.25e-10 | entropy 0.968
+i 96 | gd_time 0.0535 | total_time 821
+
+i 97 | klcoef 0 | lr 0.001
+i 97 | ii  0 | rollout_time 7.78 | horizon 2e+03 | speed 3.88 | speed_rl 3.52 | speed_rl_std 3.39 | speed_human 3.95 | inflow 534 | outflow 495 | inflow_hourly 1.92e+03
+     | outflow_hourly 1.78e+03 | collisions 12 | collisions_human 10 | fuel 1.41e+03 | backlog_step 19.4 | n_total_veh_step 50.5 | flow_horizontal 700 | flow_vertical 700
+i 97 | ii  0 | raw_reward_mean 0.217 | raw_reward_sum 435
+i 97 | ii  0 | reward_mean 0.000671 | reward_sum 1.34
+i 97 | ii  0 | n_veh_step_mean 5.08 | n_veh_step_sum 1.02e+04 | n_veh_unique 82
+i 97 | ii  0 | policy_loss -0.279 | kl -3.82e-10 | entropy 0.936
+i 97 | gd_time 0.0483 | total_time 829
+
+i 98 | klcoef 0 | lr 0.001
+i 98 | ii  0 | rollout_time 7.5 | horizon 2e+03 | speed 3.83 | speed_rl 3.46 | speed_rl_std 3.28 | speed_human 3.91 | inflow 523 | outflow 494 | inflow_hourly 1.88e+03 | outflow_hourly 1.78e+03
+     | collisions 2 | collisions_human 2 | fuel 1.49e+03 | backlog_step 25.8 | n_total_veh_step 57 | flow_horizontal 700 | flow_vertical 700
+i 98 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 484
+i 98 | ii  0 | reward_mean 0.00578 | reward_sum 11.6
+i 98 | ii  0 | n_veh_step_mean 5.17 | n_veh_step_sum 1.04e+04 | n_veh_unique 79
+i 98 | ii  0 | policy_loss -0.68 | kl 3.52e-10 | entropy 0.949
+i 98 | gd_time 0.046 | total_time 837
+
+i 99 | klcoef 0 | lr 0.001
+i 99 | ii  0 | rollout_time 6.95 | horizon 2e+03 | speed 4.24 | speed_rl 3.71 | speed_rl_std 3.51 | speed_human 4.35 | inflow 520 | outflow 486 | inflow_hourly 1.87e+03
+     | outflow_hourly 1.75e+03 | collisions 8 | collisions_human 7 | fuel 1.42e+03 | backlog_step 28.1 | n_total_veh_step 56 | flow_horizontal 700 | flow_vertical 700
+i 99 | ii  0 | raw_reward_mean 0.223 | raw_reward_sum 446
+i 99 | ii  0 | reward_mean 0.00174 | reward_sum 3.49
+i 99 | ii  0 | n_veh_step_mean 4.72 | n_veh_step_sum 9.45e+03 | n_veh_unique 79
+i 99 | ii  0 | policy_loss -0.143 | kl -9.02e-10 | entropy 0.947
+i 99 | gd_time 0.0497 | total_time 844
+
+i 100 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-100.pth at step 100
+i 100 | ii  0 | rollout_time 7.48 | horizon 2e+03 | speed 3.82 | speed_rl 3.38 | speed_rl_std 3.27 | speed_human 3.91 | inflow 519 | outflow 484 | inflow_hourly 1.87e+03
+      | outflow_hourly 1.74e+03 | collisions 8 | collisions_human 7 | fuel 1.46e+03 | backlog_step 25.1 | n_total_veh_step 56 | flow_horizontal 700 | flow_vertical 700
+i 100 | ii  0 | raw_reward_mean 0.222 | raw_reward_sum 444
+i 100 | ii  0 | reward_mean 0.00153 | reward_sum 3.05
+i 100 | ii  0 | n_veh_step_mean 5.17 | n_veh_step_sum 1.03e+04 | n_veh_unique 79
+i 100 | ii  0 | policy_loss -0.406 | kl 1.54e-09 | entropy 0.952
+i 100 | gd_time 0.0463 | total_time 852
+
+i 101 | klcoef 0 | lr 0.001
+i 101 | ii  0 | rollout_time 8.22 | horizon 2e+03 | speed 3.28 | speed_rl 2.97 | speed_rl_std 2.99 | speed_human 3.34 | inflow 513 | outflow 474 | inflow_hourly 1.85e+03
+      | outflow_hourly 1.71e+03 | collisions 2 | collisions_human 2 | fuel 1.26e+03 | backlog_step 28.3 | n_total_veh_step 63.8 | flow_horizontal 700 | flow_vertical 700
+i 101 | ii  0 | raw_reward_mean 0.232 | raw_reward_sum 464
+i 101 | ii  0 | reward_mean 0.00361 | reward_sum 7.22
+i 101 | ii  0 | n_veh_step_mean 5.79 | n_veh_step_sum 1.16e+04 | n_veh_unique 77
+i 101 | ii  0 | policy_loss -0.459 | kl -9.87e-10 | entropy 0.954
+i 101 | gd_time 0.0497 | total_time 860
+
+i 102 | klcoef 0 | lr 0.001
+i 102 | ii  0 | rollout_time 7.49 | horizon 2e+03 | speed 3.77 | speed_rl 3.32 | speed_rl_std 3.18 | speed_human 3.86 | inflow 523 | outflow 488 | inflow_hourly 1.88e+03
+      | outflow_hourly 1.76e+03 | collisions 2 | collisions_human 2 | fuel 1.35e+03 | backlog_step 28 | n_total_veh_step 59.3 | flow_horizontal 700 | flow_vertical 700
+i 102 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 478
+i 102 | ii  0 | reward_mean 0.00506 | reward_sum 10.1
+i 102 | ii  0 | n_veh_step_mean 5.26 | n_veh_step_sum 1.05e+04 | n_veh_unique 79
+i 102 | ii  0 | policy_loss -0.667 | kl 1.41e-09 | entropy 0.965
+i 102 | gd_time 0.0506 | total_time 868
+
+i 103 | klcoef 0 | lr 0.001
+i 103 | ii  0 | rollout_time 8.3 | horizon 2e+03 | speed 3.31 | speed_rl 2.99 | speed_rl_std 2.98 | speed_human 3.37 | inflow 515 | outflow 487 | inflow_hourly 1.85e+03
+      | outflow_hourly 1.75e+03 | collisions 4 | collisions_human 2 | fuel 1.8e+03 | backlog_step 28.1 | n_total_veh_step 63.7 | flow_horizontal 700 | flow_vertical 700
+i 103 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 103 | ii  0 | reward_mean 0.00387 | reward_sum 7.73
+i 103 | ii  0 | n_veh_step_mean 5.73 | n_veh_step_sum 1.15e+04 | n_veh_unique 78
+i 103 | ii  0 | policy_loss -0.651 | kl -3.97e-10 | entropy 0.973
+i 103 | gd_time 0.0505 | total_time 877
+
+i 104 | klcoef 0 | lr 0.001
+i 104 | ii  0 | rollout_time 6.96 | horizon 2e+03 | speed 4.51 | speed_rl 3.93 | speed_rl_std 3.47 | speed_human 4.63 | inflow 540 | outflow 496 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.79e+03 | collisions 20 | collisions_human 15 | fuel 1.39e+03 | backlog_step 15.5 | n_total_veh_step 42.5 | flow_horizontal 700 | flow_vertical 700
+i 104 | ii  0 | raw_reward_mean 0.198 | raw_reward_sum 396
+i 104 | ii  0 | reward_mean -0.00368 | reward_sum -7.36
+i 104 | ii  0 | n_veh_step_mean 4.56 | n_veh_step_sum 9.12e+03 | n_veh_unique 83
+i 104 | ii  0 | policy_loss 0.0203 | kl 8.8e-10 | entropy 0.934
+i 104 | gd_time 0.0475 | total_time 884
+
+i 105 | klcoef 0 | lr 0.001
+i 105 | ii  0 | rollout_time 7.47 | horizon 2e+03 | speed 3.86 | speed_rl 3.49 | speed_rl_std 3.28 | speed_human 3.93 | inflow 533 | outflow 499 | inflow_hourly 1.92e+03
+      | outflow_hourly 1.8e+03 | collisions 6 | collisions_human 6 | fuel 1.36e+03 | backlog_step 20.2 | n_total_veh_step 51.3 | flow_horizontal 700 | flow_vertical 700
+i 105 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 469
+i 105 | ii  0 | reward_mean 0.004 | reward_sum 8
+i 105 | ii  0 | n_veh_step_mean 5.13 | n_veh_step_sum 1.03e+04 | n_veh_unique 82
+i 105 | ii  0 | policy_loss -0.634 | kl -4.14e-10 | entropy 0.952
+i 105 | gd_time 0.0502 | total_time 892
+
+i 106 | klcoef 0 | lr 0.001
+i 106 | ii  0 | rollout_time 8.07 | horizon 2e+03 | speed 3.57 | speed_rl 3.28 | speed_rl_std 3.2 | speed_human 3.62 | inflow 525 | outflow 493 | inflow_hourly 1.89e+03
+      | outflow_hourly 1.77e+03 | collisions 0 | collisions_human 0 | fuel 1.41e+03 | backlog_step 26.5 | n_total_veh_step 60.2 | flow_horizontal 700 | flow_vertical 700
+i 106 | ii  0 | raw_reward_mean 0.246 | raw_reward_sum 493
+i 106 | ii  0 | reward_mean 0.00647 | reward_sum 12.9
+i 106 | ii  0 | n_veh_step_mean 5.49 | n_veh_step_sum 1.1e+04 | n_veh_unique 80
+i 106 | ii  0 | policy_loss -0.67 | kl -4.11e-10 | entropy 0.946
+i 106 | gd_time 0.0519 | total_time 900
+
+i 107 | klcoef 0 | lr 0.001
+i 107 | ii  0 | rollout_time 7.85 | horizon 2e+03 | speed 3.62 | speed_rl 3.32 | speed_rl_std 3.26 | speed_human 3.68 | inflow 527 | outflow 495 | inflow_hourly 1.9e+03
+      | outflow_hourly 1.78e+03 | collisions 2 | collisions_human 2 | fuel 1.47e+03 | backlog_step 20.3 | n_total_veh_step 53.5 | flow_horizontal 700 | flow_vertical 700
+i 107 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 485
+i 107 | ii  0 | reward_mean 0.0056 | reward_sum 11.2
+i 107 | ii  0 | n_veh_step_mean 5.36 | n_veh_step_sum 1.07e+04 | n_veh_unique 79
+i 107 | ii  0 | policy_loss -0.621 | kl -1.39e-11 | entropy 0.923
+i 107 | gd_time 0.0488 | total_time 908
+
+i 108 | klcoef 0 | lr 0.001
+i 108 | ii  0 | rollout_time 7.7 | horizon 2e+03 | speed 3.77 | speed_rl 3.48 | speed_rl_std 3.29 | speed_human 3.82 | inflow 529 | outflow 492 | inflow_hourly 1.9e+03 | outflow_hourly 1.77e+03
+      | collisions 10 | collisions_human 9 | fuel 1.4e+03 | backlog_step 21.1 | n_total_veh_step 53.1 | flow_horizontal 700 | flow_vertical 700
+i 108 | ii  0 | raw_reward_mean 0.221 | raw_reward_sum 442
+i 108 | ii  0 | reward_mean 0.00104 | reward_sum 2.08
+i 108 | ii  0 | n_veh_step_mean 5.18 | n_veh_step_sum 1.04e+04 | n_veh_unique 82
+i 108 | ii  0 | policy_loss -0.282 | kl -6.82e-10 | entropy 0.919
+i 108 | gd_time 0.0486 | total_time 916
+
+i 109 | klcoef 0 | lr 0.001
+i 109 | ii  0 | rollout_time 7.68 | horizon 2e+03 | speed 3.74 | speed_rl 3.4 | speed_rl_std 3.3 | speed_human 3.81 | inflow 524 | outflow 494 | inflow_hourly 1.89e+03 | outflow_hourly 1.78e+03
+      | collisions 10 | collisions_human 8 | fuel 1.93e+03 | backlog_step 23.5 | n_total_veh_step 55.7 | flow_horizontal 700 | flow_vertical 700
+i 109 | ii  0 | raw_reward_mean 0.222 | raw_reward_sum 444
+i 109 | ii  0 | reward_mean 0.00124 | reward_sum 2.48
+i 109 | ii  0 | n_veh_step_mean 5.21 | n_veh_step_sum 1.04e+04 | n_veh_unique 80
+i 109 | ii  0 | policy_loss -0.185 | kl 1.21e-09 | entropy 0.932
+i 109 | gd_time 0.0486 | total_time 924
+
+i 110 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-110.pth at step 110
+i 110 | ii  0 | rollout_time 8.54 | horizon 2e+03 | speed 3.27 | speed_rl 3.02 | speed_rl_std 2.99 | speed_human 3.31 | inflow 522 | outflow 492 | inflow_hourly 1.88e+03
+      | outflow_hourly 1.77e+03 | collisions 0 | collisions_human 0 | fuel 1.44e+03 | backlog_step 24.4 | n_total_veh_step 61.2 | flow_horizontal 700 | flow_vertical 700
+i 110 | ii  0 | raw_reward_mean 0.246 | raw_reward_sum 492
+i 110 | ii  0 | reward_mean 0.00625 | reward_sum 12.5
+i 110 | ii  0 | n_veh_step_mean 5.88 | n_veh_step_sum 1.18e+04 | n_veh_unique 81
+i 110 | ii  0 | policy_loss -0.609 | kl -3.04e-10 | entropy 0.934
+i 110 | gd_time 0.0518 | total_time 933
+
+i 111 | klcoef 0 | lr 0.001
+i 111 | ii  0 | rollout_time 7.16 | horizon 2e+03 | speed 4.42 | speed_rl 3.88 | speed_rl_std 3.44 | speed_human 4.52 | inflow 539 | outflow 503 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.81e+03 | collisions 16 | collisions_human 10 | fuel 1.67e+03 | backlog_step 16.2 | n_total_veh_step 44 | flow_horizontal 700 | flow_vertical 700
+i 111 | ii  0 | raw_reward_mean 0.211 | raw_reward_sum 423
+i 111 | ii  0 | reward_mean -0.00103 | reward_sum -2.05
+i 111 | ii  0 | n_veh_step_mean 4.59 | n_veh_step_sum 9.19e+03 | n_veh_unique 84
+i 111 | ii  0 | policy_loss -0.327 | kl -4.73e-10 | entropy 0.929
+i 111 | gd_time 0.0476 | total_time 940
+
+i 112 | klcoef 0 | lr 0.001
+i 112 | ii  0 | rollout_time 8.04 | horizon 2e+03 | speed 3.6 | speed_rl 3.34 | speed_rl_std 3.32 | speed_human 3.65 | inflow 522 | outflow 498 | inflow_hourly 1.88e+03
+      | outflow_hourly 1.79e+03 | collisions 8 | collisions_human 6 | fuel 2.04e+03 | backlog_step 23.8 | n_total_veh_step 57.3 | flow_horizontal 700 | flow_vertical 700
+i 112 | ii  0 | raw_reward_mean 0.229 | raw_reward_sum 458
+i 112 | ii  0 | reward_mean 0.00263 | reward_sum 5.27
+i 112 | ii  0 | n_veh_step_mean 5.34 | n_veh_step_sum 1.07e+04 | n_veh_unique 80
+i 112 | ii  0 | policy_loss -0.356 | kl -3.79e-10 | entropy 0.905
+i 112 | gd_time 0.0493 | total_time 949
+
+i 113 | klcoef 0 | lr 0.001
+i 113 | ii  0 | rollout_time 8.77 | horizon 2e+03 | speed 3.37 | speed_rl 3.16 | speed_rl_std 3.15 | speed_human 3.41 | inflow 532 | outflow 507 | inflow_hourly 1.92e+03
+      | outflow_hourly 1.83e+03 | collisions 0 | collisions_human 0 | fuel 1.63e+03 | backlog_step 20.2 | n_total_veh_step 56.5 | flow_horizontal 700 | flow_vertical 700
+i 113 | ii  0 | raw_reward_mean 0.254 | raw_reward_sum 507
+i 113 | ii  0 | reward_mean 0.00771 | reward_sum 15.4
+i 113 | ii  0 | n_veh_step_mean 5.75 | n_veh_step_sum 1.15e+04 | n_veh_unique 83
+i 113 | ii  0 | policy_loss -0.778 | kl 3.8e-11 | entropy 0.885
+i 113 | gd_time 0.0557 | total_time 958
+
+i 114 | klcoef 0 | lr 0.001
+i 114 | ii  0 | rollout_time 8 | horizon 2e+03 | speed 3.73 | speed_rl 3.39 | speed_rl_std 3.29 | speed_human 3.8 | inflow 531 | outflow 502 | inflow_hourly 1.91e+03 | outflow_hourly 1.81e+03
+      | collisions 8 | collisions_human 4 | fuel 1.66e+03 | backlog_step 19.6 | n_total_veh_step 52.3 | flow_horizontal 700 | flow_vertical 700
+i 114 | ii  0 | raw_reward_mean 0.231 | raw_reward_sum 462
+i 114 | ii  0 | reward_mean 0.00298 | reward_sum 5.95
+i 114 | ii  0 | n_veh_step_mean 5.28 | n_veh_step_sum 1.06e+04 | n_veh_unique 82
+i 114 | ii  0 | policy_loss -0.456 | kl 5.28e-10 | entropy 0.893
+i 114 | gd_time 0.0486 | total_time 966
+
+i 115 | klcoef 0 | lr 0.001
+i 115 | ii  0 | rollout_time 8.31 | horizon 2e+03 | speed 3.54 | speed_rl 3.28 | speed_rl_std 3.2 | speed_human 3.59 | inflow 531 | outflow 495 | inflow_hourly 1.91e+03
+      | outflow_hourly 1.78e+03 | collisions 2 | collisions_human 2 | fuel 1.32e+03 | backlog_step 22.5 | n_total_veh_step 56.7 | flow_horizontal 700 | flow_vertical 700
+i 115 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 485
+i 115 | ii  0 | reward_mean 0.00535 | reward_sum 10.7
+i 115 | ii  0 | n_veh_step_mean 5.47 | n_veh_step_sum 1.09e+04 | n_veh_unique 80
+i 115 | ii  0 | policy_loss -0.647 | kl 3.06e-10 | entropy 0.917
+i 115 | gd_time 0.0547 | total_time 974
+
+i 116 | klcoef 0 | lr 0.001
+i 116 | ii  0 | rollout_time 8.57 | horizon 2e+03 | speed 3.24 | speed_rl 3.01 | speed_rl_std 3.06 | speed_human 3.28 | inflow 526 | outflow 492 | inflow_hourly 1.89e+03
+      | outflow_hourly 1.77e+03 | collisions 2 | collisions_human 2 | fuel 1.46e+03 | backlog_step 18.9 | n_total_veh_step 55.9 | flow_horizontal 700 | flow_vertical 700
+i 116 | ii  0 | raw_reward_mean 0.241 | raw_reward_sum 482
+i 116 | ii  0 | reward_mean 0.005 | reward_sum 10
+i 116 | ii  0 | n_veh_step_mean 5.88 | n_veh_step_sum 1.18e+04 | n_veh_unique 80
+i 116 | ii  0 | policy_loss -0.589 | kl -6.21e-10 | entropy 0.917
+i 116 | gd_time 0.0539 | total_time 983
+
+i 117 | klcoef 0 | lr 0.001
+i 117 | ii  0 | rollout_time 7.94 | horizon 2e+03 | speed 3.64 | speed_rl 3.32 | speed_rl_std 3.25 | speed_human 3.7 | inflow 537 | outflow 503 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.81e+03 | collisions 6 | collisions_human 3 | fuel 1.53e+03 | backlog_step 16 | n_total_veh_step 49.7 | flow_horizontal 700 | flow_vertical 700
+i 117 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 473
+i 117 | ii  0 | reward_mean 0.00403 | reward_sum 8.07
+i 117 | ii  0 | n_veh_step_mean 5.39 | n_veh_step_sum 1.08e+04 | n_veh_unique 83
+i 117 | ii  0 | policy_loss -0.545 | kl 6.87e-10 | entropy 0.931
+i 117 | gd_time 0.0487 | total_time 991
+
+i 118 | klcoef 0 | lr 0.001
+i 118 | ii  0 | rollout_time 8.48 | horizon 2e+03 | speed 3.47 | speed_rl 3.15 | speed_rl_std 3.11 | speed_human 3.53 | inflow 530 | outflow 488 | inflow_hourly 1.91e+03
+      | outflow_hourly 1.76e+03 | collisions 10 | collisions_human 7 | fuel 1.33e+03 | backlog_step 19.4 | n_total_veh_step 53.9 | flow_horizontal 700 | flow_vertical 700
+i 118 | ii  0 | raw_reward_mean 0.219 | raw_reward_sum 438
+i 118 | ii  0 | reward_mean 0.000331 | reward_sum 0.663
+i 118 | ii  0 | n_veh_step_mean 5.6 | n_veh_step_sum 1.12e+04 | n_veh_unique 82
+i 118 | ii  0 | policy_loss -0.313 | kl -3.5e-11 | entropy 0.935
+i 118 | gd_time 0.053 | total_time 1e+03
+
+i 119 | klcoef 0 | lr 0.001
+i 119 | ii  0 | rollout_time 7.41 | horizon 2e+03 | speed 3.98 | speed_rl 3.6 | speed_rl_std 3.3 | speed_human 4.06 | inflow 533 | outflow 513 | inflow_hourly 1.92e+03 | outflow_hourly 1.85e+03
+      | collisions 0 | collisions_human 0 | fuel 1.72e+03 | backlog_step 20 | n_total_veh_step 50.8 | flow_horizontal 700 | flow_vertical 700
+i 119 | ii  0 | raw_reward_mean 0.257 | raw_reward_sum 513
+i 119 | ii  0 | reward_mean 0.00818 | reward_sum 16.4
+i 119 | ii  0 | n_veh_step_mean 5.03 | n_veh_step_sum 1.01e+04 | n_veh_unique 82
+i 119 | ii  0 | policy_loss -0.804 | kl -2.35e-10 | entropy 0.918
+i 119 | gd_time 0.0484 | total_time 1.01e+03
+
+i 120 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-120.pth at step 120
+i 120 | ii  0 | rollout_time 7.83 | horizon 2e+03 | speed 3.64 | speed_rl 3.31 | speed_rl_std 3.24 | speed_human 3.7 | inflow 529 | outflow 488 | inflow_hourly 1.9e+03 | outflow_hourly 1.76e+03
+      | collisions 8 | collisions_human 6 | fuel 1.24e+03 | backlog_step 17.9 | n_total_veh_step 50.8 | flow_horizontal 700 | flow_vertical 700
+i 120 | ii  0 | raw_reward_mean 0.224 | raw_reward_sum 448
+i 120 | ii  0 | reward_mean 0.00131 | reward_sum 2.63
+i 120 | ii  0 | n_veh_step_mean 5.35 | n_veh_step_sum 1.07e+04 | n_veh_unique 82
+i 120 | ii  0 | policy_loss -0.244 | kl 1.81e-09 | entropy 0.935
+i 120 | gd_time 0.0498 | total_time 1.02e+03
+
+i 121 | klcoef 0 | lr 0.001
+i 121 | ii  0 | rollout_time 8.07 | horizon 2e+03 | speed 3.52 | speed_rl 3.21 | speed_rl_std 3.06 | speed_human 3.58 | inflow 530 | outflow 495 | inflow_hourly 1.91e+03
+      | outflow_hourly 1.78e+03 | collisions 4 | collisions_human 4 | fuel 1.38e+03 | backlog_step 22.8 | n_total_veh_step 57.2 | flow_horizontal 700 | flow_vertical 700
+i 121 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 475
+i 121 | ii  0 | reward_mean 0.00414 | reward_sum 8.28
+i 121 | ii  0 | n_veh_step_mean 5.67 | n_veh_step_sum 1.13e+04 | n_veh_unique 82
+i 121 | ii  0 | policy_loss -0.645 | kl 1.31e-10 | entropy 0.952
+i 121 | gd_time 0.0514 | total_time 1.02e+03
+
+i 122 | klcoef 0 | lr 0.001
+i 122 | ii  0 | rollout_time 8.18 | horizon 2e+03 | speed 3.44 | speed_rl 3.11 | speed_rl_std 3.05 | speed_human 3.5 | inflow 525 | outflow 493 | inflow_hourly 1.89e+03
+      | outflow_hourly 1.77e+03 | collisions 0 | collisions_human 0 | fuel 1.44e+03 | backlog_step 23.4 | n_total_veh_step 58.2 | flow_horizontal 700 | flow_vertical 700
+i 122 | ii  0 | raw_reward_mean 0.246 | raw_reward_sum 493
+i 122 | ii  0 | reward_mean 0.00601 | reward_sum 12
+i 122 | ii  0 | n_veh_step_mean 5.68 | n_veh_step_sum 1.14e+04 | n_veh_unique 78
+i 122 | ii  0 | policy_loss -0.628 | kl 9.31e-10 | entropy 0.945
+i 122 | gd_time 0.053 | total_time 1.03e+03
+
+i 123 | klcoef 0 | lr 0.001
+i 123 | ii  0 | rollout_time 7.35 | horizon 2e+03 | speed 4.05 | speed_rl 3.65 | speed_rl_std 3.27 | speed_human 4.12 | inflow 535 | outflow 510 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.84e+03 | collisions 0 | collisions_human 0 | fuel 1.62e+03 | backlog_step 20.1 | n_total_veh_step 50.5 | flow_horizontal 700 | flow_vertical 700
+i 123 | ii  0 | raw_reward_mean 0.255 | raw_reward_sum 510
+i 123 | ii  0 | reward_mean 0.00778 | reward_sum 15.6
+i 123 | ii  0 | n_veh_step_mean 5.02 | n_veh_step_sum 1e+04 | n_veh_unique 82
+i 123 | ii  0 | policy_loss -0.803 | kl -4.57e-10 | entropy 0.946
+i 123 | gd_time 0.0492 | total_time 1.04e+03
+
+i 124 | klcoef 0 | lr 0.001
+i 124 | ii  0 | rollout_time 8.29 | horizon 2e+03 | speed 3.37 | speed_rl 3.09 | speed_rl_std 3.01 | speed_human 3.43 | inflow 520 | outflow 482 | inflow_hourly 1.87e+03
+      | outflow_hourly 1.74e+03 | collisions 4 | collisions_human 4 | fuel 1.37e+03 | backlog_step 25.3 | n_total_veh_step 60.3 | flow_horizontal 700 | flow_vertical 700
+i 124 | ii  0 | raw_reward_mean 0.231 | raw_reward_sum 462
+i 124 | ii  0 | reward_mean 0.00266 | reward_sum 5.31
+i 124 | ii  0 | n_veh_step_mean 5.73 | n_veh_step_sum 1.15e+04 | n_veh_unique 80
+i 124 | ii  0 | policy_loss -0.478 | kl 7.38e-10 | entropy 0.956
+i 124 | gd_time 0.0529 | total_time 1.05e+03
+
+i 125 | klcoef 0 | lr 0.001
+i 125 | ii  0 | rollout_time 8.77 | horizon 2e+03 | speed 3.32 | speed_rl 3.05 | speed_rl_std 3.01 | speed_human 3.37 | inflow 529 | outflow 492 | inflow_hourly 1.9e+03
+      | outflow_hourly 1.77e+03 | collisions 4 | collisions_human 4 | fuel 1.38e+03 | backlog_step 21.4 | n_total_veh_step 57.6 | flow_horizontal 700 | flow_vertical 700
+i 125 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 472
+i 125 | ii  0 | reward_mean 0.0037 | reward_sum 7.39
+i 125 | ii  0 | n_veh_step_mean 5.88 | n_veh_step_sum 1.18e+04 | n_veh_unique 82
+i 125 | ii  0 | policy_loss -0.608 | kl 1.11e-09 | entropy 0.935
+i 125 | gd_time 0.0543 | total_time 1.06e+03
+
+i 126 | klcoef 0 | lr 0.001
+i 126 | ii  0 | rollout_time 8.67 | horizon 2e+03 | speed 3.2 | speed_rl 2.93 | speed_rl_std 2.9 | speed_human 3.25 | inflow 521 | outflow 484 | inflow_hourly 1.88e+03 | outflow_hourly 1.74e+03
+      | collisions 2 | collisions_human 2 | fuel 1.42e+03 | backlog_step 24.3 | n_total_veh_step 61.4 | flow_horizontal 700 | flow_vertical 700
+i 126 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 474
+i 126 | ii  0 | reward_mean 0.00389 | reward_sum 7.77
+i 126 | ii  0 | n_veh_step_mean 6.04 | n_veh_step_sum 1.21e+04 | n_veh_unique 79
+i 126 | ii  0 | policy_loss -0.557 | kl 3.26e-10 | entropy 0.938
+i 126 | gd_time 0.0538 | total_time 1.07e+03
+
+i 127 | klcoef 0 | lr 0.001
+i 127 | ii  0 | rollout_time 8.55 | horizon 2e+03 | speed 3.26 | speed_rl 2.98 | speed_rl_std 2.96 | speed_human 3.31 | inflow 526 | outflow 489 | inflow_hourly 1.89e+03
+      | outflow_hourly 1.76e+03 | collisions 2 | collisions_human 1 | fuel 1.33e+03 | backlog_step 20.6 | n_total_veh_step 57.5 | flow_horizontal 700 | flow_vertical 700
+i 127 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 479
+i 127 | ii  0 | reward_mean 0.0044 | reward_sum 8.79
+i 127 | ii  0 | n_veh_step_mean 5.96 | n_veh_step_sum 1.19e+04 | n_veh_unique 80
+i 127 | ii  0 | policy_loss -0.537 | kl 1.48e-10 | entropy 0.926
+i 127 | gd_time 0.0526 | total_time 1.08e+03
+
+i 128 | klcoef 0 | lr 0.001
+i 128 | ii  0 | rollout_time 8.18 | horizon 2e+03 | speed 3.37 | speed_rl 3.12 | speed_rl_std 3.02 | speed_human 3.42 | inflow 526 | outflow 488 | inflow_hourly 1.89e+03
+      | outflow_hourly 1.76e+03 | collisions 4 | collisions_human 4 | fuel 1.39e+03 | backlog_step 22.4 | n_total_veh_step 57.8 | flow_horizontal 700 | flow_vertical 700
+i 128 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 468
+i 128 | ii  0 | reward_mean 0.0032 | reward_sum 6.39
+i 128 | ii  0 | n_veh_step_mean 5.73 | n_veh_step_sum 1.15e+04 | n_veh_unique 81
+i 128 | ii  0 | policy_loss -0.576 | kl 5.04e-10 | entropy 0.936
+i 128 | gd_time 0.0524 | total_time 1.08e+03
+
+i 129 | klcoef 0 | lr 0.001
+i 129 | ii  0 | rollout_time 7.9 | horizon 2e+03 | speed 3.68 | speed_rl 3.38 | speed_rl_std 3.16 | speed_human 3.74 | inflow 544 | outflow 503 | inflow_hourly 1.96e+03
+      | outflow_hourly 1.81e+03 | collisions 8 | collisions_human 7 | fuel 1.36e+03 | backlog_step 13.7 | n_total_veh_step 47.2 | flow_horizontal 700 | flow_vertical 700
+i 129 | ii  0 | raw_reward_mean 0.232 | raw_reward_sum 463
+i 129 | ii  0 | reward_mean 0.00264 | reward_sum 5.27
+i 129 | ii  0 | n_veh_step_mean 5.43 | n_veh_step_sum 1.09e+04 | n_veh_unique 82
+i 129 | ii  0 | policy_loss -0.366 | kl -3.24e-10 | entropy 0.926
+i 129 | gd_time 0.0509 | total_time 1.09e+03
+
+i 130 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-130.pth at step 130
+i 130 | ii  0 | rollout_time 7.72 | horizon 2e+03 | speed 3.77 | speed_rl 3.44 | speed_rl_std 3.27 | speed_human 3.83 | inflow 531 | outflow 499 | inflow_hourly 1.91e+03
+      | outflow_hourly 1.8e+03 | collisions 2 | collisions_human 2 | fuel 1.44e+03 | backlog_step 17.8 | n_total_veh_step 50 | flow_horizontal 700 | flow_vertical 700
+i 130 | ii  0 | raw_reward_mean 0.244 | raw_reward_sum 489
+i 130 | ii  0 | reward_mean 0.0054 | reward_sum 10.8
+i 130 | ii  0 | n_veh_step_mean 5.22 | n_veh_step_sum 1.04e+04 | n_veh_unique 79
+i 130 | ii  0 | policy_loss -0.63 | kl -1.26e-09 | entropy 0.919
+i 130 | gd_time 0.0517 | total_time 1.1e+03
+
+i 131 | klcoef 0 | lr 0.001
+i 131 | ii  0 | rollout_time 7.7 | horizon 2e+03 | speed 3.82 | speed_rl 3.5 | speed_rl_std 3.29 | speed_human 3.89 | inflow 534 | outflow 501 | inflow_hourly 1.92e+03 | outflow_hourly 1.8e+03
+      | collisions 4 | collisions_human 3 | fuel 1.37e+03 | backlog_step 22.6 | n_total_veh_step 54.5 | flow_horizontal 700 | flow_vertical 700
+i 131 | ii  0 | raw_reward_mean 0.24 | raw_reward_sum 481
+i 131 | ii  0 | reward_mean 0.00451 | reward_sum 9.02
+i 131 | ii  0 | n_veh_step_mean 5.14 | n_veh_step_sum 1.03e+04 | n_veh_unique 83
+i 131 | ii  0 | policy_loss -0.496 | kl -1.58e-10 | entropy 0.926
+i 131 | gd_time 0.0573 | total_time 1.11e+03
+
+i 132 | klcoef 0 | lr 0.001
+i 132 | ii  0 | rollout_time 7.9 | horizon 2e+03 | speed 3.66 | speed_rl 3.37 | speed_rl_std 3.28 | speed_human 3.72 | inflow 532 | outflow 498 | inflow_hourly 1.92e+03
+      | outflow_hourly 1.79e+03 | collisions 6 | collisions_human 4 | fuel 1.5e+03 | backlog_step 17.6 | n_total_veh_step 50.9 | flow_horizontal 700 | flow_vertical 700
+i 132 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 468
+i 132 | ii  0 | reward_mean 0.00309 | reward_sum 6.18
+i 132 | ii  0 | n_veh_step_mean 5.33 | n_veh_step_sum 1.07e+04 | n_veh_unique 81
+i 132 | ii  0 | policy_loss -0.394 | kl -1.97e-10 | entropy 0.903
+i 132 | gd_time 0.0497 | total_time 1.12e+03
+
+i 133 | klcoef 0 | lr 0.001
+i 133 | ii  0 | rollout_time 8.56 | horizon 2e+03 | speed 3.5 | speed_rl 3.22 | speed_rl_std 3.16 | speed_human 3.55 | inflow 529 | outflow 490 | inflow_hourly 1.9e+03 | outflow_hourly 1.76e+03
+      | collisions 4 | collisions_human 2 | fuel 1.36e+03 | backlog_step 18.5 | n_total_veh_step 53.1 | flow_horizontal 700 | flow_vertical 700
+i 133 | ii  0 | raw_reward_mean 0.235 | raw_reward_sum 470
+i 133 | ii  0 | reward_mean 0.00329 | reward_sum 6.58
+i 133 | ii  0 | n_veh_step_mean 5.57 | n_veh_step_sum 1.11e+04 | n_veh_unique 80
+i 133 | ii  0 | policy_loss -0.355 | kl 8.21e-10 | entropy 0.901
+i 133 | gd_time 0.0535 | total_time 1.13e+03
+
+i 134 | klcoef 0 | lr 0.001
+i 134 | ii  0 | rollout_time 7.66 | horizon 2e+03 | speed 3.93 | speed_rl 3.57 | speed_rl_std 3.34 | speed_human 4 | inflow 532 | outflow 497 | inflow_hourly 1.92e+03 | outflow_hourly 1.79e+03
+      | collisions 8 | collisions_human 7 | fuel 1.46e+03 | backlog_step 20.1 | n_total_veh_step 50.9 | flow_horizontal 700 | flow_vertical 700
+i 134 | ii  0 | raw_reward_mean 0.229 | raw_reward_sum 457
+i 134 | ii  0 | reward_mean 0.00186 | reward_sum 3.72
+i 134 | ii  0 | n_veh_step_mean 5.04 | n_veh_step_sum 1.01e+04 | n_veh_unique 80
+i 134 | ii  0 | policy_loss -0.601 | kl 1.15e-10 | entropy 0.906
+i 134 | gd_time 0.0506 | total_time 1.13e+03
+
+i 135 | klcoef 0 | lr 0.001
+i 135 | ii  0 | rollout_time 8.36 | horizon 2e+03 | speed 3.56 | speed_rl 3.34 | speed_rl_std 3.22 | speed_human 3.61 | inflow 536 | outflow 506 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.82e+03 | collisions 2 | collisions_human 2 | fuel 1.46e+03 | backlog_step 16.3 | n_total_veh_step 50.7 | flow_horizontal 700 | flow_vertical 700
+i 135 | ii  0 | raw_reward_mean 0.248 | raw_reward_sum 496
+i 135 | ii  0 | reward_mean 0.00605 | reward_sum 12.1
+i 135 | ii  0 | n_veh_step_mean 5.47 | n_veh_step_sum 1.09e+04 | n_veh_unique 82
+i 135 | ii  0 | policy_loss -0.683 | kl -1.07e-09 | entropy 0.903
+i 135 | gd_time 0.0511 | total_time 1.14e+03
+
+i 136 | klcoef 0 | lr 0.001
+i 136 | ii  0 | rollout_time 7.71 | horizon 2e+03 | speed 3.79 | speed_rl 3.51 | speed_rl_std 3.39 | speed_human 3.84 | inflow 532 | outflow 496 | inflow_hourly 1.92e+03
+      | outflow_hourly 1.79e+03 | collisions 10 | collisions_human 8 | fuel 1.46e+03 | backlog_step 19.2 | n_total_veh_step 51.1 | flow_horizontal 700 | flow_vertical 700
+i 136 | ii  0 | raw_reward_mean 0.223 | raw_reward_sum 446
+i 136 | ii  0 | reward_mean 0.000621 | reward_sum 1.24
+i 136 | ii  0 | n_veh_step_mean 5.13 | n_veh_step_sum 1.03e+04 | n_veh_unique 82
+i 136 | ii  0 | policy_loss -0.151 | kl 4.6e-10 | entropy 0.891
+i 136 | gd_time 0.0491 | total_time 1.15e+03
+
+i 137 | klcoef 0 | lr 0.001
+i 137 | ii  0 | rollout_time 8.21 | horizon 2e+03 | speed 3.42 | speed_rl 3.18 | speed_rl_std 3.13 | speed_human 3.46 | inflow 528 | outflow 494 | inflow_hourly 1.9e+03
+      | outflow_hourly 1.78e+03 | collisions 6 | collisions_human 6 | fuel 1.42e+03 | backlog_step 20.1 | n_total_veh_step 55.2 | flow_horizontal 700 | flow_vertical 700
+i 137 | ii  0 | raw_reward_mean 0.232 | raw_reward_sum 464
+i 137 | ii  0 | reward_mean 0.00257 | reward_sum 5.13
+i 137 | ii  0 | n_veh_step_mean 5.64 | n_veh_step_sum 1.13e+04 | n_veh_unique 81
+i 137 | ii  0 | policy_loss -0.543 | kl 4.85e-11 | entropy 0.903
+i 137 | gd_time 0.0523 | total_time 1.16e+03
+
+i 138 | klcoef 0 | lr 0.001
+i 138 | ii  0 | rollout_time 7.57 | horizon 2e+03 | speed 3.8 | speed_rl 3.45 | speed_rl_std 3.16 | speed_human 3.86 | inflow 540 | outflow 499 | inflow_hourly 1.94e+03 | outflow_hourly 1.8e+03
+      | collisions 12 | collisions_human 9 | fuel 1.41e+03 | backlog_step 15.4 | n_total_veh_step 47.5 | flow_horizontal 700 | flow_vertical 700
+i 138 | ii  0 | raw_reward_mean 0.22 | raw_reward_sum 439
+i 138 | ii  0 | reward_mean -0.000203 | reward_sum -0.405
+i 138 | ii  0 | n_veh_step_mean 5.21 | n_veh_step_sum 1.04e+04 | n_veh_unique 82
+i 138 | ii  0 | policy_loss -0.608 | kl -1.82e-10 | entropy 0.907
+i 138 | gd_time 0.0502 | total_time 1.17e+03
+
+i 139 | klcoef 0 | lr 0.001
+i 139 | ii  0 | rollout_time 7.93 | horizon 2e+03 | speed 3.67 | speed_rl 3.36 | speed_rl_std 3.16 | speed_human 3.73 | inflow 543 | outflow 513 | inflow_hourly 1.95e+03
+      | outflow_hourly 1.85e+03 | collisions 2 | collisions_human 2 | fuel 1.47e+03 | backlog_step 17.3 | n_total_veh_step 51.1 | flow_horizontal 700 | flow_vertical 700
+i 139 | ii  0 | raw_reward_mean 0.252 | raw_reward_sum 503
+i 139 | ii  0 | reward_mean 0.00669 | reward_sum 13.4
+i 139 | ii  0 | n_veh_step_mean 5.5 | n_veh_step_sum 1.1e+04 | n_veh_unique 84
+i 139 | ii  0 | policy_loss -0.778 | kl -1.09e-09 | entropy 0.919
+i 139 | gd_time 0.0555 | total_time 1.17e+03
+
+i 140 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-140.pth at step 140
+i 140 | ii  0 | rollout_time 7.55 | horizon 2e+03 | speed 3.84 | speed_rl 3.47 | speed_rl_std 3.24 | speed_human 3.91 | inflow 535 | outflow 497 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.79e+03 | collisions 6 | collisions_human 5 | fuel 1.36e+03 | backlog_step 18.2 | n_total_veh_step 50.1 | flow_horizontal 700 | flow_vertical 700
+i 140 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 140 | ii  0 | reward_mean 0.0028 | reward_sum 5.6
+i 140 | ii  0 | n_veh_step_mean 5.25 | n_veh_step_sum 1.05e+04 | n_veh_unique 82
+i 140 | ii  0 | policy_loss -0.392 | kl -4.34e-10 | entropy 0.926
+i 140 | gd_time 0.0499 | total_time 1.18e+03
+
+i 141 | klcoef 0 | lr 0.001
+i 141 | ii  0 | rollout_time 9.01 | horizon 2e+03 | speed 3.26 | speed_rl 3.05 | speed_rl_std 3.05 | speed_human 3.3 | inflow 529 | outflow 493 | inflow_hourly 1.9e+03 | outflow_hourly 1.77e+03
+      | collisions 4 | collisions_human 4 | fuel 1.42e+03 | backlog_step 16.8 | n_total_veh_step 53.7 | flow_horizontal 700 | flow_vertical 700
+i 141 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 473
+i 141 | ii  0 | reward_mean 0.00342 | reward_sum 6.85
+i 141 | ii  0 | n_veh_step_mean 5.89 | n_veh_step_sum 1.18e+04 | n_veh_unique 81
+i 141 | ii  0 | policy_loss -0.526 | kl -1.32e-10 | entropy 0.919
+i 141 | gd_time 0.0525 | total_time 1.19e+03
+
+i 142 | klcoef 0 | lr 0.001
+i 142 | ii  0 | rollout_time 7.62 | horizon 2e+03 | speed 3.82 | speed_rl 3.5 | speed_rl_std 3.24 | speed_human 3.89 | inflow 538 | outflow 501 | inflow_hourly 1.94e+03 | outflow_hourly 1.8e+03
+      | collisions 4 | collisions_human 4 | fuel 1.41e+03 | backlog_step 17.8 | n_total_veh_step 49.7 | flow_horizontal 700 | flow_vertical 700
+i 142 | ii  0 | raw_reward_mean 0.24 | raw_reward_sum 481
+i 142 | ii  0 | reward_mean 0.00426 | reward_sum 8.52
+i 142 | ii  0 | n_veh_step_mean 5.19 | n_veh_step_sum 1.04e+04 | n_veh_unique 80
+i 142 | ii  0 | policy_loss -0.708 | kl 1.12e-09 | entropy 0.919
+i 142 | gd_time 0.0517 | total_time 1.2e+03
+
+i 143 | klcoef 0 | lr 0.001
+i 143 | ii  0 | rollout_time 7.66 | horizon 2e+03 | speed 3.8 | speed_rl 3.47 | speed_rl_std 3.3 | speed_human 3.86 | inflow 531 | outflow 502 | inflow_hourly 1.91e+03 | outflow_hourly 1.81e+03
+      | collisions 6 | collisions_human 5 | fuel 1.56e+03 | backlog_step 20.1 | n_total_veh_step 52.1 | flow_horizontal 700 | flow_vertical 700
+i 143 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 472
+i 143 | ii  0 | reward_mean 0.00327 | reward_sum 6.54
+i 143 | ii  0 | n_veh_step_mean 5.24 | n_veh_step_sum 1.05e+04 | n_veh_unique 82
+i 143 | ii  0 | policy_loss -0.515 | kl -3.72e-10 | entropy 0.922
+i 143 | gd_time 0.0521 | total_time 1.21e+03
+
+i 144 | klcoef 0 | lr 0.001
+i 144 | ii  0 | rollout_time 8.12 | horizon 2e+03 | speed 3.54 | speed_rl 3.21 | speed_rl_std 3.09 | speed_human 3.6 | inflow 531 | outflow 498 | inflow_hourly 1.91e+03
+      | outflow_hourly 1.79e+03 | collisions 6 | collisions_human 4 | fuel 1.48e+03 | backlog_step 16.5 | n_total_veh_step 51 | flow_horizontal 700 | flow_vertical 700
+i 144 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 468
+i 144 | ii  0 | reward_mean 0.00282 | reward_sum 5.64
+i 144 | ii  0 | n_veh_step_mean 5.62 | n_veh_step_sum 1.12e+04 | n_veh_unique 81
+i 144 | ii  0 | policy_loss -0.358 | kl -5.66e-10 | entropy 0.937
+i 144 | gd_time 0.0505 | total_time 1.22e+03
+
+i 145 | klcoef 0 | lr 0.001
+i 145 | ii  0 | rollout_time 7.75 | horizon 2e+03 | speed 3.79 | speed_rl 3.46 | speed_rl_std 3.26 | speed_human 3.86 | inflow 539 | outflow 503 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.81e+03 | collisions 2 | collisions_human 2 | fuel 1.35e+03 | backlog_step 16.1 | n_total_veh_step 48.5 | flow_horizontal 700 | flow_vertical 700
+i 145 | ii  0 | raw_reward_mean 0.246 | raw_reward_sum 493
+i 145 | ii  0 | reward_mean 0.00549 | reward_sum 11
+i 145 | ii  0 | n_veh_step_mean 5.31 | n_veh_step_sum 1.06e+04 | n_veh_unique 81
+i 145 | ii  0 | policy_loss -0.665 | kl -3.1e-10 | entropy 0.931
+i 145 | gd_time 0.0491 | total_time 1.22e+03
+
+i 146 | klcoef 0 | lr 0.001
+i 146 | ii  0 | rollout_time 7.52 | horizon 2e+03 | speed 3.93 | speed_rl 3.55 | speed_rl_std 3.34 | speed_human 4 | inflow 544 | outflow 507 | inflow_hourly 1.96e+03 | outflow_hourly 1.83e+03
+      | collisions 8 | collisions_human 7 | fuel 1.39e+03 | backlog_step 14.7 | n_total_veh_step 46.2 | flow_horizontal 700 | flow_vertical 700
+i 146 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 146 | ii  0 | reward_mean 0.00267 | reward_sum 5.34
+i 146 | ii  0 | n_veh_step_mean 5.18 | n_veh_step_sum 1.04e+04 | n_veh_unique 84
+i 146 | ii  0 | policy_loss -0.458 | kl 1.32e-09 | entropy 0.89
+i 146 | gd_time 0.0507 | total_time 1.23e+03
+
+i 147 | klcoef 0 | lr 0.001
+i 147 | ii  0 | rollout_time 8.62 | horizon 2e+03 | speed 3.27 | speed_rl 3.02 | speed_rl_std 3 | speed_human 3.32 | inflow 532 | outflow 493 | inflow_hourly 1.92e+03 | outflow_hourly 1.77e+03
+      | collisions 4 | collisions_human 2 | fuel 1.35e+03 | backlog_step 17.7 | n_total_veh_step 54.6 | flow_horizontal 700 | flow_vertical 700
+i 147 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 473
+i 147 | ii  0 | reward_mean 0.0033 | reward_sum 6.6
+i 147 | ii  0 | n_veh_step_mean 5.82 | n_veh_step_sum 1.16e+04 | n_veh_unique 80
+i 147 | ii  0 | policy_loss -0.459 | kl -5.03e-10 | entropy 0.903
+i 147 | gd_time 0.0532 | total_time 1.24e+03
+
+i 148 | klcoef 0 | lr 0.001
+i 148 | ii  0 | rollout_time 7.97 | horizon 2e+03 | speed 3.69 | speed_rl 3.43 | speed_rl_std 3.28 | speed_human 3.73 | inflow 540 | outflow 506 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.82e+03 | collisions 4 | collisions_human 4 | fuel 1.43e+03 | backlog_step 15.1 | n_total_veh_step 48.7 | flow_horizontal 700 | flow_vertical 700
+i 148 | ii  0 | raw_reward_mean 0.243 | raw_reward_sum 486
+i 148 | ii  0 | reward_mean 0.00469 | reward_sum 9.38
+i 148 | ii  0 | n_veh_step_mean 5.41 | n_veh_step_sum 1.08e+04 | n_veh_unique 83
+i 148 | ii  0 | policy_loss -0.595 | kl 7.23e-11 | entropy 0.918
+i 148 | gd_time 0.0489 | total_time 1.25e+03
+
+i 149 | klcoef 0 | lr 0.001
+i 149 | ii  0 | rollout_time 8.52 | horizon 2e+03 | speed 3.56 | speed_rl 3.32 | speed_rl_std 3.22 | speed_human 3.61 | inflow 537 | outflow 500 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.8e+03 | collisions 4 | collisions_human 4 | fuel 1.34e+03 | backlog_step 16.9 | n_total_veh_step 51.2 | flow_horizontal 700 | flow_vertical 700
+i 149 | ii  0 | raw_reward_mean 0.24 | raw_reward_sum 480
+i 149 | ii  0 | reward_mean 0.00402 | reward_sum 8.03
+i 149 | ii  0 | n_veh_step_mean 5.5 | n_veh_step_sum 1.1e+04 | n_veh_unique 83
+i 149 | ii  0 | policy_loss -0.514 | kl 1.04e-09 | entropy 0.892
+i 149 | gd_time 0.0535 | total_time 1.26e+03
+
+i 150 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-150.pth at step 150
+i 150 | ii  0 | rollout_time 8.34 | horizon 2e+03 | speed 3.39 | speed_rl 3.17 | speed_rl_std 3.13 | speed_human 3.43 | inflow 533 | outflow 498 | inflow_hourly 1.92e+03
+      | outflow_hourly 1.79e+03 | collisions 0 | collisions_human 0 | fuel 1.3e+03 | backlog_step 18.1 | n_total_veh_step 54 | flow_horizontal 700 | flow_vertical 700
+i 150 | ii  0 | raw_reward_mean 0.249 | raw_reward_sum 498
+i 150 | ii  0 | reward_mean 0.00595 | reward_sum 11.9
+i 150 | ii  0 | n_veh_step_mean 5.71 | n_veh_step_sum 1.14e+04 | n_veh_unique 82
+i 150 | ii  0 | policy_loss -0.564 | kl 3.04e-10 | entropy 0.893
+i 150 | gd_time 0.0542 | total_time 1.27e+03
+
+i 151 | klcoef 0 | lr 0.001
+i 151 | ii  0 | rollout_time 7.86 | horizon 2e+03 | speed 3.66 | speed_rl 3.34 | speed_rl_std 3.25 | speed_human 3.72 | inflow 526 | outflow 498 | inflow_hourly 1.89e+03
+      | outflow_hourly 1.79e+03 | collisions 2 | collisions_human 2 | fuel 1.55e+03 | backlog_step 20.5 | n_total_veh_step 53.8 | flow_horizontal 700 | flow_vertical 700
+i 151 | ii  0 | raw_reward_mean 0.244 | raw_reward_sum 488
+i 151 | ii  0 | reward_mean 0.00484 | reward_sum 9.68
+i 151 | ii  0 | n_veh_step_mean 5.44 | n_veh_step_sum 1.09e+04 | n_veh_unique 81
+i 151 | ii  0 | policy_loss -0.515 | kl 6.12e-10 | entropy 0.924
+i 151 | gd_time 0.0505 | total_time 1.27e+03
+
+i 152 | klcoef 0 | lr 0.001
+i 152 | ii  0 | rollout_time 7.47 | horizon 2e+03 | speed 4 | speed_rl 3.62 | speed_rl_std 3.36 | speed_human 4.08 | inflow 540 | outflow 507 | inflow_hourly 1.94e+03 | outflow_hourly 1.83e+03
+      | collisions 4 | collisions_human 3 | fuel 1.38e+03 | backlog_step 19.3 | n_total_veh_step 50.1 | flow_horizontal 700 | flow_vertical 700
+i 152 | ii  0 | raw_reward_mean 0.243 | raw_reward_sum 487
+i 152 | ii  0 | reward_mean 0.00472 | reward_sum 9.43
+i 152 | ii  0 | n_veh_step_mean 5.04 | n_veh_step_sum 1.01e+04 | n_veh_unique 83
+i 152 | ii  0 | policy_loss -0.601 | kl 2e-10 | entropy 0.904
+i 152 | gd_time 0.0492 | total_time 1.28e+03
+
+i 153 | klcoef 0 | lr 0.001
+i 153 | ii  0 | rollout_time 8.31 | horizon 2e+03 | speed 3.42 | speed_rl 3.17 | speed_rl_std 3.11 | speed_human 3.47 | inflow 531 | outflow 506 | inflow_hourly 1.91e+03
+      | outflow_hourly 1.82e+03 | collisions 0 | collisions_human 0 | fuel 1.71e+03 | backlog_step 19.3 | n_total_veh_step 55 | flow_horizontal 700 | flow_vertical 700
+i 153 | ii  0 | raw_reward_mean 0.253 | raw_reward_sum 506
+i 153 | ii  0 | reward_mean 0.00677 | reward_sum 13.5
+i 153 | ii  0 | n_veh_step_mean 5.73 | n_veh_step_sum 1.15e+04 | n_veh_unique 82
+i 153 | ii  0 | policy_loss -0.693 | kl 5.39e-10 | entropy 0.885
+i 153 | gd_time 0.0536 | total_time 1.29e+03
+
+i 154 | klcoef 0 | lr 0.001
+i 154 | ii  0 | rollout_time 7.41 | horizon 2e+03 | speed 3.93 | speed_rl 3.56 | speed_rl_std 3.38 | speed_human 4 | inflow 534 | outflow 508 | inflow_hourly 1.92e+03 | outflow_hourly 1.83e+03
+      | collisions 2 | collisions_human 2 | fuel 1.54e+03 | backlog_step 18.3 | n_total_veh_step 49.5 | flow_horizontal 700 | flow_vertical 700
+i 154 | ii  0 | raw_reward_mean 0.249 | raw_reward_sum 498
+i 154 | ii  0 | reward_mean 0.00587 | reward_sum 11.7
+i 154 | ii  0 | n_veh_step_mean 5.1 | n_veh_step_sum 1.02e+04 | n_veh_unique 82
+i 154 | ii  0 | policy_loss -0.675 | kl -8.02e-11 | entropy 0.881
+i 154 | gd_time 0.0488 | total_time 1.3e+03
+
+i 155 | klcoef 0 | lr 0.001
+i 155 | ii  0 | rollout_time 7.91 | horizon 2e+03 | speed 3.62 | speed_rl 3.36 | speed_rl_std 3.22 | speed_human 3.67 | inflow 537 | outflow 495 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.78e+03 | collisions 10 | collisions_human 7 | fuel 1.39e+03 | backlog_step 14.2 | n_total_veh_step 47.8 | flow_horizontal 700 | flow_vertical 700
+i 155 | ii  0 | raw_reward_mean 0.223 | raw_reward_sum 445
+i 155 | ii  0 | reward_mean -4.27e-06 | reward_sum -0.00855
+i 155 | ii  0 | n_veh_step_mean 5.32 | n_veh_step_sum 1.06e+04 | n_veh_unique 81
+i 155 | ii  0 | policy_loss -0.546 | kl 6.09e-10 | entropy 0.874
+i 155 | gd_time 0.0537 | total_time 1.31e+03
+
+i 156 | klcoef 0 | lr 0.001
+i 156 | ii  0 | rollout_time 7.67 | horizon 2e+03 | speed 3.75 | speed_rl 3.45 | speed_rl_std 3.35 | speed_human 3.81 | inflow 535 | outflow 502 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.81e+03 | collisions 6 | collisions_human 5 | fuel 1.4e+03 | backlog_step 19.1 | n_total_veh_step 51.5 | flow_horizontal 700 | flow_vertical 700
+i 156 | ii  0 | raw_reward_mean 0.236 | raw_reward_sum 472
+i 156 | ii  0 | reward_mean 0.00297 | reward_sum 5.93
+i 156 | ii  0 | n_veh_step_mean 5.25 | n_veh_step_sum 1.05e+04 | n_veh_unique 81
+i 156 | ii  0 | policy_loss -0.497 | kl -1.24e-09 | entropy 0.875
+i 156 | gd_time 0.0512 | total_time 1.31e+03
+
+i 157 | klcoef 0 | lr 0.001
+i 157 | ii  0 | rollout_time 7.95 | horizon 2e+03 | speed 3.66 | speed_rl 3.4 | speed_rl_std 3.3 | speed_human 3.71 | inflow 540 | outflow 505 | inflow_hourly 1.94e+03 | outflow_hourly 1.82e+03
+      | collisions 4 | collisions_human 3 | fuel 1.4e+03 | backlog_step 15.3 | n_total_veh_step 48.9 | flow_horizontal 700 | flow_vertical 700
+i 157 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 485
+i 157 | ii  0 | reward_mean 0.00437 | reward_sum 8.74
+i 157 | ii  0 | n_veh_step_mean 5.33 | n_veh_step_sum 1.07e+04 | n_veh_unique 82
+i 157 | ii  0 | policy_loss -0.519 | kl 1.58e-10 | entropy 0.861
+i 157 | gd_time 0.0521 | total_time 1.32e+03
+
+i 158 | klcoef 0 | lr 0.001
+i 158 | ii  0 | rollout_time 8.63 | horizon 2e+03 | speed 3.54 | speed_rl 3.35 | speed_rl_std 3.29 | speed_human 3.57 | inflow 537 | outflow 500 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.8e+03 | collisions 8 | collisions_human 7 | fuel 1.51e+03 | backlog_step 14.8 | n_total_veh_step 49.4 | flow_horizontal 700 | flow_vertical 700
+i 158 | ii  0 | raw_reward_mean 0.23 | raw_reward_sum 460
+i 158 | ii  0 | reward_mean 0.00159 | reward_sum 3.18
+i 158 | ii  0 | n_veh_step_mean 5.45 | n_veh_step_sum 1.09e+04 | n_veh_unique 81
+i 158 | ii  0 | policy_loss -0.638 | kl -4.58e-11 | entropy 0.869
+i 158 | gd_time 0.0519 | total_time 1.33e+03
+
+i 159 | klcoef 0 | lr 0.001
+i 159 | ii  0 | rollout_time 7.27 | horizon 2e+03 | speed 4.16 | speed_rl 3.86 | speed_rl_std 3.5 | speed_human 4.22 | inflow 547 | outflow 516 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.86e+03 | collisions 6 | collisions_human 6 | fuel 1.46e+03 | backlog_step 13.5 | n_total_veh_step 43.3 | flow_horizontal 700 | flow_vertical 700
+i 159 | ii  0 | raw_reward_mean 0.243 | raw_reward_sum 486
+i 159 | ii  0 | reward_mean 0.00443 | reward_sum 8.85
+i 159 | ii  0 | n_veh_step_mean 4.82 | n_veh_step_sum 9.63e+03 | n_veh_unique 83
+i 159 | ii  0 | policy_loss -0.668 | kl -2.2e-10 | entropy 0.857
+i 159 | gd_time 0.0487 | total_time 1.34e+03
+
+i 160 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-160.pth at step 160
+i 160 | ii  0 | rollout_time 8.25 | horizon 2e+03 | speed 3.52 | speed_rl 3.27 | speed_rl_std 3.23 | speed_human 3.56 | inflow 536 | outflow 506 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.82e+03 | collisions 2 | collisions_human 2 | fuel 1.51e+03 | backlog_step 20.3 | n_total_veh_step 55.2 | flow_horizontal 700 | flow_vertical 700
+i 160 | ii  0 | raw_reward_mean 0.248 | raw_reward_sum 496
+i 160 | ii  0 | reward_mean 0.0055 | reward_sum 11
+i 160 | ii  0 | n_veh_step_mean 5.6 | n_veh_step_sum 1.12e+04 | n_veh_unique 82
+i 160 | ii  0 | policy_loss -0.715 | kl 5.97e-10 | entropy 0.876
+i 160 | gd_time 0.055 | total_time 1.35e+03
+
+i 161 | klcoef 0 | lr 0.001
+i 161 | ii  0 | rollout_time 7.77 | horizon 2e+03 | speed 3.85 | speed_rl 3.56 | speed_rl_std 3.34 | speed_human 3.91 | inflow 545 | outflow 516 | inflow_hourly 1.96e+03
+      | outflow_hourly 1.86e+03 | collisions 4 | collisions_human 2 | fuel 1.61e+03 | backlog_step 12.2 | n_total_veh_step 44.7 | flow_horizontal 700 | flow_vertical 700
+i 161 | ii  0 | raw_reward_mean 0.248 | raw_reward_sum 496
+i 161 | ii  0 | reward_mean 0.00548 | reward_sum 11
+i 161 | ii  0 | n_veh_step_mean 5.16 | n_veh_step_sum 1.03e+04 | n_veh_unique 82
+i 161 | ii  0 | policy_loss -0.62 | kl 1.31e-09 | entropy 0.836
+i 161 | gd_time 0.0491 | total_time 1.36e+03
+
+i 162 | klcoef 0 | lr 0.001
+i 162 | ii  0 | rollout_time 8.07 | horizon 2e+03 | speed 3.58 | speed_rl 3.33 | speed_rl_std 3.28 | speed_human 3.62 | inflow 537 | outflow 504 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.81e+03 | collisions 6 | collisions_human 5 | fuel 1.57e+03 | backlog_step 14.4 | n_total_veh_step 48.6 | flow_horizontal 700 | flow_vertical 700
+i 162 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 474
+i 162 | ii  0 | reward_mean 0.00304 | reward_sum 6.08
+i 162 | ii  0 | n_veh_step_mean 5.42 | n_veh_step_sum 1.08e+04 | n_veh_unique 81
+i 162 | ii  0 | policy_loss -0.632 | kl -1.53e-10 | entropy 0.843
+i 162 | gd_time 0.0512 | total_time 1.36e+03
+
+i 163 | klcoef 0 | lr 0.001
+i 163 | ii  0 | rollout_time 7.56 | horizon 2e+03 | speed 4.02 | speed_rl 3.71 | speed_rl_std 3.5 | speed_human 4.08 | inflow 550 | outflow 515 | inflow_hourly 1.98e+03
+      | outflow_hourly 1.85e+03 | collisions 6 | collisions_human 5 | fuel 1.36e+03 | backlog_step 11.5 | n_total_veh_step 42.7 | flow_horizontal 700 | flow_vertical 700
+i 163 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 485
+i 163 | ii  0 | reward_mean 0.00423 | reward_sum 8.46
+i 163 | ii  0 | n_veh_step_mean 5.04 | n_veh_step_sum 1.01e+04 | n_veh_unique 85
+i 163 | ii  0 | policy_loss -0.646 | kl 1.22e-10 | entropy 0.868
+i 163 | gd_time 0.0505 | total_time 1.37e+03
+
+i 164 | klcoef 0 | lr 0.001
+i 164 | ii  0 | rollout_time 7.94 | horizon 2e+03 | speed 3.73 | speed_rl 3.41 | speed_rl_std 3.2 | speed_human 3.79 | inflow 547 | outflow 506 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.82e+03 | collisions 6 | collisions_human 2 | fuel 1.27e+03 | backlog_step 15.1 | n_total_veh_step 48.2 | flow_horizontal 700 | flow_vertical 700
+i 164 | ii  0 | raw_reward_mean 0.238 | raw_reward_sum 476
+i 164 | ii  0 | reward_mean 0.00322 | reward_sum 6.45
+i 164 | ii  0 | n_veh_step_mean 5.26 | n_veh_step_sum 1.05e+04 | n_veh_unique 82
+i 164 | ii  0 | policy_loss -0.472 | kl -3.69e-10 | entropy 0.895
+i 164 | gd_time 0.0491 | total_time 1.38e+03
+
+i 165 | klcoef 0 | lr 0.001
+i 165 | ii  0 | rollout_time 8.05 | horizon 2e+03 | speed 3.63 | speed_rl 3.3 | speed_rl_std 3.19 | speed_human 3.7 | inflow 541 | outflow 504 | inflow_hourly 1.95e+03 | outflow_hourly 1.81e+03
+      | collisions 6 | collisions_human 4 | fuel 1.47e+03 | backlog_step 15.6 | n_total_veh_step 49.6 | flow_horizontal 700 | flow_vertical 700
+i 165 | ii  0 | raw_reward_mean 0.237 | raw_reward_sum 474
+i 165 | ii  0 | reward_mean 0.00298 | reward_sum 5.95
+i 165 | ii  0 | n_veh_step_mean 5.46 | n_veh_step_sum 1.09e+04 | n_veh_unique 81
+i 165 | ii  0 | policy_loss -0.661 | kl -2.11e-10 | entropy 0.914
+i 165 | gd_time 0.0536 | total_time 1.39e+03
+
+i 166 | klcoef 0 | lr 0.001
+i 166 | ii  0 | rollout_time 8.6 | horizon 2e+03 | speed 3.27 | speed_rl 3.02 | speed_rl_std 3.06 | speed_human 3.32 | inflow 528 | outflow 491 | inflow_hourly 1.9e+03 | outflow_hourly 1.77e+03
+      | collisions 2 | collisions_human 0 | fuel 1.39e+03 | backlog_step 20.2 | n_total_veh_step 56.9 | flow_horizontal 700 | flow_vertical 700
+i 166 | ii  0 | raw_reward_mean 0.24 | raw_reward_sum 481
+i 166 | ii  0 | reward_mean 0.00373 | reward_sum 7.46
+i 166 | ii  0 | n_veh_step_mean 5.88 | n_veh_step_sum 1.18e+04 | n_veh_unique 82
+i 166 | ii  0 | policy_loss -0.442 | kl 4.38e-10 | entropy 0.927
+i 166 | gd_time 0.055 | total_time 1.4e+03
+
+i 167 | klcoef 0 | lr 0.001
+i 167 | ii  0 | rollout_time 8.14 | horizon 2e+03 | speed 3.86 | speed_rl 3.48 | speed_rl_std 3.23 | speed_human 3.94 | inflow 539 | outflow 510 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.84e+03 | collisions 2 | collisions_human 2 | fuel 1.53e+03 | backlog_step 14.6 | n_total_veh_step 46.7 | flow_horizontal 700 | flow_vertical 700
+i 167 | ii  0 | raw_reward_mean 0.25 | raw_reward_sum 500
+i 167 | ii  0 | reward_mean 0.0058 | reward_sum 11.6
+i 167 | ii  0 | n_veh_step_mean 5.32 | n_veh_step_sum 1.06e+04 | n_veh_unique 82
+i 167 | ii  0 | policy_loss -0.683 | kl -5.53e-10 | entropy 0.924
+i 167 | gd_time 0.0491 | total_time 1.41e+03
+
+i 168 | klcoef 0 | lr 0.001
+i 168 | ii  0 | rollout_time 7.47 | horizon 2e+03 | speed 4.02 | speed_rl 3.62 | speed_rl_std 3.32 | speed_human 4.1 | inflow 538 | outflow 513 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.85e+03 | collisions 4 | collisions_human 3 | fuel 1.85e+03 | backlog_step 20.6 | n_total_veh_step 51.6 | flow_horizontal 700 | flow_vertical 700
+i 168 | ii  0 | raw_reward_mean 0.246 | raw_reward_sum 493
+i 168 | ii  0 | reward_mean 0.00501 | reward_sum 10
+i 168 | ii  0 | n_veh_step_mean 5.11 | n_veh_step_sum 1.02e+04 | n_veh_unique 82
+i 168 | ii  0 | policy_loss -0.667 | kl -1.68e-11 | entropy 0.929
+i 168 | gd_time 0.0491 | total_time 1.41e+03
+
+i 169 | klcoef 0 | lr 0.001
+i 169 | ii  0 | rollout_time 8.25 | horizon 2e+03 | speed 3.69 | speed_rl 3.39 | speed_rl_std 3.24 | speed_human 3.75 | inflow 538 | outflow 510 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.84e+03 | collisions 2 | collisions_human 2 | fuel 1.72e+03 | backlog_step 19.3 | n_total_veh_step 52.9 | flow_horizontal 700 | flow_vertical 700
+i 169 | ii  0 | raw_reward_mean 0.25 | raw_reward_sum 500
+i 169 | ii  0 | reward_mean 0.00577 | reward_sum 11.5
+i 169 | ii  0 | n_veh_step_mean 5.42 | n_veh_step_sum 1.08e+04 | n_veh_unique 81
+i 169 | ii  0 | policy_loss -0.776 | kl 3.29e-10 | entropy 0.912
+i 169 | gd_time 0.0523 | total_time 1.42e+03
+
+i 170 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-170.pth at step 170
+i 170 | ii  0 | rollout_time 7.59 | horizon 2e+03 | speed 4.35 | speed_rl 3.98 | speed_rl_std 3.51 | speed_human 4.42 | inflow 556 | outflow 523 | inflow_hourly 2e+03 | outflow_hourly 1.88e+03
+      | collisions 4 | collisions_human 4 | fuel 1.41e+03 | backlog_step 12 | n_total_veh_step 41.3 | flow_horizontal 700 | flow_vertical 700
+i 170 | ii  0 | raw_reward_mean 0.252 | raw_reward_sum 503
+i 170 | ii  0 | reward_mean 0.00606 | reward_sum 12.1
+i 170 | ii  0 | n_veh_step_mean 4.76 | n_veh_step_sum 9.52e+03 | n_veh_unique 84
+i 170 | ii  0 | policy_loss -0.86 | kl -2.01e-10 | entropy 0.889
+i 170 | gd_time 0.0537 | total_time 1.43e+03
+
+i 171 | klcoef 0 | lr 0.001
+i 171 | ii  0 | rollout_time 8.06 | horizon 2e+03 | speed 3.73 | speed_rl 3.47 | speed_rl_std 3.3 | speed_human 3.78 | inflow 548 | outflow 514 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.85e+03 | collisions 6 | collisions_human 2 | fuel 1.49e+03 | backlog_step 10.8 | n_total_veh_step 44.3 | flow_horizontal 700 | flow_vertical 700
+i 171 | ii  0 | raw_reward_mean 0.242 | raw_reward_sum 484
+i 171 | ii  0 | reward_mean 0.00394 | reward_sum 7.87
+i 171 | ii  0 | n_veh_step_mean 5.24 | n_veh_step_sum 1.05e+04 | n_veh_unique 85
+i 171 | ii  0 | policy_loss -0.526 | kl 1.12e-09 | entropy 0.903
+i 171 | gd_time 0.0497 | total_time 1.44e+03
+
+i 172 | klcoef 0 | lr 0.001
+i 172 | ii  0 | rollout_time 7.9 | horizon 2e+03 | speed 3.71 | speed_rl 3.39 | speed_rl_std 3.27 | speed_human 3.77 | inflow 546 | outflow 510 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.84e+03 | collisions 8 | collisions_human 4 | fuel 1.46e+03 | backlog_step 14.7 | n_total_veh_step 48.2 | flow_horizontal 700 | flow_vertical 700
+i 172 | ii  0 | raw_reward_mean 0.235 | raw_reward_sum 470
+i 172 | ii  0 | reward_mean 0.00236 | reward_sum 4.73
+i 172 | ii  0 | n_veh_step_mean 5.33 | n_veh_step_sum 1.07e+04 | n_veh_unique 84
+i 172 | ii  0 | policy_loss -0.42 | kl 1.09e-09 | entropy 0.895
+i 172 | gd_time 0.0517 | total_time 1.45e+03
+
+i 173 | klcoef 0 | lr 0.001
+i 173 | ii  0 | rollout_time 8.18 | horizon 2e+03 | speed 3.61 | speed_rl 3.34 | speed_rl_std 3.23 | speed_human 3.66 | inflow 546 | outflow 512 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.84e+03 | collisions 2 | collisions_human 2 | fuel 1.41e+03 | backlog_step 13.1 | n_total_veh_step 47.6 | flow_horizontal 700 | flow_vertical 700
+i 173 | ii  0 | raw_reward_mean 0.251 | raw_reward_sum 502
+i 173 | ii  0 | reward_mean 0.0059 | reward_sum 11.8
+i 173 | ii  0 | n_veh_step_mean 5.56 | n_veh_step_sum 1.11e+04 | n_veh_unique 82
+i 173 | ii  0 | policy_loss -0.703 | kl 5.91e-10 | entropy 0.897
+i 173 | gd_time 0.0539 | total_time 1.46e+03
+
+i 174 | klcoef 0 | lr 0.001
+i 174 | ii  0 | rollout_time 7.56 | horizon 2e+03 | speed 4.02 | speed_rl 3.71 | speed_rl_std 3.42 | speed_human 4.08 | inflow 549 | outflow 518 | inflow_hourly 1.98e+03
+      | outflow_hourly 1.86e+03 | collisions 2 | collisions_human 2 | fuel 1.48e+03 | backlog_step 13.5 | n_total_veh_step 44.8 | flow_horizontal 700 | flow_vertical 700
+i 174 | ii  0 | raw_reward_mean 0.254 | raw_reward_sum 508
+i 174 | ii  0 | reward_mean 0.00654 | reward_sum 13.1
+i 174 | ii  0 | n_veh_step_mean 5.08 | n_veh_step_sum 1.02e+04 | n_veh_unique 84
+i 174 | ii  0 | policy_loss -0.799 | kl 2.54e-10 | entropy 0.896
+i 174 | gd_time 0.0505 | total_time 1.46e+03
+
+i 175 | klcoef 0 | lr 0.001
+i 175 | ii  0 | rollout_time 7.91 | horizon 2e+03 | speed 3.73 | speed_rl 3.42 | speed_rl_std 3.34 | speed_human 3.79 | inflow 542 | outflow 515 | inflow_hourly 1.95e+03
+      | outflow_hourly 1.85e+03 | collisions 2 | collisions_human 0 | fuel 1.63e+03 | backlog_step 17 | n_total_veh_step 50.6 | flow_horizontal 700 | flow_vertical 700
+i 175 | ii  0 | raw_reward_mean 0.253 | raw_reward_sum 505
+i 175 | ii  0 | reward_mean 0.00618 | reward_sum 12.4
+i 175 | ii  0 | n_veh_step_mean 5.37 | n_veh_step_sum 1.07e+04 | n_veh_unique 82
+i 175 | ii  0 | policy_loss -0.612 | kl -4.57e-10 | entropy 0.886
+i 175 | gd_time 0.0511 | total_time 1.47e+03
+
+i 176 | klcoef 0 | lr 0.001
+i 176 | ii  0 | rollout_time 8.31 | horizon 2e+03 | speed 3.82 | speed_rl 3.54 | speed_rl_std 3.4 | speed_human 3.87 | inflow 553 | outflow 526 | inflow_hourly 1.99e+03
+      | outflow_hourly 1.89e+03 | collisions 2 | collisions_human 2 | fuel 1.55e+03 | backlog_step 11.9 | n_total_veh_step 45.1 | flow_horizontal 700 | flow_vertical 700
+i 176 | ii  0 | raw_reward_mean 0.258 | raw_reward_sum 516
+i 176 | ii  0 | reward_mean 0.00739 | reward_sum 14.8
+i 176 | ii  0 | n_veh_step_mean 5.37 | n_veh_step_sum 1.07e+04 | n_veh_unique 85
+i 176 | ii  0 | policy_loss -0.874 | kl 2.05e-10 | entropy 0.902
+i 176 | gd_time 0.0495 | total_time 1.48e+03
+
+i 177 | klcoef 0 | lr 0.001
+i 177 | ii  0 | rollout_time 7.98 | horizon 2e+03 | speed 3.65 | speed_rl 3.41 | speed_rl_std 3.41 | speed_human 3.7 | inflow 537 | outflow 504 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.81e+03 | collisions 12 | collisions_human 11 | fuel 1.72e+03 | backlog_step 18.3 | n_total_veh_step 52.1 | flow_horizontal 700 | flow_vertical 700
+i 177 | ii  0 | raw_reward_mean 0.222 | raw_reward_sum 444
+i 177 | ii  0 | reward_mean -0.000689 | reward_sum -1.38
+i 177 | ii  0 | n_veh_step_mean 5.41 | n_veh_step_sum 1.08e+04 | n_veh_unique 83
+i 177 | ii  0 | policy_loss -0.427 | kl -4.66e-10 | entropy 0.883
+i 177 | gd_time 0.0525 | total_time 1.49e+03
+
+i 178 | klcoef 0 | lr 0.001
+i 178 | ii  0 | rollout_time 7.88 | horizon 2e+03 | speed 3.71 | speed_rl 3.39 | speed_rl_std 3.35 | speed_human 3.78 | inflow 547 | outflow 505 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.82e+03 | collisions 8 | collisions_human 4 | fuel 1.36e+03 | backlog_step 13.8 | n_total_veh_step 47.1 | flow_horizontal 700 | flow_vertical 700
+i 178 | ii  0 | raw_reward_mean 0.233 | raw_reward_sum 465
+i 178 | ii  0 | reward_mean 0.00167 | reward_sum 3.33
+i 178 | ii  0 | n_veh_step_mean 5.32 | n_veh_step_sum 1.06e+04 | n_veh_unique 82
+i 178 | ii  0 | policy_loss -0.405 | kl 8.83e-10 | entropy 0.885
+i 178 | gd_time 0.0492 | total_time 1.5e+03
+
+i 179 | klcoef 0 | lr 0.001
+i 179 | ii  0 | rollout_time 8.07 | horizon 2e+03 | speed 3.63 | speed_rl 3.4 | speed_rl_std 3.35 | speed_human 3.67 | inflow 549 | outflow 509 | inflow_hourly 1.98e+03
+      | outflow_hourly 1.83e+03 | collisions 6 | collisions_human 5 | fuel 1.38e+03 | backlog_step 13.2 | n_total_veh_step 47.5 | flow_horizontal 700 | flow_vertical 700
+i 179 | ii  0 | raw_reward_mean 0.239 | raw_reward_sum 479
+i 179 | ii  0 | reward_mean 0.0032 | reward_sum 6.4
+i 179 | ii  0 | n_veh_step_mean 5.47 | n_veh_step_sum 1.09e+04 | n_veh_unique 84
+i 179 | ii  0 | policy_loss -0.65 | kl -4.38e-11 | entropy 0.88
+i 179 | gd_time 0.0548 | total_time 1.5e+03
+
+i 180 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-180.pth at step 180
+i 180 | ii  0 | rollout_time 7.96 | horizon 2e+03 | speed 3.69 | speed_rl 3.47 | speed_rl_std 3.34 | speed_human 3.74 | inflow 546 | outflow 512 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.84e+03 | collisions 6 | collisions_human 6 | fuel 1.5e+03 | backlog_step 16.4 | n_total_veh_step 50.2 | flow_horizontal 700 | flow_vertical 700
+i 180 | ii  0 | raw_reward_mean 0.241 | raw_reward_sum 482
+i 180 | ii  0 | reward_mean 0.00351 | reward_sum 7.03
+i 180 | ii  0 | n_veh_step_mean 5.39 | n_veh_step_sum 1.08e+04 | n_veh_unique 83
+i 180 | ii  0 | policy_loss -0.729 | kl -5.08e-10 | entropy 0.871
+i 180 | gd_time 0.0531 | total_time 1.51e+03
+
+i 181 | klcoef 0 | lr 0.001
+i 181 | ii  0 | rollout_time 8.76 | horizon 2e+03 | speed 3.34 | speed_rl 3.13 | speed_rl_std 3.18 | speed_human 3.38 | inflow 547 | outflow 514 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.85e+03 | collisions 2 | collisions_human 2 | fuel 1.43e+03 | backlog_step 11.9 | n_total_veh_step 49.4 | flow_horizontal 700 | flow_vertical 700
+i 181 | ii  0 | raw_reward_mean 0.252 | raw_reward_sum 504
+i 181 | ii  0 | reward_mean 0.00594 | reward_sum 11.9
+i 181 | ii  0 | n_veh_step_mean 5.97 | n_veh_step_sum 1.19e+04 | n_veh_unique 84
+i 181 | ii  0 | policy_loss -0.696 | kl 3.47e-10 | entropy 0.864
+i 181 | gd_time 0.0552 | total_time 1.52e+03
+
+i 182 | klcoef 0 | lr 0.001
+i 182 | ii  0 | rollout_time 7.84 | horizon 2e+03 | speed 3.85 | speed_rl 3.54 | speed_rl_std 3.36 | speed_human 3.91 | inflow 554 | outflow 520 | inflow_hourly 1.99e+03
+      | outflow_hourly 1.87e+03 | collisions 6 | collisions_human 6 | fuel 1.45e+03 | backlog_step 11.2 | n_total_veh_step 44 | flow_horizontal 700 | flow_vertical 700
+i 182 | ii  0 | raw_reward_mean 0.245 | raw_reward_sum 490
+i 182 | ii  0 | reward_mean 0.00435 | reward_sum 8.71
+i 182 | ii  0 | n_veh_step_mean 5.34 | n_veh_step_sum 1.07e+04 | n_veh_unique 85
+i 182 | ii  0 | policy_loss -0.757 | kl -9.88e-10 | entropy 0.868
+i 182 | gd_time 0.051 | total_time 1.53e+03
+
+i 183 | klcoef 0 | lr 0.001
+i 183 | ii  0 | rollout_time 8.32 | horizon 2e+03 | speed 3.5 | speed_rl 3.25 | speed_rl_std 3.24 | speed_human 3.54 | inflow 539 | outflow 509 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.83e+03 | collisions 0 | collisions_human 0 | fuel 1.43e+03 | backlog_step 15.9 | n_total_veh_step 51.5 | flow_horizontal 700 | flow_vertical 700
+i 183 | ii  0 | raw_reward_mean 0.255 | raw_reward_sum 509
+i 183 | ii  0 | reward_mean 0.00644 | reward_sum 12.9
+i 183 | ii  0 | n_veh_step_mean 5.69 | n_veh_step_sum 1.14e+04 | n_veh_unique 82
+i 183 | ii  0 | policy_loss -0.62 | kl -1.12e-09 | entropy 0.88
+i 183 | gd_time 0.0538 | total_time 1.54e+03
+
+i 184 | klcoef 0 | lr 0.001
+i 184 | ii  0 | rollout_time 7.49 | horizon 2e+03 | speed 4.1 | speed_rl 3.7 | speed_rl_std 3.46 | speed_human 4.18 | inflow 552 | outflow 516 | inflow_hourly 1.99e+03 | outflow_hourly 1.86e+03
+      | collisions 12 | collisions_human 9 | fuel 1.5e+03 | backlog_step 12.2 | n_total_veh_step 43 | flow_horizontal 700 | flow_vertical 700
+i 184 | ii  0 | raw_reward_mean 0.228 | raw_reward_sum 456
+i 184 | ii  0 | reward_mean 0.000521 | reward_sum 1.04
+i 184 | ii  0 | n_veh_step_mean 5.03 | n_veh_step_sum 1.01e+04 | n_veh_unique 86
+i 184 | ii  0 | policy_loss -0.447 | kl -2.4e-10 | entropy 0.867
+i 184 | gd_time 0.0516 | total_time 1.55e+03
+
+i 185 | klcoef 0 | lr 0.001
+i 185 | ii  0 | rollout_time 8.18 | horizon 2e+03 | speed 3.53 | speed_rl 3.26 | speed_rl_std 3.32 | speed_human 3.58 | inflow 536 | outflow 496 | inflow_hourly 1.93e+03
+      | outflow_hourly 1.79e+03 | collisions 4 | collisions_human 4 | fuel 1.28e+03 | backlog_step 17.6 | n_total_veh_step 52.3 | flow_horizontal 700 | flow_vertical 700
+i 185 | ii  0 | raw_reward_mean 0.238 | raw_reward_sum 476
+i 185 | ii  0 | reward_mean 0.00274 | reward_sum 5.48
+i 185 | ii  0 | n_veh_step_mean 5.55 | n_veh_step_sum 1.11e+04 | n_veh_unique 79
+i 185 | ii  0 | policy_loss -0.428 | kl 7.26e-11 | entropy 0.864
+i 185 | gd_time 0.0544 | total_time 1.55e+03
+
+i 186 | klcoef 0 | lr 0.001
+i 186 | ii  0 | rollout_time 8.37 | horizon 2e+03 | speed 3.79 | speed_rl 3.49 | speed_rl_std 3.27 | speed_human 3.85 | inflow 548 | outflow 516 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.86e+03 | collisions 4 | collisions_human 2 | fuel 1.45e+03 | backlog_step 14.3 | n_total_veh_step 47.3 | flow_horizontal 700 | flow_vertical 700
+i 186 | ii  0 | raw_reward_mean 0.248 | raw_reward_sum 496
+i 186 | ii  0 | reward_mean 0.00495 | reward_sum 9.9
+i 186 | ii  0 | n_veh_step_mean 5.29 | n_veh_step_sum 1.06e+04 | n_veh_unique 84
+i 186 | ii  0 | policy_loss -0.618 | kl 3.13e-10 | entropy 0.88
+i 186 | gd_time 0.0508 | total_time 1.56e+03
+
+i 187 | klcoef 0 | lr 0.001
+i 187 | ii  0 | rollout_time 7.72 | horizon 2e+03 | speed 3.85 | speed_rl 3.55 | speed_rl_std 3.36 | speed_human 3.91 | inflow 542 | outflow 512 | inflow_hourly 1.95e+03
+      | outflow_hourly 1.84e+03 | collisions 4 | collisions_human 2 | fuel 1.61e+03 | backlog_step 18 | n_total_veh_step 50.1 | flow_horizontal 700 | flow_vertical 700
+i 187 | ii  0 | raw_reward_mean 0.246 | raw_reward_sum 492
+i 187 | ii  0 | reward_mean 0.00448 | reward_sum 8.97
+i 187 | ii  0 | n_veh_step_mean 5.17 | n_veh_step_sum 1.03e+04 | n_veh_unique 83
+i 187 | ii  0 | policy_loss -0.635 | kl -2.06e-10 | entropy 0.879
+i 187 | gd_time 0.0501 | total_time 1.57e+03
+
+i 188 | klcoef 0 | lr 0.001
+i 188 | ii  0 | rollout_time 7.91 | horizon 2e+03 | speed 3.76 | speed_rl 3.46 | speed_rl_std 3.36 | speed_human 3.82 | inflow 546 | outflow 517 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.86e+03 | collisions 2 | collisions_human 2 | fuel 1.58e+03 | backlog_step 13.2 | n_total_veh_step 46.5 | flow_horizontal 700 | flow_vertical 700
+i 188 | ii  0 | raw_reward_mean 0.254 | raw_reward_sum 507
+i 188 | ii  0 | reward_mean 0.00614 | reward_sum 12.3
+i 188 | ii  0 | n_veh_step_mean 5.39 | n_veh_step_sum 1.08e+04 | n_veh_unique 83
+i 188 | ii  0 | policy_loss -0.718 | kl -2.55e-10 | entropy 0.871
+i 188 | gd_time 0.0584 | total_time 1.58e+03
+
+i 189 | klcoef 0 | lr 0.001
+i 189 | ii  0 | rollout_time 8.68 | horizon 2e+03 | speed 3.21 | speed_rl 3 | speed_rl_std 3.13 | speed_human 3.25 | inflow 526 | outflow 487 | inflow_hourly 1.89e+03 | outflow_hourly 1.75e+03
+      | collisions 4 | collisions_human 4 | fuel 1.42e+03 | backlog_step 16.4 | n_total_veh_step 53.8 | flow_horizontal 700 | flow_vertical 700
+i 189 | ii  0 | raw_reward_mean 0.234 | raw_reward_sum 467
+i 189 | ii  0 | reward_mean 0.00165 | reward_sum 3.3
+i 189 | ii  0 | n_veh_step_mean 5.97 | n_veh_step_sum 1.19e+04 | n_veh_unique 79
+i 189 | ii  0 | policy_loss -0.411 | kl 6.55e-10 | entropy 0.877
+i 189 | gd_time 0.0548 | total_time 1.59e+03
+
+i 190 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-190.pth at step 190
+i 190 | ii  0 | rollout_time 8.7 | horizon 2e+03 | speed 3.31 | speed_rl 3.12 | speed_rl_std 3.18 | speed_human 3.35 | inflow 538 | outflow 506 | inflow_hourly 1.94e+03
+      | outflow_hourly 1.82e+03 | collisions 0 | collisions_human 0 | fuel 1.4e+03 | backlog_step 15.1 | n_total_veh_step 52.1 | flow_horizontal 700 | flow_vertical 700
+i 190 | ii  0 | raw_reward_mean 0.253 | raw_reward_sum 506
+i 190 | ii  0 | reward_mean 0.00599 | reward_sum 12
+i 190 | ii  0 | n_veh_step_mean 5.83 | n_veh_step_sum 1.17e+04 | n_veh_unique 81
+i 190 | ii  0 | policy_loss -0.576 | kl -1.42e-11 | entropy 0.883
+i 190 | gd_time 0.0535 | total_time 1.6e+03
+
+i 191 | klcoef 0 | lr 0.001
+i 191 | ii  0 | rollout_time 7.02 | horizon 2e+03 | speed 4.35 | speed_rl 3.97 | speed_rl_std 3.61 | speed_human 4.42 | inflow 553 | outflow 520 | inflow_hourly 1.99e+03
+      | outflow_hourly 1.87e+03 | collisions 4 | collisions_human 4 | fuel 1.42e+03 | backlog_step 11.8 | n_total_veh_step 40.7 | flow_horizontal 700 | flow_vertical 700
+i 191 | ii  0 | raw_reward_mean 0.25 | raw_reward_sum 500
+i 191 | ii  0 | reward_mean 0.0053 | reward_sum 10.6
+i 191 | ii  0 | n_veh_step_mean 4.72 | n_veh_step_sum 9.45e+03 | n_veh_unique 85
+i 191 | ii  0 | policy_loss -0.672 | kl 4.03e-10 | entropy 0.873
+i 191 | gd_time 0.0497 | total_time 1.61e+03
+
+i 192 | klcoef 0 | lr 0.001
+i 192 | ii  0 | rollout_time 8.38 | horizon 2e+03 | speed 3.44 | speed_rl 3.23 | speed_rl_std 3.18 | speed_human 3.48 | inflow 534 | outflow 507 | inflow_hourly 1.92e+03
+      | outflow_hourly 1.83e+03 | collisions 0 | collisions_human 0 | fuel 1.56e+03 | backlog_step 17.3 | n_total_veh_step 53.2 | flow_horizontal 700 | flow_vertical 700
+i 192 | ii  0 | raw_reward_mean 0.254 | raw_reward_sum 507
+i 192 | ii  0 | reward_mean 0.00607 | reward_sum 12.1
+i 192 | ii  0 | n_veh_step_mean 5.69 | n_veh_step_sum 1.14e+04 | n_veh_unique 83
+i 192 | ii  0 | policy_loss -0.599 | kl -3.44e-10 | entropy 0.889
+i 192 | gd_time 0.0517 | total_time 1.61e+03
+
+i 193 | klcoef 0 | lr 0.001
+i 193 | ii  0 | rollout_time 8.27 | horizon 2e+03 | speed 3.52 | speed_rl 3.25 | speed_rl_std 3.21 | speed_human 3.57 | inflow 542 | outflow 515 | inflow_hourly 1.95e+03
+      | outflow_hourly 1.85e+03 | collisions 0 | collisions_human 0 | fuel 1.59e+03 | backlog_step 15.2 | n_total_veh_step 50.4 | flow_horizontal 700 | flow_vertical 700
+i 193 | ii  0 | raw_reward_mean 0.258 | raw_reward_sum 515
+i 193 | ii  0 | reward_mean 0.00695 | reward_sum 13.9
+i 193 | ii  0 | n_veh_step_mean 5.63 | n_veh_step_sum 1.13e+04 | n_veh_unique 81
+i 193 | ii  0 | policy_loss -0.726 | kl 3.13e-10 | entropy 0.879
+i 193 | gd_time 0.0535 | total_time 1.62e+03
+
+i 194 | klcoef 0 | lr 0.001
+i 194 | ii  0 | rollout_time 7.83 | horizon 2e+03 | speed 3.82 | speed_rl 3.51 | speed_rl_std 3.38 | speed_human 3.88 | inflow 547 | outflow 517 | inflow_hourly 1.97e+03
+      | outflow_hourly 1.86e+03 | collisions 8 | collisions_human 6 | fuel 1.76e+03 | backlog_step 14.2 | n_total_veh_step 46.9 | flow_horizontal 700 | flow_vertical 700
+i 194 | ii  0 | raw_reward_mean 0.238 | raw_reward_sum 477
+i 194 | ii  0 | reward_mean 0.00264 | reward_sum 5.29
+i 194 | ii  0 | n_veh_step_mean 5.25 | n_veh_step_sum 1.05e+04 | n_veh_unique 83
+i 194 | ii  0 | policy_loss -0.641 | kl -1.15e-09 | entropy 0.884
+i 194 | gd_time 0.0489 | total_time 1.63e+03
+
+i 195 | klcoef 0 | lr 0.001
+i 195 | ii  0 | rollout_time 8.46 | horizon 2e+03 | speed 3.41 | speed_rl 3.15 | speed_rl_std 3.24 | speed_human 3.46 | inflow 523 | outflow 501 | inflow_hourly 1.88e+03
+      | outflow_hourly 1.8e+03 | collisions 4 | collisions_human 4 | fuel 2.06e+03 | backlog_step 20.8 | n_total_veh_step 56.6 | flow_horizontal 700 | flow_vertical 700
+i 195 | ii  0 | raw_reward_mean 0.24 | raw_reward_sum 481
+i 195 | ii  0 | reward_mean 0.00309 | reward_sum 6.18
+i 195 | ii  0 | n_veh_step_mean 5.76 | n_veh_step_sum 1.15e+04 | n_veh_unique 80
+i 195 | ii  0 | policy_loss -0.572 | kl -3.49e-10 | entropy 0.903
+i 195 | gd_time 0.0544 | total_time 1.64e+03
+
+i 196 | klcoef 0 | lr 0.001
+i 196 | ii  0 | rollout_time 8.27 | horizon 2e+03 | speed 3.93 | speed_rl 3.61 | speed_rl_std 3.38 | speed_human 3.99 | inflow 550 | outflow 518 | inflow_hourly 1.98e+03
+      | outflow_hourly 1.86e+03 | collisions 4 | collisions_human 4 | fuel 1.45e+03 | backlog_step 14.3 | n_total_veh_step 46.5 | flow_horizontal 700 | flow_vertical 700
+i 196 | ii  0 | raw_reward_mean 0.249 | raw_reward_sum 498
+i 196 | ii  0 | reward_mean 0.00498 | reward_sum 9.96
+i 196 | ii  0 | n_veh_step_mean 5.25 | n_veh_step_sum 1.05e+04 | n_veh_unique 85
+i 196 | ii  0 | policy_loss -0.75 | kl -1.2e-09 | entropy 0.892
+i 196 | gd_time 0.052 | total_time 1.65e+03
+
+i 197 | klcoef 0 | lr 0.001
+i 197 | ii  0 | rollout_time 7.08 | horizon 2e+03 | speed 4.43 | speed_rl 3.99 | speed_rl_std 3.5 | speed_human 4.52 | inflow 557 | outflow 532 | inflow_hourly 2.01e+03
+      | outflow_hourly 1.92e+03 | collisions 2 | collisions_human 1 | fuel 1.57e+03 | backlog_step 10 | n_total_veh_step 39 | flow_horizontal 700 | flow_vertical 700
+i 197 | ii  0 | raw_reward_mean 0.261 | raw_reward_sum 522
+i 197 | ii  0 | reward_mean 0.00765 | reward_sum 15.3
+i 197 | ii  0 | n_veh_step_mean 4.75 | n_veh_step_sum 9.5e+03 | n_veh_unique 85
+i 197 | ii  0 | policy_loss -0.893 | kl 7.08e-11 | entropy 0.867
+i 197 | gd_time 0.0489 | total_time 1.65e+03
+
+i 198 | klcoef 0 | lr 0.001
+i 198 | ii  0 | rollout_time 7.75 | horizon 2e+03 | speed 3.94 | speed_rl 3.57 | speed_rl_std 3.4 | speed_human 4.01 | inflow 550 | outflow 524 | inflow_hourly 1.98e+03
+      | outflow_hourly 1.89e+03 | collisions 0 | collisions_human 0 | fuel 1.62e+03 | backlog_step 15.8 | n_total_veh_step 48.2 | flow_horizontal 700 | flow_vertical 700
+i 198 | ii  0 | raw_reward_mean 0.262 | raw_reward_sum 524
+i 198 | ii  0 | reward_mean 0.00785 | reward_sum 15.7
+i 198 | ii  0 | n_veh_step_mean 5.28 | n_veh_step_sum 1.06e+04 | n_veh_unique 83
+i 198 | ii  0 | policy_loss -0.82 | kl 1.91e-10 | entropy 0.88
+i 198 | gd_time 0.0538 | total_time 1.66e+03
+
+i 199 | klcoef 0 | lr 0.001
+i 199 | ii  0 | rollout_time 7.52 | horizon 2e+03 | speed 4.09 | speed_rl 3.73 | speed_rl_std 3.4 | speed_human 4.16 | inflow 557 | outflow 531 | inflow_hourly 2.01e+03
+      | outflow_hourly 1.91e+03 | collisions 2 | collisions_human 0 | fuel 1.54e+03 | backlog_step 9.27 | n_total_veh_step 40.6 | flow_horizontal 700 | flow_vertical 700
+i 199 | ii  0 | raw_reward_mean 0.261 | raw_reward_sum 521
+i 199 | ii  0 | reward_mean 0.00749 | reward_sum 15
+i 199 | ii  0 | n_veh_step_mean 5.05 | n_veh_step_sum 1.01e+04 | n_veh_unique 86
+i 199 | ii  0 | policy_loss -0.8 | kl 8.11e-10 | entropy 0.888
+i 199 | gd_time 0.0526 | total_time 1.67e+03
+
+i 200 | klcoef 0 | lr 0.001
+Saved model /Users/sallysun/Desktop/mixed_autonomy_intersections/scripts/results/fourway_1x1_penetration0.5_server_no_TLS/models/model-200.pth at step 200
+i 200 | ii  0 | rollout_time 7.98 | horizon 2e+03 | speed 3.71 | speed_rl 3.43 | speed_rl_std 3.34 | speed_human 3.77 | inflow 544 | outflow 519 | inflow_hourly 1.96e+03
+      | outflow_hourly 1.87e+03 | collisions 2 | collisions_human 2 | fuel 1.74e+03 | backlog_step 14.2 | n_total_veh_step 48.1 | flow_horizontal 700 | flow_vertical 700
+i 200 | ii  0 | raw_reward_mean 0.255 | raw_reward_sum 509
+i 200 | ii  0 | reward_mean 0.00611 | reward_sum 12.2
+i 200 | ii  0 | n_veh_step_mean 5.43 | n_veh_step_sum 1.09e+04 | n_veh_unique 82
+i 200 | total_time 1.68e+03
+

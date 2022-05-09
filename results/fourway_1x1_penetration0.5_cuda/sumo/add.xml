@@ -8,9 +8,9 @@
   <route id="r_down_0" edges="e_n_100.200_n_100.100 e_n_100.100_n_100.0"/>
   <route id="r_left_0" edges="e_n_200.100_n_100.100 e_n_100.100_n_0.100"/>
   <flow id="f_up_0" type="generic" route="r_up_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="700"/>
-  <flow id="f_right_0" type="generic" route="r_right_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="1000"/>
+  <flow id="f_right_0" type="generic" route="r_right_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="700"/>
   <flow id="f_down_0" type="generic" route="r_down_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="700"/>
-  <flow id="f_left_0" type="generic" route="r_left_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="1000"/>
+  <flow id="f_left_0" type="generic" route="r_left_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="700"/>
   <tlLogic id="n_100.100" offset="0.0" type="static" programID="1">
     <phase duration="0.1" state="rrrr"/>
     <phase duration="0.5" state="GrGr"/>

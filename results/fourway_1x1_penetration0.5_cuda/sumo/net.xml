@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Fri Apr 15 22:06:58 2022 by Eclipse SUMO netconvert Version v1_1_0+0000-2147d155b1b
+<!-- generated on Fri Apr 15 23:23:54 2022 by Eclipse SUMO netconvert Version v1_1_0+0000-2147d155b1b
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
-        <node-files value="../results/fourway_1x1_penetration0.5/sumo/nod.xml"/>
-        <edge-files value="../results/fourway_1x1_penetration0.5/sumo/edg.xml"/>
-        <connection-files value="../results/fourway_1x1_penetration0.5/sumo/con.xml"/>
+        <node-files value="../results/fourway_1x1_penetration0.5_cuda/sumo/nod.xml"/>
+        <edge-files value="../results/fourway_1x1_penetration0.5_cuda/sumo/edg.xml"/>
+        <connection-files value="../results/fourway_1x1_penetration0.5_cuda/sumo/con.xml"/>
     </input>
 
     <output>
-        <output-file value="../results/fourway_1x1_penetration0.5/sumo/net.xml"/>
+        <output-file value="../results/fourway_1x1_penetration0.5_cuda/sumo/net.xml"/>
     </output>
 
     <junctions>

@@ -1,0 +1,620 @@
+diff --git a/env.py b/env.py
+index 0f6c0b6..9bbf166 100644
+--- a/env.py
++++ b/env.py
+@@ -770,7 +770,12 @@ class TrafficState:
+                 color_fn = c.get('color_fn', lambda veh: RED if 'rl' in type_.id else WHITE)
+                 self.set_color(veh, color_fn(veh))
+ 
+-            tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
++            # tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
++            if 'rl' in type_.id:
++                tc.vehicle.setSpeedMode(veh_id, 0)
++            else:
++                tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
++
+             tc.vehicle.setLaneChangeMode(veh_id, c.get('lc_mode', LC_MODE.no_lat_collide))
+             self.new_departed.add(veh)
+             if '.' in veh_id:
+@@ -781,6 +786,9 @@ class TrafficState:
+ 
+         self.new_arrived = {self.vehicles[veh_id] for veh_id in sim_res.arrived_vehicles_ids}
+         self.new_collided = {self.vehicles[veh_id] for veh_id in sim_res.colliding_vehicles_ids}
++        # for col_v in self.new_collided:
++        #     if col_v.type == "human":
++        #         self.new_collided.pop(col_v)
+         for veh in self.new_arrived:
+             veh.type.vehicles.remove(self.vehicles.pop(veh.id))
+         self.new_arrived -= self.new_collided # Don't count collided vehicles as "arrived"
+diff --git a/god.py b/god.py
+new file mode 100644
+index 0000000..38757d0
+--- /dev/null
++++ b/god.py
+@@ -0,0 +1,77 @@
++import numpy
++
++def computeF(rho, V_max=144, rho_max=160):
++    """Computes flux F=V*rho
++    Parameters
++    ----------
++    V_max  : float
++        Maximum allowed velocity
++    rho    : array of floats
++        Array with density of cars at every point x
++    rho_max: float
++        Maximum allowed car density
++    Returns
++    -------
++    F : array
++        Array with flux at every point x
++    """
++    return V_max*rho*(1-rho/rho_max)
++
++def godunov(rho, nt, dt, dx, L=0.5):
++    """
++    rho    : array of floats
++            Density at current time-step
++    nt     : int
++            Number of time steps
++    dt     : float
++            Time-step size
++    dx     : float
++            Mesh spacing
++    rho_max: float
++            Maximum allowed car density
++    V_max  : float
++            Speed limit
++
++    Returns
++    -------
++    rho_n : array of floats
++            Density after nt time steps at every point x
++    """
++
++    # initialize our results array with dimensions nt by nx
++    rho_n = numpy.zeros((nt, len(rho)))
++    # copy the initial u array into each row of our new array
++    rho_n[:, :] = rho.copy()
++
++    # setup some temporary arrays
++    rho_plus = numpy.zeros_like(rho)
++    rho_minus = numpy.zeros_like(rho)
++    flux = numpy.zeros_like(rho)
++
++    for t in range(1, nt):
++        rho_plus[:-1] = rho[1:]  # Can't do i+1/2 indices, so cell boundary
++        rho_minus = rho.copy()  # arrays at index i are at location i+1/2
++        flux = 0.5 * (computeF(rho_minus) +
++                      computeF(rho_plus) +
++                      dx / dt * (rho_minus - rho_plus))
++        rho_n[t, 1:-1] = rho[1:-1] + dt / dx * (flux[:-2] - flux[1:-1])
++        rho_n[t, 0] = rho[0]
++        rho_n[t, -1] = rho[-1]
++        rho = rho_n[t].copy()
++
++    return rho_n
++
++nt = 200
++dt = 1/1200
++nx = 100
++dx = 0.01
++L = 0.5
++
++
++x = numpy.linspace(dx, L-dx, nx)
++rho = 100 + 10 * numpy.sin(numpy.pi*0.5*x)
++rho[-1] = rho[0]
++
++rho_n = godunov(rho, nt, dt, dx)
++
++print(rho_n[-1,:])
+\ No newline at end of file
+diff --git a/intersection.py b/intersection.py
+index bd2a901..3320873 100644
+--- a/intersection.py
++++ b/intersection.py
+@@ -16,15 +16,15 @@ class GridEnv(Env):
+ 
+         builder = NetBuilder()
+         xys = np.array(np.ones((c.n_rows + 2, c.n_cols + 2)).nonzero()).T * c.length
+-        nodes = builder.add_nodes(
+-            [Namespace(x=x, y=y, type='priority') for y, x in xys]
+-        ).reshape(c.n_rows + 2, c.n_cols + 2)
++        min = np.min(xys,0)
++        max = np.max(xys,0)
++        nodes = builder.add_nodes([Namespace(x=x, y=y, type='traffic_light') if (y!= min[0] and y!= max[0] and x!= min[1] and x!= max[1]) else Namespace(x=x, y=y, type='priority') for y, x in xys]).reshape(c.n_rows + 2, c.n_cols + 2)
+ 
+-        tl = c.setdefault('tl', False)
+-        if tl:
+-            c.av_frac = 0
+-            c.pop('av_range', None)
+-            c.speed_mode = SPEED_MODE.all_checks
++        tl = c.setdefault('tl', True)
++        # if tl:
++        #     c.av_frac = 0
++        #     c.pop('av_range', None)
++        #     c.speed_mode = SPEED_MODE.all_checks
+ 
+         flows = []
+         c.setdefaults(flow_rate_h=c.flow_rate, flow_rate_v=c.flow_rate)
+@@ -48,7 +48,7 @@ class GridEnv(Env):
+             tl = 1000000 if tl == 'MaxPressure' else tl
+             tl_h, tl_v = tl if isinstance(tl, tuple) else (tl, tl)
+             tl_offset = c.get('tl_offset', 'auto')
+-            yellow = c.get('yellow', 0.5)
++            yellow = c.get('yellow', 0.1)
+             if tl_offset == 'auto':
+                 offsets = c.length * (np.arange(c.n_rows).reshape(-1, 1) + np.arange(c.n_cols).reshape(1, -1)) / 10
+             elif tl_offset == 'same':
+@@ -57,9 +57,11 @@ class GridEnv(Env):
+                 node.type = 'traffic_light'
+                 phase_multiple = len(c.directions) // 2
+                 tls.append(E('tlLogic',
+-                    E('phase', duration=tl_v, state='Gr' * phase_multiple),
++                    E('phase', duration=0.1, state='rr' * phase_multiple),
++                    E('phase', duration=0.5, state='Gr' * phase_multiple),
+                     *lif(yellow, E('phase', duration=yellow, state='yr' * phase_multiple)),
+-                    E('phase', duration=tl_h, state='rG' * phase_multiple),
++                    E('phase', duration=0.1, state='rr' * phase_multiple),
++                    E('phase', duration=0.5, state='rG' * phase_multiple),
+                     *lif(yellow, E('phase', duration=yellow, state='ry' * phase_multiple)),
+                 id=node.id, offset=offset, type='static', programID='1'))
+ 
+@@ -263,7 +265,7 @@ if __name__ == '__main__':
+     c = GridExp.from_args(globals(), locals())
+     c.setdefaults(
+         n_steps=200,
+-        step_save=5,
++        step_save=10,
+ 
+         depart_speed=0,
+         max_speed=13,
+diff --git a/lwr.py b/lwr.py
+new file mode 100644
+index 0000000..68fa6a3
+--- /dev/null
++++ b/lwr.py
+@@ -0,0 +1,271 @@
++
++# \begin{equation}
++#     u = v_0\left(1-\frac{\rho}{\rho_0}\right)
++# \end{equation}
++
++# \begin{equation}
++#     \frac{\partial \rho}{\partial t} + \frac{\partial (\rho u)}{\partial x} = 0
++# \end{equation}
++#
++# Combining these two we get:
++#
++# \begin{equation}
++#  \frac{\partial \rho}{\partial t} + \frac{\partial}{\partial x}\left[ v_0 \left(1-\frac{\rho}{\rho_0}\right)\rho \right] = 0
++# \end{equation}
++#
++# where <b>$v_0$ and $\rho_0$ are the parameters which are set to one</b> without loss of generality. So the equation becomes:
++#
++# \begin{equation}
++#     \frac{\partial \rho}{\partial t} + \frac{\partial}{\partial x}\left[ \left(1-\rho\right)\rho \right] = 0
++# \end{equation}
++#
++# This equation can also be written as:
++#
++# \begin{equation}
++#     \frac{\partial \rho}{\partial t} + \left(1-2\rho\right)\frac{\partial \rho}{\partial x} = 0
++# \end{equation}
++#
++# This is the simplest <b>Lighthill–Whitham–Richards LWR model</b>. This equation is also known as the <b>inviscid Burgers' equation</b> which form huge discontinuities commonly referred to as <b>shock</b>.
++#
++# The LWR equation was developed in 1955 and 1956 by Lighthill and Whitham, and independently also by Richards$^6$. In addition to the continuity equation, their key assumption was that the traffic flow $Q(x,t) = \rho(x,t)u(x,t)$, or speed $u(x,t) = u(\rho(x,t))$ is always in local equilibrium with respect to the density: <b>Traffic flow and local speed instantaneously follow the density, not only for steady-state traffic but in all situations$^4$</b>.
++#
++# The exact form of $u(\rho(x,t))$ was not defined originally and is obtained by experimental fitting the data or by simple assumptions like the linear decrease of velocity with density, which we have used for our analysis.
++#
++# #### <font color='Tomato'> <u> Advection Equation </u></font>
++#
++# The Burgers' equation belong to a much bigger class of <b>Advection Equations</b> which are <b>hyperbolic partial differential equations</b> and are notorious for numerical schemes to handle due to shocks.
++#
++# An advection equation arrises when a scalar field (here being density) is advected (transported by bulk motion) by a vector field (here being the velocity). Related quantities like Energy are also advected with the scalar field. The LWR equation is more complex than a simple advection equation because unlike the Advection equation where the velocity is constant, the velocity here depends on the density.
++#
++# ### <font color='Tomato'> <u> Burgers' Equation and Shocks </u></font>
++#
++# In Burgers' equation the propagation velocity decreases with density, this results in highly dense and slowly moving regions, and rare and highly mobile regions which propagate as a shock wave. Suppose we start from a sin modulation of density, the low density areas where sin is minimum will move faster towards the high density areas, and the high density areas where sin is maximum will move slowly. As a result the wave will get distorted because mass from low density areas moves faster and accumulates while the high density areas cannot disperse their mass.
++#
++# This results in steep gradient or a discontinuity in $\rho$, which propagates at a velocity, called a shock wave as shown in the figure. The numerical treatment of shocks is difficult due to the increasing discontinuity and methods fail as the gradient grows. Traditional schemes like Finite Elements and Finite Volumes don't work well and have to replaced by the Gudonov method to obtain correct solutions up until shock formation. Once the shock has formed, many numerical schemes no longer perform well.
++#
++# ![Image of Shock](http://laurent.nack.pagesperso-orange.fr/burgers/graph1.gif)
++# Image from http://laurent.nack.pagesperso-orange.fr/burgers/burger.htm
++#
++# The shock propagates with a constant velocity which can be obtained by simple analysis$^4$:
++#
++# \begin{equation}
++#     c_{12} = \frac{dX_{12}}{dt} = v_0 \left[ 1-\left( \frac{\rho_1+\rho_2}{\rho_0} \right)\right]
++# \end{equation}
++#
++# where $\rho_1$ and $\rho_2$ are the densities at the two sides of the shock wave and $v_0$ and $\rho_0$ were defined earlier.
++#
++# <img src="shock_front.png" width="480">
++# Shockfront velocity. Image from$^3$.
++#
++# ### <font color='Tomato'> <u> Numerically Solving the LWR Equation </u></font>
++#
++# The LWR Equation in the last form is solved on a <b>1D space on an x-grid</b> that goes from 0 to 1 with <b>periodic boundary conditions</b> which amounts to solving traffic flow on a <b>circular road</b> with neither exits nor entrances:
++#
++# \begin{equation}
++#     \rho(x+1) = \rho(x)
++# \end{equation}
++#
++# Subjected to the initial conditions:
++#
++# \begin{equation}
++#     \rho(t=0,x) = 0.2 + 0.1sin(2\pi x)
++# \end{equation}
++#
++# Which assumes a constant density of cars at $\rho=0.2$ over which we have a sin modulation of density of amplitude 0.1. The density $\rho>0$ $\forall$ x and stays that way $\forall$ t. NOTE: Negative density of cars is unphysical.
++#
++# The total <b>integration time, T = 1</b> with the <b>number of grid points = N</b>, the time increment <b>$\Delta t=\frac{1}{N}=\frac{1}{100} $</b> and spatial increment, <b>$\Delta x=\frac{1}{N}=\frac{1}{100}$</b>.
++#
++# Since we consider a 1D circular road with no output or input flux of cars, the <b>total number of cars on the road = M, should stay constant in time</b>:
++#
++# \begin{equation}
++#     M(t) = \int_{0}^{1} \rho(t,x)dx = \sum_{i=0}^{1} \rho{t,x_i}
++# \end{equation}
++
++# Importing Packages
++import numpy as np
++import matplotlib.pyplot as plt
++# matplotlib inline
++from matplotlib import animation, rc
++from IPython.display import HTML
++
++# Parameters:
++N = 100.
++dx = 1 / N
++dt = 1 / N
++T = float(1/6)
++v0 = 144
++rho0 = 160
++
++# defining grid.
++x0 = np.arange(0, 1, dx)
++xL0 = np.arange(0,1, 500)
++
++# Initial Conditions: Here we define various initial
++# conditions, only uncomment the one to be used.
++
++# Sin Wave
++p0 = 100 + 10 * np.sin(np.arange(0, 2 * np.pi, 2 * np.pi * dx))
++
++class variable():
++    """Class to allow variables to be used and reset afterwards"""
++
++    def __init__(self, value):
++        self.backup = np.copy(value)
++        self.v = np.copy(value)
++
++    def update(self, function):
++        self.v = function(self.v)
++        return self.v
++
++    def reset(self):
++        self.v = np.copy(self.backup)
++
++
++# Creating global variables.
++p = variable(p0)
++xL = variable(xL0)
++
++
++def reset(variables=[p, xL]):
++    """Resets variables to their original values"""
++    for variable in variables:
++        variable.reset()
++    return 0
++
++
++# Helper functions
++def flux(shift, p):
++    """ Helper function for conservative schemes. """
++    if shift == 0:
++        return v0 * (1 - p / rho0) * p
++    else:
++        return v0 * (1 - np.roll(p, -shift) / rho0) * np.roll(p, -shift)
++
++
++def velocity(shift=0, array=p):
++    """ Helper function for Godunov scheme. """
++    if shift == 0:
++        return v0 * (1 - array / rho0)
++    else:
++        return v0 * (1 - np.roll(array, -shift) / rho0)
++
++
++def animate(i, scheme, line, mass, time):
++    """Animation function. Runs the schemes."""
++
++    # Runs the schemes and sets data to lines.
++    p.update(scheme)
++    line.set_data(x0, p.v)
++
++    # Adds time and total mass to the plots.
++    time.set_text("T = " + "%.2f" % (i * dt))
++    mass.set_text("M = " + "%.2f" % (np.sum(p.v)))
++    return line, time, mass
++
++
++def run(scheme):
++    """ Helper function to run and animate different schemes. """
++    # Set up figure.
++    fig, ax = plt.subplots(figsize=(8, 4))
++
++    ax.set_xlim((0, 1))
++    ax.set_ylim((0, .5))
++    line, = ax.plot([], [], lw=2)
++    ax.set_ylabel(r'$\rho$')
++    ax.set_xlabel("x")
++    time = ax.annotate("", xy=(.75, .45))
++    mass = ax.annotate("", xy=(.75, .42))
++
++    # Plot initial condition for reference.
++    ax.plot(x0, p0, "--")
++
++    # Run animation.
++    ax.set_title(scheme.str)
++    anim = animation.FuncAnimation(fig, animate, fargs=(scheme, line, mass, time),
++                                   frames=int(T / dt), interval=50, blit=True)
++    rc('animation', html='html5')
++
++    # Close figure and reset before returning.
++    plt.close(anim._fig)
++    reset()
++    return HTML(anim.to_html5_video())
++
++
++def Godunov(p):
++    """ Godunov scheme """
++    vl = velocity(0, p)
++    vr = velocity(1, p)
++    ul = p
++    ur = np.roll(p, -1)
++
++    # Shock or rarefaction?
++    Shock = vl - vr > 0  # 1 is shock, 0 = rarefaction.
++    Rare = Shock != 1
++
++    # Direction of shock.
++    Sl = (vl + vr) / 2. < 0
++    Sr = Sl != 1
++
++    # Sign of velocity.
++    v_right = (vl >= 0) == (vr > 0)
++    v_left = (vr <= 0) == (vl > 0)
++
++    # Adding shock.
++    u = Shock * Sl * ur
++    u += Shock * Sr * ul
++
++    # Adding rarefaction.
++    u += Rare * v_right * ul
++    u += Rare * v_left * ur
++
++    f_right = flux(0, u)
++    f_left = flux(-1, u)
++
++    p += -dt / dx * (f_right - f_left)
++    return p
++
++
++Godunov.str = "Godunov Method"
++run(Godunov)
++
++# Stores the data for the corresponding scheme.
++p_dict = {}
++lines_dict = {}
++
++
++def animate_all(scheme=Godunov):
++    """ Runs the schemes and sets line values. """
++    p_dict[scheme].update(scheme)
++    lines_dict[scheme].set_data(x0, p_dict[scheme].v)
++
++    return lines_dict.values()
++
++
++def run_all(scheme=Godunov):
++    """ Helper function to animate different schemes. """
++
++    # Set up plot.
++    fig, ax = plt.subplots(figsize=(12, 8))
++    ax.set_title("Comparison of schemes")
++    ax.set_xlim((0, 1))
++    ax.set_ylim((0, .5))
++    ax.set_ylabel(r'$\rho$')
++    ax.set_xlabel("x")
++
++    # Set up the dictionary data.
++    p_dict[scheme] = variable(p0)
++    lines_dict[scheme] = ax.plot([], [], label=scheme.str)[0]
++
++    # Plot initial values for reference.
++    ax.plot(x0, p0, "--")
++    anim = animation.FuncAnimation(fig, animate_all, fargs=(scheme,),
++                                   frames=int(T / dt), interval=50, blit=True)
++    plt.legend()
++    rc('animation', html='html5')
++    # Close figure and reset before returning.
++    plt.close(anim._fig)
++    reset()
++    return HTML(anim.to_html5_video())
++
++
++run_all()
+\ No newline at end of file
+diff --git a/requirements.txt b/requirements.txt
+index f7f717c..ad97f3a 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,11 +1,12 @@
+-gym
+-lxml
+-ray
+-traci
+-pyyaml
+-numpy
+-scipy
+-pandas
+-matplotlib
+-jupyter
+-tensorboard
++PyYAML~=6.0
++numpy~=1.21.5
++pandas~=1.3.5
++scipy~=1.7.3
++matplotlib~=3.5.1
++torch~=1.11.0
++tqdm~=4.63.0
++gym~=0.23.1
++traci~=1.12.0
++lxml~=4.8.0
++ipython~=7.32.0
++
+diff --git a/results/fourway_1x1_penetration0.5/sumo/add.xml b/results/fourway_1x1_penetration0.5/sumo/add.xml
+index 05f482f..647cfd0 100644
+--- a/results/fourway_1x1_penetration0.5/sumo/add.xml
++++ b/results/fourway_1x1_penetration0.5/sumo/add.xml
+@@ -11,4 +11,12 @@
+   <flow id="f_right_0" type="generic" route="r_right_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="1000"/>
+   <flow id="f_down_0" type="generic" route="r_down_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="700"/>
+   <flow id="f_left_0" type="generic" route="r_left_0" departSpeed="0" departLane="random" begin="1" end="86400" vehsPerHour="1000"/>
++  <tlLogic id="n_100.100" offset="0.0" type="static" programID="1">
++    <phase duration="0.1" state="rrrr"/>
++    <phase duration="0.5" state="GrGr"/>
++    <phase duration="0.1" state="yryr"/>
++    <phase duration="0.1" state="rrrr"/>
++    <phase duration="0.5" state="rGrG"/>
++    <phase duration="0.1" state="ryry"/>
++  </tlLogic>
+ </additional>
+diff --git a/results/fourway_1x1_penetration0.5/sumo/net.xml b/results/fourway_1x1_penetration0.5/sumo/net.xml
+index 1aabc14..71b8b93 100644
+--- a/results/fourway_1x1_penetration0.5/sumo/net.xml
++++ b/results/fourway_1x1_penetration0.5/sumo/net.xml
+@@ -1,16 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<!-- generated on Mon Jan 17 17:46:28 2022 by Eclipse SUMO netconvert Version 1.1.0
++<!-- generated on Fri Apr 15 22:06:58 2022 by Eclipse SUMO netconvert Version v1_1_0+0000-2147d155b1b
+ <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+ 
+     <input>
+-        <node-files value="results/fourway_1x1_penetration0.5/sumo/nod.xml"/>
+-        <edge-files value="results/fourway_1x1_penetration0.5/sumo/edg.xml"/>
+-        <connection-files value="results/fourway_1x1_penetration0.5/sumo/con.xml"/>
++        <node-files value="../results/fourway_1x1_penetration0.5/sumo/nod.xml"/>
++        <edge-files value="../results/fourway_1x1_penetration0.5/sumo/edg.xml"/>
++        <connection-files value="../results/fourway_1x1_penetration0.5/sumo/con.xml"/>
+     </input>
+ 
+     <output>
+-        <output-file value="results/fourway_1x1_penetration0.5/sumo/net.xml"/>
++        <output-file value="../results/fourway_1x1_penetration0.5/sumo/net.xml"/>
+     </output>
+ 
+     <junctions>
+@@ -62,9 +62,16 @@
+         <lane id="e_n_200.100_n_100.100_0" index="0" speed="13.00" length="100.00" shape="200.00,101.60 107.20,101.60"/>
+     </edge>
+ 
++    <tlLogic id="n_100.100" type="static" programID="0" offset="0">
++        <phase duration="42" state="GrGr"/>
++        <phase duration="3"  state="yryr"/>
++        <phase duration="42" state="rGrG"/>
++        <phase duration="3"  state="ryry"/>
++    </tlLogic>
++
+     <junction id="n_0.100" type="dead_end" x="0.00" y="100.00" incLanes="e_n_100.100_n_0.100_0" intLanes="" shape="0.00,100.00 0.00,103.20 0.00,100.00"/>
+     <junction id="n_100.0" type="dead_end" x="100.00" y="0.00" incLanes="e_n_100.100_n_100.0_0" intLanes="" shape="100.00,0.00 96.80,0.00 100.00,0.00"/>
+-    <junction id="n_100.100" type="priority" x="100.00" y="100.00" incLanes="e_n_100.200_n_100.100_0 e_n_200.100_n_100.100_0 e_n_100.0_n_100.100_0 e_n_0.100_n_100.100_0" intLanes=":n_100.100_0_0 :n_100.100_1_0 :n_100.100_2_0 :n_100.100_3_0" shape="96.80,107.20 103.20,107.20 103.64,104.98 104.20,104.20 104.98,103.64 105.98,103.31 107.20,103.20 107.20,96.80 104.98,96.36 104.20,95.80 103.64,95.02 103.31,94.02 103.20,92.80 96.80,92.80 96.36,95.02 95.80,95.80 95.02,96.36 94.02,96.69 92.80,96.80 92.80,103.20 95.02,103.64 95.80,104.20 96.36,104.98 96.69,105.98">
++    <junction id="n_100.100" type="traffic_light" x="100.00" y="100.00" incLanes="e_n_100.200_n_100.100_0 e_n_200.100_n_100.100_0 e_n_100.0_n_100.100_0 e_n_0.100_n_100.100_0" intLanes=":n_100.100_0_0 :n_100.100_1_0 :n_100.100_2_0 :n_100.100_3_0" shape="96.80,107.20 103.20,107.20 103.64,104.98 104.20,104.20 104.98,103.64 105.98,103.31 107.20,103.20 107.20,96.80 104.98,96.36 104.20,95.80 103.64,95.02 103.31,94.02 103.20,92.80 96.80,92.80 96.36,95.02 95.80,95.80 95.02,96.36 94.02,96.69 92.80,96.80 92.80,103.20 95.02,103.64 95.80,104.20 96.36,104.98 96.69,105.98">
+         <request index="0" response="0000" foes="1010" cont="0"/>
+         <request index="1" response="0101" foes="0101" cont="0"/>
+         <request index="2" response="0000" foes="1010" cont="0"/>
+@@ -73,10 +80,10 @@
+     <junction id="n_100.200" type="dead_end" x="100.00" y="200.00" incLanes="e_n_100.100_n_100.200_0" intLanes="" shape="100.00,200.00 103.20,200.00 100.00,200.00"/>
+     <junction id="n_200.100" type="dead_end" x="200.00" y="100.00" incLanes="e_n_100.100_n_200.100_0" intLanes="" shape="200.00,100.00 200.00,96.80 200.00,100.00"/>
+ 
+-    <connection from="e_n_0.100_n_100.100" to="e_n_100.100_n_200.100" fromLane="0" toLane="0" via=":n_100.100_3_0" dir="s" state="m"/>
+-    <connection from="e_n_100.0_n_100.100" to="e_n_100.100_n_100.200" fromLane="0" toLane="0" via=":n_100.100_2_0" dir="s" state="M"/>
+-    <connection from="e_n_100.200_n_100.100" to="e_n_100.100_n_100.0" fromLane="0" toLane="0" via=":n_100.100_0_0" dir="s" state="M"/>
+-    <connection from="e_n_200.100_n_100.100" to="e_n_100.100_n_0.100" fromLane="0" toLane="0" via=":n_100.100_1_0" dir="s" state="m"/>
++    <connection from="e_n_0.100_n_100.100" to="e_n_100.100_n_200.100" fromLane="0" toLane="0" via=":n_100.100_3_0" tl="n_100.100" linkIndex="3" dir="s" state="o"/>
++    <connection from="e_n_100.0_n_100.100" to="e_n_100.100_n_100.200" fromLane="0" toLane="0" via=":n_100.100_2_0" tl="n_100.100" linkIndex="2" dir="s" state="O"/>
++    <connection from="e_n_100.200_n_100.100" to="e_n_100.100_n_100.0" fromLane="0" toLane="0" via=":n_100.100_0_0" tl="n_100.100" linkIndex="0" dir="s" state="O"/>
++    <connection from="e_n_200.100_n_100.100" to="e_n_100.100_n_0.100" fromLane="0" toLane="0" via=":n_100.100_1_0" tl="n_100.100" linkIndex="1" dir="s" state="o"/>
+ 
+     <connection from=":n_100.100_0" to="e_n_100.100_n_100.0" fromLane="0" toLane="0" dir="s" state="M"/>
+     <connection from=":n_100.100_1" to="e_n_100.100_n_0.100" fromLane="0" toLane="0" dir="s" state="M"/>
+diff --git a/results/fourway_1x1_penetration0.5/sumo/nod.xml b/results/fourway_1x1_penetration0.5/sumo/nod.xml
+index 9fca9d5..b9c01cf 100644
+--- a/results/fourway_1x1_penetration0.5/sumo/nod.xml
++++ b/results/fourway_1x1_penetration0.5/sumo/nod.xml
+@@ -4,7 +4,7 @@
+   <node x="100" y="0" type="priority" id="n_100.0"/>
+   <node x="200" y="0" type="priority" id="n_200.0"/>
+   <node x="0" y="100" type="priority" id="n_0.100"/>
+-  <node x="100" y="100" type="priority" id="n_100.100"/>
++  <node x="100" y="100" type="traffic_light" id="n_100.100"/>
+   <node x="200" y="100" type="priority" id="n_200.100"/>
+   <node x="0" y="200" type="priority" id="n_0.200"/>
+   <node x="100" y="200" type="priority" id="n_100.200"/>
+diff --git a/scripts/inference.sh b/scripts/inference.sh
+index 27f69a0..34e33e5 100755
+--- a/scripts/inference.sh
++++ b/scripts/inference.sh
+@@ -1,20 +1,20 @@
+ # Example evaluation hyperparameters
+ #
+-#EXP_DIR=results/fourway_1x1_penetration0.5
+-#CKPT=170
+-#FR_H=1000 # Horizontal flow rate in vehicles/hour
+-#FR_V=700 # Vertical flow rate
+-#N_ROWS=1
+-#N_COLS=1
+-#
+-#python ../intersection.py $EXP_DIR e=$CKPT n_rows=$N_ROWS n_cols=$N_COLS n_steps=1 n_rollouts_per_step=1 skip_stat_steps=500 flow_rate_h=$FR_H flow_rate_v=$FR_V render
++EXP_DIR=../results/fourway_1x1_penetration0.5
++CKPT=170
++FR_H=1000 # Horizontal flow rate in vehicles/hour
++FR_V=700 # Vertical flow rate
++N_ROWS=1
++N_COLS=1
+ 
++python ../intersection.py $EXP_DIR e=$CKPT n_rows=$N_ROWS n_cols=$N_COLS n_steps=1 n_rollouts_per_step=1 skip_stat_steps=500 flow_rate_h=$FR_H flow_rate_v=$FR_V render
+ 
+-EXP_DIR=results/twoway_2x1_penetration0.333
+-CKPT=165
+-FR_H=850 # Horizontal flow rate in vehicles/hour
+-FR_V=700 # Vertical flow rate
+-N_ROWS=3
+-N_COLS=3
+ 
+-python ../intersection.py $EXP_DIR e=$CKPT n_rows=$N_ROWS n_cols=$N_COLS n_steps=1 n_rollouts_per_step=1 skip_stat_steps=500 flow_rate_h=$FR_H flow_rate_v=$FR_V render
+\ No newline at end of file
++#EXP_DIR=results/twoway_2x1_penetration0.333
++#CKPT=165
++#FR_H=850 # Horizontal flow rate in vehicles/hour
++#FR_V=700 # Vertical flow rate
++#N_ROWS=3
++##N_COLS=3
++#
++#python ../intersection.py $EXP_DIR e=$CKPT n_rows=$N_ROWS n_cols=$N_COLS n_steps=1 n_rollouts_per_step=1 skip_stat_steps=500 flow_rate_h=$FR_H flow_rate_v=$FR_V render
+\ No newline at end of file
+diff --git a/scripts/train.sh b/scripts/train.sh
+index ec51b67..5bb9ce0 100755
+--- a/scripts/train.sh
++++ b/scripts/train.sh
+@@ -1,4 +1,4 @@
+ # Example training hyperparameters (also see $EXP_DIR/config.yaml)
+-EXP_DIR=results/fourway_1x1_penetration0.5_cuda
++EXP_DIR=../results/fourway_1x1_penetration0.5_cuda
+ 
+ python ../intersection.py $EXP_DIR
+\ No newline at end of file

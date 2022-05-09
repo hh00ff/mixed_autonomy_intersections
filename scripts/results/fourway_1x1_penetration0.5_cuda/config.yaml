@@ -1,0 +1,9 @@
+flow_rate_h: 1000
+flow_rate_v: 700
+n_cols: 1
+n_rollouts_per_step: 1
+n_rows: 1
+n_steps: 1
+render: true
+skip_stat_steps: 500
+tb: true

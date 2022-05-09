@@ -772,7 +772,7 @@ class TrafficState:
 
             # tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
             if 'rl' in type_.id:
-                tc.vehicle.setSpeedMode(veh_id, 0)
+                tc.vehicle.setSpeedMode(veh_id, 55)
             else:
                 tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
 

@@ -1,0 +1,51 @@
+act_type: accel_discrete
+adv_norm: false
+alg: !!python/name:ut.PG ''
+av_frac: 0.15
+batch_concat: true
+center_reward: true
+collision_coef: 5
+debug: false
+depart_speed: 0
+device: cuda
+directions:
+- up
+- right
+disable_amp: true
+e: false
+flow_rate: 700
+gamma: 0.99
+generic_type: true
+horizon: 2000
+length: 100
+logger: true
+low: -1
+lr: 0.001
+main: true
+max_accel: 1.5
+max_decel: 3.5
+max_dist: 100
+max_speed: 13
+n_actions: 3
+n_cols: 1
+n_gds: 1
+n_rows: 2
+n_steps: 200
+name: fourway_1x1_penetration0.5_server_with_TLS
+norm_reward: true
+obs_next_cross_platoons: 1
+obs_tail: true
+opt: RMSprop
+opt_level: O0
+render: true
+res: /home/hfq/code/py_space/sunqian/mixed_autonomy_intersections/results/fourway_1x1_penetration0.5_server_with_TLS
+sim_step: 0.5
+speed_mode: 1
+step_save: 10
+tb: true
+tmp: false
+warmup_steps: 100
+
+i 0 | klcoef 0 | lr 0.001
+netconvert -o results/fourway_1x1_penetration0.5_server_with_TLS/sumo/net.xml -n results/fourway_1x1_penetration0.5_server_with_TLS/sumo/nod.xml -e results/fourway_1x1_penetration0.5_server_with_TLS/sumo/edg.xml -x results/fourway_1x1_penetration0.5_server_with_TLS/sumo/con.xml --no-turnarounds true
+sumo-gui --net-file results/fourway_1x1_penetration0.5_server_with_TLS/sumo/net.xml --additional-files results/fourway_1x1_penetration0.5_server_with_TLS/sumo/add.xml --gui-settings-file results/fourway_1x1_penetration0.5_server_with_TLS/sumo/gui.xml --begin 0 --step-length 0.5 --no-step-log true --time-to-teleport -1 --no-warnings true --collision.action remove --collision.check-junctions true --max-depart-delay 0.5 --random true --start true

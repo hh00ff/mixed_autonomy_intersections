@@ -20,10 +20,10 @@ class GridEnv(Env):
         max = np.max(xys,0)
         nodes = builder.add_nodes([Namespace(x=x, y=y, type='traffic_light') if (y!= min[0] and y!= max[0] and x!= min[1] and x!= max[1]) else Namespace(x=x, y=y, type='priority') for y, x in xys]).reshape(c.n_rows + 2, c.n_cols + 2)
         tl = c.setdefault('tl', True)
-        # if tl:
-        #     c.av_frac = 0
-        #     c.pop('av_range', None)
-        #     c.speed_mode = SPEED_MODE.all_checks
+        if tl:
+            c.av_frac = 0.5 # hfq
+            c.pop('av_range', None)
+            c.speed_mode = SPEED_MODE.all_checks # hfq
 
         flows = []
         c.setdefaults(flow_rate_h=c.flow_rate, flow_rate_v=c.flow_rate)
@@ -47,7 +47,7 @@ class GridEnv(Env):
             tl = 1000000 if tl == 'MaxPressure' else tl
             tl_h, tl_v = tl if isinstance(tl, tuple) else (tl, tl)
             tl_offset = c.get('tl_offset', 'auto')
-            yellow = c.get('yellow', 0.1)
+            yellow = c.get('yellow', 1)  # hfq
             if tl_offset == 'auto':
                 offsets = c.length * (np.arange(c.n_rows).reshape(-1, 1) + np.arange(c.n_cols).reshape(1, -1)) / 10
             elif tl_offset == 'same':
@@ -57,10 +57,10 @@ class GridEnv(Env):
                 phase_multiple = len(c.directions) // 2
                 tls.append(E('tlLogic',
                     E('phase', duration=0.1, state='rr' * phase_multiple),
-                    E('phase', duration=0.5, state='Gr' * phase_multiple),
+                    E('phase', duration=10, state='Gr' * phase_multiple),  # hfq
                     *lif(yellow, E('phase', duration=yellow, state='yr' * phase_multiple)),
                     E('phase', duration=0.1, state='rr' * phase_multiple),
-                    E('phase', duration=0.5, state='rG' * phase_multiple),
+                    E('phase', duration=10, state='rG' * phase_multiple),  # hfq
                     *lif(yellow, E('phase', duration=yellow, state='ry' * phase_multiple)),
                 id=node.id, offset=offset, type='static', programID='1'))
 

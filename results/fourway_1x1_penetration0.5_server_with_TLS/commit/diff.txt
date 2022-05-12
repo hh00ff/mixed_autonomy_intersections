@@ -1,0 +1,79 @@
+diff --git a/env.py b/env.py
+index bbe23ce..c26fc04 100644
+--- a/env.py
++++ b/env.py
+@@ -772,7 +772,8 @@ class TrafficState:
+ 
+             # tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
+             if 'rl' in type_.id:
+-                tc.vehicle.setSpeedMode(veh_id, 55)
++                # tc.vehicle.setSpeedMode(veh_id, 55)
++                tc.vehicle.setSpeedMode(veh_id, 0)  # hfq
+             else:
+                 tc.vehicle.setSpeedMode(veh_id, c.get('speed_mode', SPEED_MODE.all_checks))
+ 
+diff --git a/intersection_tls.py b/intersection_tls.py
+index fd79fae..4a9328d 100644
+--- a/intersection_tls.py
++++ b/intersection_tls.py
+@@ -20,10 +20,10 @@ class GridEnv(Env):
+         max = np.max(xys,0)
+         nodes = builder.add_nodes([Namespace(x=x, y=y, type='traffic_light') if (y!= min[0] and y!= max[0] and x!= min[1] and x!= max[1]) else Namespace(x=x, y=y, type='priority') for y, x in xys]).reshape(c.n_rows + 2, c.n_cols + 2)
+         tl = c.setdefault('tl', True)
+-        # if tl:
+-        #     c.av_frac = 0
+-        #     c.pop('av_range', None)
+-        #     c.speed_mode = SPEED_MODE.all_checks
++        if tl:
++            c.av_frac = 0.5 # hfq
++            c.pop('av_range', None)
++            c.speed_mode = SPEED_MODE.all_checks # hfq
+ 
+         flows = []
+         c.setdefaults(flow_rate_h=c.flow_rate, flow_rate_v=c.flow_rate)
+@@ -47,7 +47,7 @@ class GridEnv(Env):
+             tl = 1000000 if tl == 'MaxPressure' else tl
+             tl_h, tl_v = tl if isinstance(tl, tuple) else (tl, tl)
+             tl_offset = c.get('tl_offset', 'auto')
+-            yellow = c.get('yellow', 0.1)
++            yellow = c.get('yellow', 1)  # hfq
+             if tl_offset == 'auto':
+                 offsets = c.length * (np.arange(c.n_rows).reshape(-1, 1) + np.arange(c.n_cols).reshape(1, -1)) / 10
+             elif tl_offset == 'same':
+@@ -57,10 +57,10 @@ class GridEnv(Env):
+                 phase_multiple = len(c.directions) // 2
+                 tls.append(E('tlLogic',
+                     E('phase', duration=0.1, state='rr' * phase_multiple),
+-                    E('phase', duration=0.5, state='Gr' * phase_multiple),
++                    E('phase', duration=10, state='Gr' * phase_multiple),  # hfq
+                     *lif(yellow, E('phase', duration=yellow, state='yr' * phase_multiple)),
+                     E('phase', duration=0.1, state='rr' * phase_multiple),
+-                    E('phase', duration=0.5, state='rG' * phase_multiple),
++                    E('phase', duration=10, state='rG' * phase_multiple),  # hfq
+                     *lif(yellow, E('phase', duration=yellow, state='ry' * phase_multiple)),
+                 id=node.id, offset=offset, type='static', programID='1'))
+ 
+diff --git a/scripts/train.sh b/scripts/train.sh
+index 2bb1ce8..2a49536 100755
+--- a/scripts/train.sh
++++ b/scripts/train.sh
+@@ -1,7 +1,11 @@
+-# with traffic light
+-EXP_DIR=results/fourway_1x1_penetration0.5_server_with_TLS
+-python ../intersection_tls.py $EXP_DIR
++## with traffic light
++#EXP_DIR=results/fourway_1x1_penetration0.5_server_with_TLS
++#python ../intersection_tls.py $EXP_DIR
++#
++## no traffic light
++#EXP_DIR=results/fourway_1x1_penetration0.5_server_no_TLS
++#python ../intersection.py $EXP_DIR
+ 
+-# no traffic light
+-EXP_DIR=results/fourway_1x1_penetration0.5_server_no_TLS
+-python ../intersection.py $EXP_DIR
+\ No newline at end of file
++# with traffic light hfq
++EXP_DIR=results/fourway_1x1_penetration0.5_server_with_TLS
++python intersection_tls.py $EXP_DIR render
+\ No newline at end of file

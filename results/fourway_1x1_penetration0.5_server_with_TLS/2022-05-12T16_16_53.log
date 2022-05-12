@@ -1,0 +1,79 @@
+act_type: accel_discrete
+adv_norm: false
+alg: !!python/name:ut.PG ''
+av_frac: 0.15
+batch_concat: true
+center_reward: true
+collision_coef: 5
+debug: false
+depart_speed: 0
+device: cuda
+directions:
+- up
+- right
+disable_amp: true
+e: false
+flow_rate: 700
+gamma: 0.99
+generic_type: true
+horizon: 2000
+length: 100
+logger: true
+low: -1
+lr: 0.001
+main: true
+max_accel: 1.5
+max_decel: 3.5
+max_dist: 100
+max_speed: 13
+n_actions: 3
+n_cols: 1
+n_gds: 1
+n_rows: 2
+n_steps: 200
+name: fourway_1x1_penetration0.5_server_with_TLS
+norm_reward: true
+obs_next_cross_platoons: 1
+obs_tail: true
+opt: RMSprop
+opt_level: O0
+render: false
+res: /home/hfq/code/py_space/sunqian/mixed_autonomy_intersections/results/fourway_1x1_penetration0.5_server_with_TLS
+sim_step: 0.5
+speed_mode: 1
+step_save: 10
+tb: true
+tmp: false
+warmup_steps: 100
+
+i 0 | klcoef 0 | lr 0.001
+Saved model /home/hfq/code/py_space/sunqian/mixed_autonomy_intersections/results/fourway_1x1_penetration0.5_server_with_TLS/models/model-0.pth at step 0
+netconvert -o results/fourway_1x1_penetration0.5_server_with_TLS/sumo/net.xml -n results/fourway_1x1_penetration0.5_server_with_TLS/sumo/nod.xml -e results/fourway_1x1_penetration0.5_server_with_TLS/sumo/edg.xml -x results/fourway_1x1_penetration0.5_server_with_TLS/sumo/con.xml --no-turnarounds true
+sumo --net-file results/fourway_1x1_penetration0.5_server_with_TLS/sumo/net.xml --additional-files results/fourway_1x1_penetration0.5_server_with_TLS/sumo/add.xml --gui-settings-file results/fourway_1x1_penetration0.5_server_with_TLS/sumo/gui.xml --begin 0 --step-length 0.5 --no-step-log true --time-to-teleport -1 --no-warnings true --collision.action remove --collision.check-junctions true --max-depart-delay 0.5 --random true --start true
+i 0 | ii  0 | rollout_time 6.5 | horizon 2e+03 | speed 1.16 | speed_rl 0.973 | speed_rl_std 1.29 | speed_human 1.38 | inflow 275 | outflow 56 | inflow_hourly 990 | outflow_hourly 202 | collisions 214 | collisions_human 102
+    | fuel 1.61e+03 | backlog_step 153 | n_total_veh_step 173 | flow_horizontal 700 | flow_vertical 700
+i 0 | ii  0 | raw_reward_mean -0.507 | raw_reward_sum -1.01e+03
+i 0 | ii  0 | reward_mean -0.00137 | reward_sum -2.74
+i 0 | ii  0 | n_veh_step_mean 10.8 | n_veh_step_sum 2.15e+04 | n_veh_unique 143
+i 0 | ii  0 | policy_loss 0.246 | kl 5.13e-10 | entropy 1.1
+i 0 | gd_time 0.058 | total_time 7.07
+
+i 1 | klcoef 0 | lr 0.001
+i 1 | ii  0 | rollout_time 5.33 | horizon 2e+03 | speed 0.85 | speed_rl 0.719 | speed_rl_std 1.09 | speed_human 0.999 | inflow 223 | outflow 49 | inflow_hourly 803 | outflow_hourly 176 | collisions 164 | collisions_human 79
+    | fuel 1.34e+03 | backlog_step 181 | n_total_veh_step 203 | flow_horizontal 700 | flow_vertical 700
+i 1 | ii  0 | raw_reward_mean -0.386 | raw_reward_sum -771
+i 1 | ii  0 | reward_mean 0.00742 | reward_sum 14.8
+i 1 | ii  0 | n_veh_step_mean 11.6 | n_veh_step_sum 2.33e+04 | n_veh_unique 118
+i 1 | ii  0 | policy_loss -0.625 | kl 5.83e-10 | entropy 1.09
+i 1 | gd_time 0.0601 | total_time 12.8
+
+i 2 | klcoef 0 | lr 0.001
+i 2 | ii  0 | rollout_time 5.84 | horizon 2e+03 | speed 0.536 | speed_rl 0.436 | speed_rl_std 0.822 | speed_human 0.648 | inflow 157 | outflow 35 | inflow_hourly 565 | outflow_hourly 126 | collisions 106
+    | collisions_human 49 | fuel 1.18e+03 | backlog_step 211 | n_total_veh_step 236 | flow_horizontal 700 | flow_vertical 700
+i 2 | ii  0 | raw_reward_mean -0.247 | raw_reward_sum -495
+i 2 | ii  0 | reward_mean 0.0132 | reward_sum 26.4
+i 2 | ii  0 | n_veh_step_mean 13.3 | n_veh_step_sum 2.66e+04 | n_veh_unique 86
+i 2 | ii  0 | policy_loss -1.1 | kl -1.97e-10 | entropy 1.05
+i 2 | gd_time 0.0534 | total_time 18.9
+
+i 3 | klcoef 0 | lr 0.001
